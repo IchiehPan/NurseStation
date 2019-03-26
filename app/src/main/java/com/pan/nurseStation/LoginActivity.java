@@ -94,7 +94,7 @@ public class LoginActivity extends AppCompatActivity {
             // perform the user login attempt.
 
             // 模拟内网环境下登录成功
-            if (Constants.isDebug) {
+            if (Constants.ISDEBUG) {
                 if (Objects.equals(username, "admin") && Objects.equals(password, "123456")) {
                     // success
                     loginSuccess();

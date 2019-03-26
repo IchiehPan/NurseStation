@@ -12,7 +12,7 @@ public class Constants {
     public final static int MESSAGE_SUCCESS_CODE = 0;
     public final static int MESSAGE_FAIL_CODE = 1;
 
-    public final static boolean isDebug = true;
+    public final static boolean ISDEBUG = true;
 
     //    public final static String URL = "http://192.168.8.104:8080/DyWeb_war_exploded/hello";
     public final static String URL = "http://192.168.10.71:88/dbhospital/";

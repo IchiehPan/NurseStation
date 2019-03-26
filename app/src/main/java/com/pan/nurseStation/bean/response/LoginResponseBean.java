@@ -8,9 +8,9 @@ public class LoginResponseBean {
     /**
      * 提示信息
      */
-    private String msg;
+    private String msg = "";
 
-    private Data data;
+    private Data data = new Data();
 
     public int getRet() {
         return ret;
@@ -38,9 +38,9 @@ public class LoginResponseBean {
 
     public class Data {
 
-        private String number;
-        private String department_id;
-        private String department_name;
+        private String number = "";
+        private String department_id = "";
+        private String department_name = "";
 
         public void setNumber(String number) {
             this.number = number;

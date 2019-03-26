@@ -38,7 +38,7 @@ import java.util.Objects;
 
 public class DBHisBusiness {
     public static RequestQueue mQueue;
-    public static LoginResponseBean loginResponseBean;
+    public static LoginResponseBean loginResponseBean = new LoginResponseBean();
     public static List<LevelResponseBean.Data> levelDataList = new ArrayList<>();
 
     private static final String TAG = DBHisBusiness.class.getSimpleName();
@@ -59,6 +59,7 @@ public class DBHisBusiness {
         params.put("level", requestBean.getLevel());
         params.put("page", String.valueOf(requestBean.getPage()));
         params.put(Constants.SERVICE_PARAM, Constants.BEDLIST_SERVICE);
+        Log.i(TAG, "bedlist: params=" + params);
         StringRequest stringRequest = VolleyKit.newStringRequest(Request.Method.POST, Constants.URL, params, listener, errorListener);
         mQueue.add(stringRequest);
     }

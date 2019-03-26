@@ -15,13 +15,20 @@ import android.widget.Spinner;
 import com.bben.ydcf.scandome.CommonView;
 import com.bben.ydcf.scandome.receiver.ScanResultReceiver;
 import com.pan.anlib.util.DensityKit;
+import com.pan.lib.util.BeanKit;
 import com.pan.nurseStation.adapter.BedListAdapter;
 import com.pan.nurseStation.adapter.BedTypeAdapter;
 import com.pan.nurseStation.adapter.SimpleSpinnerAdapter;
 import com.pan.nurseStation.bean.Constants;
 import com.pan.nurseStation.bean.request.BedListRequestBean;
+import com.pan.nurseStation.bean.response.BedListResponseBean;
+import com.pan.nurseStation.bean.response.LevelResponseBean;
 import com.pan.nurseStation.business.DBHisBusiness;
 import com.pan.nurseStation.widget.dialog.JAlertDialog;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 public class BedListActivity extends AppCompatActivity implements CommonView {
@@ -49,28 +56,34 @@ public class BedListActivity extends AppCompatActivity implements CommonView {
 
     private void initData() {
         BedListRequestBean requestBean = new BedListRequestBean();
-        requestBean.setLevel("lev");
-        requestBean.setPage(2);
-        requestBean.setSearch("sear");
         DBHisBusiness dbHisBusiness = new DBHisBusiness();
         dbHisBusiness.bedlist(requestBean, response -> {
             Log.i(TAG, "onResponse: " + response);
+            BedListResponseBean responseBean = BeanKit.string2Bean(response, BedListResponseBean.class);
+            Log.i(TAG, "initData: responseBean=" + responseBean);
+
+
         }, error -> {
             Log.e(TAG, "onResponse: " + error.toString(), error);
         });
 
-    }
+        String[] bedTypes;
+        if (Constants.ISDEBUG) {
+            bedTypes = this.getResources().getStringArray(R.array.bed_types);
+        }
+        if (!DBHisBusiness.levelDataList.isEmpty()) {
+            List<String> bedTypeList = new ArrayList<>(DBHisBusiness.levelDataList.size());
+            for (LevelResponseBean.Data data : DBHisBusiness.levelDataList) {
+                bedTypeList.add(data.getName());
+            }
 
-    private void initView() {
-        searchBarView = findViewById(R.id.search_bar_view);
-        searchEditTextBar = findViewById(R.id.search_edit_text_bar);
+            bedTypes = bedTypeList.toArray(new String[bedTypeList.size()]);
+        }
 
-        String[] bedTypes = this.getResources().getStringArray(R.array.bed_types);
 
         spinner = findViewById(R.id.spinner);
         SimpleSpinnerAdapter<String> arrayAdapter = new SimpleSpinnerAdapter<>(this, R.layout.item_simple_spinner, android.R.id.text1, bedTypes);
         arrayAdapter.setDropDownViewResource(R.layout.item_simple_spinner_dropdown);
-        arrayAdapter.setTextSize(10);
         spinner.setAdapter(arrayAdapter);
 
         bedTypeView = findViewById(R.id.bed_type_view);
@@ -78,7 +91,11 @@ public class BedListActivity extends AppCompatActivity implements CommonView {
 
         bedListView = findViewById(R.id.bed_list_view);
         bedListView.setAdapter(new BedListAdapter(this, 7));
+    }
 
+    private void initView() {
+        searchBarView = findViewById(R.id.search_bar_view);
+        searchEditTextBar = findViewById(R.id.search_edit_text_bar);
     }
 
     @Override
