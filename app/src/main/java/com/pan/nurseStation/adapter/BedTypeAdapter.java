@@ -1,15 +1,18 @@
 package com.pan.nurseStation.adapter;
 
 import android.content.Context;
+import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.pan.nurseStation.R;
 import com.pan.nurseStation.bean.response.LevelResponseBean;
+import com.pan.nurseStation.business.DBHisBusiness;
 
 import java.util.List;
 
@@ -42,9 +45,15 @@ public class BedTypeAdapter extends BaseAdapter {
         LinearLayout linearLayout;
         if (convertView == null) {
             linearLayout = (LinearLayout) View.inflate(mContext, R.layout.item_simple_example_icon, null);
+            ImageView imageView = linearLayout.findViewById(R.id.head_iv);
             TextView headTV = linearLayout.findViewById(R.id.head1);
             TextView contentTV = linearLayout.findViewById(R.id.content1);
+
             headTV.setText(mLevelDataList.get(position).getName());
+            GradientDrawable myGrad = (GradientDrawable) imageView.getBackground();
+            myGrad.setColor(DBHisBusiness.bedTypeColorMap.get(mLevelDataList.get(position).getCode()));
+
+
         } else {
             linearLayout = (LinearLayout) convertView;
         }

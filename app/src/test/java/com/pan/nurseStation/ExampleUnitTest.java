@@ -1,5 +1,8 @@
 package com.pan.nurseStation;
 
+import com.pan.lib.util.BeanKit;
+import com.pan.nurseStation.bean.response.BedListResponseBean;
+
 import org.junit.Test;
 
 import static org.junit.Assert.*;

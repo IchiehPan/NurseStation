@@ -101,7 +101,7 @@ public class BedListResponseBean {
 
     }
 
-    public class PatientInfo {
+    public static class PatientInfo {
 
         private String department_id = "";
         private String bed_id = "";
