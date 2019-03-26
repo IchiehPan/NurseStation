@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="bed_types">
+        <item>@string/bed_list_level_head_tip</item>
+        <item>@string/bed_list_level_head1_tip</item>
+        <item>@string/bed_list_level_head2_tip</item>
+    </string-array>
+
+
+    <string-array name="order_date">
+        <item>@string/example_date</item>
+        <item>@string/example_date</item>
+    </string-array>
+
+    <string-array name="order_type">
+        <item>@string/order_type</item>
+        <item>@string/order_type_long</item>
+        <item>@string/order_type_short</item>
+    </string-array>
+
+    <string-array name="order_status">
+        <item>@string/order_status</item>
+        <item>@string/order_status_waiting_for_medicine</item>
+        <item>@string/order_status_waiting_for_execution</item>
+        <item>@string/order_status_execute</item>
+        <item>@string/order_status_finish</item>
+    </string-array>
+</resources>

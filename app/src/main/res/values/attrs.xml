@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="RoundButton">
+        <attr name="corner_radius" format="dimension" />
+        <attr name="background_color" format="color" />
+    </declare-styleable>
+
+
+    <declare-styleable name="ImageExampleLayout">
+        <attr name="text" format="string" />
+    </declare-styleable>
+</resources>

@@ -1,0 +1,121 @@
+<resources>
+    <string name="app_name">NurseStation</string>
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+
+    <string name="todo">TODO</string>
+    <string name="action_login">登 录</string>
+    <string name="action_close">关 闭</string>
+    <string name="action_reload">重 置</string>
+    <string name="action_submit">提 交</string>
+    <string name="action_cancel">取 消</string>
+    <string name="action_confirm">确 认</string>
+    <string name="in_test_activity">In Test Activity</string>
+    <string name="login_username_hint">请输入账号</string>
+    <string name="login_password_hint">请输入密码</string>
+    <string name="login_success_tip">登录成功</string>
+    <string name="login_fail_tip">登录失败</string>
+    <string name="scan_code_tip">请扫描病人腕带</string>
+    <string name="manual_input_tip">手动输入</string>
+    <string name="submit_warning_tip">提示: 提交后不可撤销,请谨慎操作！</string>
+    <string name="submit_warning_tip2">提示：提交后不可撤销，请谨慎操作！如需修改请到HIS系统操作。</string>
+    <string name="scan_success_tip">病人匹配成功！</string>
+    <string name="scan_success_tip2">身份核对成功！</string>
+    <string name="scan_fail_tip">信息不匹配，请核实。</string>
+    <string name="scan_finish_tip">我知道了</string>
+    <string name="scan_input_tip">输入病人腕带码：</string>
+
+
+    <string name="bed_list_title">床位列表</string>
+    <string name="bed_list_back">切换用户</string>
+    <string name="wristband_info_tip">腕带信息</string>
+    <string name="quick_message_tip">快捷信息</string>
+    <string name="enter_date_info">录入时间</string>
+
+    <string name="search_view_hint">床位/姓名/住院号</string>
+    <string name="search_view_cancel">取 消</string>
+
+    <string name="bed_list_level_head_tip">全部</string>
+    <string name="bed_list_level_head1">特级护理:</string>
+    <string name="bed_list_level_head1_tip">特级护理</string>
+    <string name="bed_list_level_head2">一级护理:</string>
+    <string name="bed_list_level_head2_tip">一级护理</string>
+    <string name="bed_list_level_head3">二级护理:</string>
+    <string name="bed_list_level_head4">三级护理:</string>
+    <string name="bed_list_level_head5">新生儿护理:</string>
+    <string name="bed_list_level_head6">新生儿特殊护理:</string>
+    <string name="example_number_zero">0</string>
+
+    <string name="bed_list_keShi_head">科室:</string>
+    <string name="bed_list_keShi_content">内一科</string>
+    <string name="bed_list_sum_head">病人总数:</string>
+    <string name="bed_list_sum_content">56</string>
+    <string name="bed_list_leaf_head">剩余床位:</string>
+    <string name="bed_list_leaf_content">10</string>
+    <string name="bed_list_his_no_head">住院号:</string>
+
+    <string name="checked_quantity_head">已勾选:</string>
+
+    <string name="example_patient_no">001</string>
+    <string name="example_patient_name">王小明</string>
+    <string name="example_patient_age">45岁</string>
+    <string name="example_patient_number">5042602</string>
+    <string name="example_date">2018-02-01</string>
+
+    <string name="example_medical_type">维生素C注射液[规格]</string>
+    <string name="example_medical_unit">0.5g/QD/-</string>
+
+    <string name="bed_info_example">002床 王小明</string>
+    <string name="title_activity_bed_info">BedInfoActivity</string>
+
+    <string name="order_status">状态</string>
+    <string name="order_status_waiting_for_medicine">待核药</string>
+    <string name="order_status_waiting_for_execution">待执行</string>
+    <string name="order_status_execute">执行中</string>
+    <string name="order_status_finish">已完成</string>
+
+    <string name="order_type">医嘱类别</string>
+    <string name="order_type_long">长嘱</string>
+    <string name="order_type_short">临嘱</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="patient_info_title">病人信息</string>
+    <string name="medical_order_title">医嘱执行</string>
+    <string name="vital_sign_title">生命体征</string>
+
+    <string name="page_basic_info">基本信息</string>
+    <string name="page_order_info">医嘱信息</string>
+    <string name="page_nursing_record">护理文书</string>
+    <string name="page_progress_note">病程记录</string>
+
+
+    <string name="form_hint_text">请填写</string>
+    <string name="form_temperature_type">体温类型</string>
+    <string name="form_temperature_type_mouth">口表</string>
+    <string name="form_temperature_type_underarm">腋表</string>
+    <string name="form_temperature_type_anus">肛表</string>
+    <string name="form_temperature">体温(℃)</string>
+    <string name="form_pulse_type">脉搏类型</string>
+    <string name="form_pulse_type_pulse">脉率</string>
+    <string name="form_pulse_type_heart">心率</string>
+    <string name="form_pulse">脉搏(次/分)</string>
+    <string name="form_breathe">呼吸(次/分)</string>
+    <string name="form_assisted_breathe">辅助呼吸</string>
+    <string name="form_blood_pressure">血压(mmHg)</string>
+    <string name="form_stool_frequency">大便次数(次)</string>
+    <string name="form_urine_volume">尿量(ml)</string>
+    <string name="form_input_volume">输入液量(ml)</string>
+    <string name="form_weight">体重(kg)</string>
+    <string name="form_other">其他</string>
+</resources>

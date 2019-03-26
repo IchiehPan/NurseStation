@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="218dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@drawable/bg_corner_fill_all_white"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="47dp"
+        android:text="@string/scan_input_tip"
+        android:textSize="11sp" />
+
+    <EditText
+        android:id="@+id/patient_number"
+        android:layout_width="176dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="19dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/bg_input_normal" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/line_size"
+        android:layout_marginTop="37dp"
+        android:background="#c9c9c9" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="34dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            android:includeFontPadding="false"
+            android:onClick="hideInputDialog"
+            android:text="@string/action_cancel"
+            android:textColor="#5daeff"
+            android:textSize="11sp" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/bg_corner_fill_bottom_right_blue"
+            android:includeFontPadding="false"
+            android:onClick="submitInputDialog"
+            android:text="@string/action_confirm"
+            android:textColor="@color/custom_white"
+            android:textSize="11sp" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

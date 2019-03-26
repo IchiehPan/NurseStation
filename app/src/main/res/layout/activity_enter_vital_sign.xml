@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".EnterVitalSignActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:background="@color/custom_white"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="9dp"
+            android:background="@drawable/ic_back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/vital_sign_title"
+            android:textColor="#333333"
+            android:textSize="15sp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#f9f9f9"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/line_size"
+            android:background="@color/custom_white">
+
+            <TextView
+                android:id="@+id/name_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="20dp"
+                android:includeFontPadding="false"
+                android:text="@string/example_patient_name"
+                android:textColor="#333333"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:layout_width="10dp"
+                android:layout_height="13dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="20dp"
+                android:layout_toRightOf="@id/name_text"
+                android:background="@drawable/ic_male" />
+
+            <TextView
+                android:id="@+id/age_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/name_text"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="9dp"
+                android:includeFontPadding="false"
+                android:text="@string/example_patient_age"
+                android:textColor="#666666"
+                android:textSize="11sp" />
+
+            <TextView
+                android:id="@+id/his_no_head"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/age_text"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="7dp"
+                android:includeFontPadding="false"
+                android:text="@string/bed_list_his_no_head"
+                android:textColor="#666666"
+                android:textSize="11sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/age_text"
+                android:layout_marginTop="7dp"
+                android:layout_toRightOf="@id/his_no_head"
+                android:includeFontPadding="false"
+                android:text="@string/example_patient_number"
+                android:textColor="#666666"
+                android:textSize="11sp" />
+
+            <TextView
+                android:id="@+id/ke_shi_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/his_no_head"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="7dp"
+                android:includeFontPadding="false"
+                android:text="@string/bed_list_keShi_content"
+                android:textColor="#666666"
+                android:textSize="11sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/his_no_head"
+                android:layout_marginTop="7dp"
+                android:layout_marginBottom="14dp"
+                android:layout_toRightOf="@id/ke_shi_text"
+                android:includeFontPadding="false"
+                android:text="@string/example_patient_no"
+                android:textColor="#666666"
+                android:textSize="11sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="13dp"
+                android:layout_marginEnd="9dp"
+                android:includeFontPadding="false"
+                android:text="@string/manual_input_tip"
+                android:textColor="#999999"
+                android:textSize="10sp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="47dp"
+                android:layout_marginEnd="35dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="4dp"
+                    android:background="@drawable/ic_scan" />
+
+                <TextView
+                    android:id="@+id/scan_success_tip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:includeFontPadding="false"
+                    android:text="@string/scan_code_tip"
+                    android:textColor="#3a9cff"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="37dp"
+            android:layout_marginStart="9dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="9dp"
+            android:background="@drawable/bg_corner_fill_all_white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_weight="1"
+                android:text="@string/enter_date_info"
+                android:textSize="10sp" />
+
+            <Spinner
+                android:id="@+id/date_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginEnd="22dp"
+                android:background="@null"
+                android:dropDownVerticalOffset="31dp" />
+
+            <ImageView
+                android:layout_width="@dimen/line_size"
+                android:layout_height="12dp"
+                android:background="#333333" />
+
+            <Spinner
+                android:id="@+id/time_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="28dp"
+                android:background="@null"
+                android:dropDownVerticalOffset="31dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="9dp"
+            android:layout_marginEnd="9dp"
+            android:orientation="vertical">
+
+            <com.pan.nurseStation.widget.layout.ImageExampleLayout
+                android:layout_width="wrap_content"
+                android:layout_height="29dp"
+                android:gravity="center_vertical"
+                app:text="@string/vital_sign_title" />
+
+            <ScrollView
+                android:id="@+id/scroll_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="26dp">
+            </ScrollView>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="71dp"
+        android:background="@color/custom_white">
+
+        <TextView
+            android:id="@+id/warning_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="29dp"
+            android:layout_marginLeft="18dp"
+            android:gravity="center_vertical"
+            android:text="@string/submit_warning_tip2"
+            android:textColor="#999999"
+            android:textSize="10sp" />
+
+        <Button
+            android:id="@+id/button_submit"
+            android:layout_width="183dp"
+            android:layout_height="30dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="29dp"
+            android:layout_marginRight="22dp"
+            android:background="@drawable/bg_corner_fill_all_blue"
+            android:onClick="submitForm"
+            android:text="@string/action_submit"
+            android:textColor="#fffefe"
+            android:textSize="10sp" />
+
+        <Button
+            android:layout_width="119dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="29dp"
+            android:layout_marginRight="11dp"
+            android:layout_toLeftOf="@id/button_submit"
+            android:background="@drawable/bg_corner_stroke_all_white"
+            android:onClick="resetForm"
+            android:text="@string/action_reload"
+            android:textColor="#6a81a6"
+            android:textSize="10sp" />
+
+
+    </RelativeLayout>
+
+
+</LinearLayout>

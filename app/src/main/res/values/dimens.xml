@@ -1,0 +1,21 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="search_edit_text_margin_left">76dp</dimen>
+
+    <!--SpinnerDropDownStyle-->
+    <dimen name="line_size">0.5dp</dimen>
+
+    <!-- BottomNavigationView 字体大小 -->
+    <dimen name="design_bottom_navigation_active_text_size">10sp</dimen>
+    <dimen name="design_bottom_navigation_inactive_text_size">10sp</dimen>
+
+    <dimen name="form_text_size">10sp</dimen>
+    <dimen name="form_margin_size">1dp</dimen>
+    <dimen name="form_tab_width">64dp</dimen>
+    <dimen name="form_tab_height">39dp</dimen>
+    <dimen name="form_text_margin">8dp</dimen>
+    <dimen name="form_checkbox_width">103sp</dimen>
+</resources>
