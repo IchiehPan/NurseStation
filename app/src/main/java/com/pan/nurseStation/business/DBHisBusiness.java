@@ -54,7 +54,7 @@ public class DBHisBusiness {
 
     public void bedlist(BedListRequestBean requestBean, Response.Listener<String> listener, @Nullable Response.ErrorListener errorListener) {
         Map<String, String> params = new HashMap<>();
-        params.put("number", loginResponseBean.getNumber());
+        params.put("number", loginResponseBean.getData().getNumber());
         params.put("search", requestBean.getSearch());
         params.put("level", requestBean.getLevel());
         params.put("page", String.valueOf(requestBean.getPage()));

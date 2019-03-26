@@ -9,13 +9,8 @@ public class LoginResponseBean {
      * 提示信息
      */
     private String msg;
-    /**
-     * 用户工号
-     */
-    private String number;
 
     private Data data;
-
 
     public int getRet() {
         return ret;
@@ -31,14 +26,6 @@ public class LoginResponseBean {
 
     public void setMsg(String msg) {
         this.msg = msg;
-    }
-
-    public String getNumber() {
-        return number;
-    }
-
-    public void setNumber(String number) {
-        this.number = number;
     }
 
     public Data getData() {
