@@ -27,7 +27,9 @@ import com.pan.nurseStation.business.DBHisBusiness;
 import com.pan.nurseStation.widget.dialog.JAlertDialog;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 
@@ -81,21 +83,24 @@ public class BedListActivity extends AppCompatActivity implements CommonView {
         }
 
 
-        spinner = findViewById(R.id.spinner);
         SimpleSpinnerAdapter<String> arrayAdapter = new SimpleSpinnerAdapter<>(this, R.layout.item_simple_spinner, android.R.id.text1, bedTypes);
         arrayAdapter.setDropDownViewResource(R.layout.item_simple_spinner_dropdown);
         spinner.setAdapter(arrayAdapter);
 
-        bedTypeView = findViewById(R.id.bed_type_view);
-        bedTypeView.setAdapter(new BedTypeAdapter(this, 6));
 
-        bedListView = findViewById(R.id.bed_list_view);
+        bedTypeView.setAdapter(new BedTypeAdapter(this, DBHisBusiness.levelDataList));
+
+
         bedListView.setAdapter(new BedListAdapter(this, 7));
     }
 
     private void initView() {
         searchBarView = findViewById(R.id.search_bar_view);
         searchEditTextBar = findViewById(R.id.search_edit_text_bar);
+
+        spinner = findViewById(R.id.spinner);
+        bedTypeView = findViewById(R.id.bed_type_view);
+        bedListView = findViewById(R.id.bed_list_view);
     }
 
     @Override

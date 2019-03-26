@@ -40,6 +40,7 @@ public class DBHisBusiness {
     public static RequestQueue mQueue;
     public static LoginResponseBean loginResponseBean = new LoginResponseBean();
     public static List<LevelResponseBean.Data> levelDataList = new ArrayList<>();
+    public static Map<String, Integer> bedTypeColorMap = new HashMap<>();
 
     private static final String TAG = DBHisBusiness.class.getSimpleName();
 
@@ -77,6 +78,20 @@ public class DBHisBusiness {
         params.put(Constants.SERVICE_PARAM, Constants.LEVEL_SERVICE);
         StringRequest stringRequest = VolleyKit.newStringRequest(Request.Method.POST, Constants.URL, params, listener, errorListener);
         mQueue.add(stringRequest);
+    }
+
+
+    public static void initBedTypeColorMap(Context context) {
+        // 将颜色和数据做绑定
+        bedTypeColorMap.clear();
+        int[] colors = context.getResources().getIntArray(R.array.bed_type_color);
+        for (int index = 0; index < DBHisBusiness.levelDataList.size(); index++) {
+            if (index < colors.length) {
+                bedTypeColorMap.put(DBHisBusiness.levelDataList.get(index).getCode(), colors[index]);
+            } else {
+                bedTypeColorMap.put(DBHisBusiness.levelDataList.get(index).getCode(), context.getColor(R.color.bed_type_color_blue));
+            }
+        }
     }
 
 

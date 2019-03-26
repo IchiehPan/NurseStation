@@ -10,6 +10,9 @@ import com.pan.nurseStation.bean.response.LevelResponseBean;
 import com.pan.nurseStation.bean.response.LoginResponseBean;
 import com.pan.nurseStation.business.DBHisBusiness;
 
+import java.util.HashMap;
+import java.util.Map;
+
 
 public class MyApplication extends Application {
     private static final String TAG = MyApplication.class.getSimpleName();
@@ -23,14 +26,11 @@ public class MyApplication extends Application {
 
 
         dbHisBusiness.level(null, response -> {
-            Log.i(TAG, "onCreate: response=" + response);
             LevelResponseBean responseBean = BeanKit.string2Bean(response, LevelResponseBean.class);
-            Log.i(TAG, "onCreate: responseBean=" + responseBean);
             DBHisBusiness.levelDataList = responseBean.getData();
-            Log.i(TAG, "onCreate: levelDataList=" + DBHisBusiness.levelDataList);
+            DBHisBusiness.initBedTypeColorMap(this);
         }, error -> {
             Log.e(TAG, "onCreate: error=" + error, error);
         });
-
     }
 }

@@ -11,4 +11,21 @@
     <color name="custom_white">#ffffff</color>
 
     <color name="form_text_color">#666666</color>
+
+    <color name="bed_type_color_blue">#5987f0</color>
+    <color name="bed_type_color_red">#ff6666</color>
+    <color name="bed_type_color_pink">#ffa2d0</color>
+    <color name="bed_type_color_cyanine">#1dcdcd</color>
+    <color name="bed_type_color_green">#03ba7e</color>
+    <color name="bed_type_color_orange">#ff9b6a</color>
+
+    <array name="bed_type_color">
+        <!--护理级别的颜色-->
+        <item>@color/bed_type_color_blue</item>
+        <item>@color/bed_type_color_red</item>
+        <item>@color/bed_type_color_pink</item>
+        <item>@color/bed_type_color_cyanine</item>
+        <item>@color/bed_type_color_green</item>
+        <item>@color/bed_type_color_orange</item>
+    </array>
 </resources>
