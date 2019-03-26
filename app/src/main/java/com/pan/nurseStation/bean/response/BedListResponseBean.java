@@ -3,6 +3,7 @@
  */
 package com.pan.nurseStation.bean.response;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,8 +15,8 @@ import java.util.List;
 public class BedListResponseBean {
 
     private int ret;
-    private Data data;
-    private String msg;
+    private Data data = new Data();
+    private String msg = "";
 
     public void setRet(int ret) {
         this.ret = ret;
@@ -41,14 +42,14 @@ public class BedListResponseBean {
         return msg;
     }
 
-    class Data {
+    public class Data {
 
         private int page;
-        private String records;
+        private String records = "";
         private int pages;
-        private String patients;
-        private String remain_bed;
-        private List<PatientInfo> list;
+        private String patients = "";
+        private String remain_bed = "";
+        private List<PatientInfo> list = new ArrayList<>();
 
         public void setPage(int page) {
             this.page = page;

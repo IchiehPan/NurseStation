@@ -14,8 +14,8 @@ import java.util.Date;
 public class PatientDetailResponseBean {
 
     private int ret;
-    private Data data;
-    private String msg;
+    private Data data = new Data();
+    private String msg = "";
 
     public void setRet(int ret) {
         this.ret = ret;
@@ -41,27 +41,26 @@ public class PatientDetailResponseBean {
         return msg;
     }
 
+    public class Data {
 
-    class Data {
-
-        private String name;
-        private String bed_id;
-        private String level;
-        private String age;
-        private String sex;
-        private String hos_number;
-        private String number;
-        private String department_id;
-        private Date time;
-        private String doctor;
-        private String diagnose;
-        private String cost_type;
-        private String cost_state;
-        private String notes;
-        private String contact;
-        private String relation;
-        private String phone;
-        private String department_name;
+        private String name = "";
+        private String bed_id = "";
+        private String level = "";
+        private String age = "";
+        private String sex = "";
+        private String hos_number = "";
+        private String number = "";
+        private String department_id = "";
+        private Date time = null;
+        private String doctor = "";
+        private String diagnose = "";
+        private String cost_type = "";
+        private String cost_state = "";
+        private String notes = "";
+        private String contact = "";
+        private String relation = "";
+        private String phone = "";
+        private String department_name = "";
 
         public void setName(String name) {
             this.name = name;

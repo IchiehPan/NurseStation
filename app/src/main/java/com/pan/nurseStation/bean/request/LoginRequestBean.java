@@ -4,11 +4,11 @@ public class LoginRequestBean {
     /**
      * 用户工号
      */
-    private String number;
+    private String number = "";
     /**
      * 用户密码
      */
-    private String password;
+    private String password = "";
 
     public LoginRequestBean(String number, String password) {
         this.number = number;

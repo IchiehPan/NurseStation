@@ -5,16 +5,16 @@ public class BedListRequestBean {
     /**
      * 责任护士工号
      */
-    private String number;
+    private String number = "";
 
     /**
      * 病床号/姓名/住院号
      */
-    private String search;
+    private String search = "";
     /**
      * 护理级别，0表示全部
      */
-    private String level;
+    private String level = "";
     /**
      * 当前页
      */

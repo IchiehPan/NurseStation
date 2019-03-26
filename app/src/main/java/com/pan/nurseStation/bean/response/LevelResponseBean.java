@@ -3,6 +3,7 @@
  */
 package com.pan.nurseStation.bean.response;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,8 +15,8 @@ import java.util.List;
 public class LevelResponseBean {
 
     private int ret;
-    private List<Data> data;
-    private String msg;
+    private List<Data> data = new ArrayList<>();
+    private String msg = "";
 
     public void setRet(int ret) {
         this.ret = ret;
@@ -43,8 +44,8 @@ public class LevelResponseBean {
 
     public class Data {
 
-        private String code;
-        private String name;
+        private String code = "";
+        private String name = "";
 
         public void setCode(String code) {
             this.code = code;
