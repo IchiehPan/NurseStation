@@ -101,16 +101,16 @@ public class BedListResponseBean {
 
     }
 
-    class PatientInfo {
+    public class PatientInfo {
 
-        private String department_id;
-        private String bed_id;
-        private String name;
-        private String level;
-        private String age;
-        private String sex;
-        private String hos_number;
-        private String number;
+        private String department_id = "";
+        private String bed_id = "";
+        private String name = "";
+        private String level = "";
+        private String age = "";
+        private String sex = "";
+        private String hos_number = "";
+        private String number = "";
 
         public void setDepartment_id(String department_id) {
             this.department_id = department_id;
