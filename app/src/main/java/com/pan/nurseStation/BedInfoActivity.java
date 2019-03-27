@@ -10,7 +10,10 @@ import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
+import com.pan.lib.util.BeanKit;
+import com.pan.nurseStation.bean.response.BedListResponseBean;
 import com.pan.nurseStation.fragment.MedicalOrderFragment;
 import com.pan.nurseStation.fragment.PatientInfoFragment;
 import com.pan.nurseStation.fragment.VitalSignFragment;
@@ -18,9 +21,11 @@ import com.pan.nurseStation.fragment.VitalSignFragment;
 public class BedInfoActivity extends FragmentActivity {
 
     private static final String TAG = BedInfoActivity.class.getSimpleName();
-    private PatientInfoFragment patientInfoFrag;
-    private MedicalOrderFragment doctorToldFrag;
-    private VitalSignFragment vitalSignFra;
+    private TextView patientExampleInfo;
+    BottomNavigationView bottomNavigationView;
+    private PatientInfoFragment patientInfoFragment;
+    private MedicalOrderFragment medicalOrderFragment;
+    private VitalSignFragment vitalSignFragment;
     private Fragment[] fragments;
     private int lastShowFragment = 0;
 
@@ -59,35 +64,43 @@ public class BedInfoActivity extends FragmentActivity {
         Log.d(TAG, "onCreate: hosNumber=" + hosNumber);
         String patientInfo = bundle.getString("patientInfo");
         Log.d(TAG, "onCreate: patientInfo=" + patientInfo);
+        BedListResponseBean.PatientInfo patientInfoBean = BeanKit.string2Bean(patientInfo, BedListResponseBean.PatientInfo.class);
 
         initView();
+        initData(patientInfoBean);
         initFragments(hosNumber);
     }
 
+    private void initData(BedListResponseBean.PatientInfo patientInfoBean) {
+        patientExampleInfo.setText(patientInfoBean.getBed_id() + " " + patientInfoBean.getName());
+    }
+
     private void initView() {
-        BottomNavigationView navigation = findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        patientExampleInfo = findViewById(R.id.patient_example_info);
+        bottomNavigationView = findViewById(R.id.navigation);
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
 
     private void initFragments(String hosNumber) {
-        patientInfoFrag = new PatientInfoFragment();
-        doctorToldFrag = new MedicalOrderFragment();
-        vitalSignFra = new VitalSignFragment();
+        patientInfoFragment = new PatientInfoFragment();
+        medicalOrderFragment = new MedicalOrderFragment();
+        vitalSignFragment = new VitalSignFragment();
 
         Bundle bundle = new Bundle();
         /*往bundle中添加数据*/
         bundle.putString("hos_number", hosNumber);
         /*把数据设置到Fragment中*/
-        patientInfoFrag.setArguments(bundle);
-        doctorToldFrag.setArguments(bundle);
-        vitalSignFra.setArguments(bundle);
+        patientInfoFragment.setArguments(bundle);
+        medicalOrderFragment.setArguments(bundle);
+        vitalSignFragment.setArguments(bundle);
 
 
-        fragments = new Fragment[]{patientInfoFrag, doctorToldFrag, vitalSignFra};
+        fragments = new Fragment[]{patientInfoFragment, medicalOrderFragment, vitalSignFragment};
         lastShowFragment = 0;
         getSupportFragmentManager().beginTransaction()
-                .add(R.id.fragment_container, patientInfoFrag)
-                .show(patientInfoFrag)
+                .add(R.id.fragment_container, patientInfoFragment)
+                .show(patientInfoFragment)
                 .commit();
     }
 
@@ -112,7 +125,7 @@ public class BedInfoActivity extends FragmentActivity {
     public void onBackPressed() {
         switch (lastShowFragment) {
             case 0:
-                patientInfoFrag.onBackPressed();
+                patientInfoFragment.onBackPressed();
                 break;
         }
 //        super.onBackPressed();
@@ -122,5 +135,19 @@ public class BedInfoActivity extends FragmentActivity {
         Intent intent = new Intent(this, BedListActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
+    }
+
+    public void refreshTheWeb(View view) {
+        switch (lastShowFragment) {
+            case 0:
+                patientInfoFragment.getWebView().reload();
+                break;
+            case 1:
+                medicalOrderFragment.getWebView().reload();
+                break;
+            case 2:
+                vitalSignFragment.getWebView().reload();
+                break;
+        }
     }
 }

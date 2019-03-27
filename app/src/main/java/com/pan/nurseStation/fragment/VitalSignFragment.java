@@ -237,4 +237,8 @@ public class VitalSignFragment extends Fragment {
 
         super.onDestroy();
     }
+
+    public WebView getWebView() {
+        return mWebView;
+    }
 }

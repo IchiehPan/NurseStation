@@ -21,7 +21,6 @@ public class PatientInfoFragment extends Fragment implements BackHandledInterfac
     private static final String TAG = PatientInfoFragment.class.getSimpleName();
     private WebView mWebView;
     private TabLayout mTabLayout;
-    private String mHosNumber;
 
     public PatientInfoFragment() {
         // Required empty public constructor
@@ -45,7 +44,6 @@ public class PatientInfoFragment extends Fragment implements BackHandledInterfac
         mWebView = root.findViewById(R.id.webView);
         Bundle bundle = this.getArguments();
         String hosNumber = bundle.getString("hos_number");
-
 
         //声明WebSettings子类
         JWebSetting.setParam(mWebView.getSettings());
@@ -108,6 +106,9 @@ public class PatientInfoFragment extends Fragment implements BackHandledInterfac
     @Override
     public void onBackPressed() {
         Log.i(TAG, "setSelectedFragment: ----------------------------------------------------");
+    }
 
+    public WebView getWebView() {
+        return mWebView;
     }
 }

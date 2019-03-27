@@ -113,4 +113,8 @@ public class MedicalOrderFragment extends Fragment {
 
         super.onDestroy();
     }
+
+    public WebView getWebView() {
+        return mWebView;
+    }
 }
