@@ -52,6 +52,7 @@ public class BedListActivity extends AppCompatActivity implements CommonView {
     private TextView leaveCount;
     private int page = 1;
     private List<BedListResponseBean.PatientInfo> dataList = new ArrayList<>();
+    private BedListAdapter bedListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,7 +116,7 @@ public class BedListActivity extends AppCompatActivity implements CommonView {
             BedListResponseBean responseBean = BeanKit.string2Bean(response, BedListResponseBean.class);
             // 房子组件的绑定数据
             dataList.addAll(responseBean.getData().getList());
-            bedListView.setAdapter(new BedListAdapter(this, dataList));
+            bedListAdapter.notifyDataSetChanged();
 
             // 底下的数据
             departmentName.setText(DBHisBusiness.loginBean.getDepartment_name());
@@ -135,6 +136,9 @@ public class BedListActivity extends AppCompatActivity implements CommonView {
         departmentName = findViewById(R.id.department_name);
         totalCount = findViewById(R.id.total_count);
         leaveCount = findViewById(R.id.leave_count);
+
+        bedListAdapter = new BedListAdapter(this, dataList);
+        bedListView.setAdapter(bedListAdapter);
 
         AutoLoadListener autoLoadListener = new AutoLoadListener(() -> {
             initListData("", "", ++page);
