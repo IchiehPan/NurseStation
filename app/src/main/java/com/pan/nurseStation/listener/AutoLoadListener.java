@@ -36,7 +36,7 @@ public class AutoLoadListener implements OnScrollListener {
             v.getLocationOnScreen(location);//获取在整个屏幕内的绝对坐标
             int y = location[1];
 
-            Log.d(TAG, "onScrollStateChanged: " + "x" + location[0] + "y" + location[1]);
+            Log.d(TAG, "onScrollStateChanged: " + "x=" + location[0] + ", y=" + location[1]);
             if (view.getLastVisiblePosition() != getLastVisiblePosition && lastVisiblePositionY != y)//第一次拖至底部
             {
                 Log.d(TAG, "onScrollStateChanged: 已经拖动至底部，再次拖动即可翻页");

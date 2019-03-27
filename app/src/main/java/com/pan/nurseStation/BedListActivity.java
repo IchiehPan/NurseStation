@@ -70,16 +70,12 @@ public class BedListActivity extends AppCompatActivity implements CommonView {
         setContentView(R.layout.activity_bed_list);
 
         initView();
-        initData();
+        initNavData();
 
         resultReceiver = new ScanResultReceiver(this);
         registerReceiver(resultReceiver, new IntentFilter(com.bben.ydcf.scandome.Constants.DECODE_RESULT_FILTER));
     }
 
-    private void initData() {
-        initNavData();
-        initListData(level, search, page);
-    }
 
     public void initNavData() {
         DBHisBusiness dbHisBusiness = new DBHisBusiness();

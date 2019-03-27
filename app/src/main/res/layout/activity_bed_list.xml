@@ -152,7 +152,6 @@
             android:verticalSpacing="10dp" />
         <!--动态传入-->
 
-
         <GridView
             android:id="@+id/bed_list_view"
             android:layout_width="match_parent"

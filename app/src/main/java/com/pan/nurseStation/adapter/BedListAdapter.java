@@ -2,6 +2,7 @@ package com.pan.nurseStation.adapter;
 
 import android.content.Context;
 import android.graphics.drawable.GradientDrawable;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -17,6 +18,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class BedListAdapter extends BaseAdapter {
+    private static final String TAG = BedListAdapter.class.getSimpleName();
     Context mContext;
     List<BedListResponseBean.PatientInfo> mList;
 
@@ -70,8 +72,10 @@ public class BedListAdapter extends BaseAdapter {
             }
             patientAge.setText(patientInfo.getAge());
             patientNumber.setText(patientInfo.getHos_number());
+            Log.d(TAG, "getView: 新创建组件position=" + position);
         } else {
             linearLayout = (LinearLayout) convertView;
+            Log.d(TAG, "getView: 复用组件position=" + position);
         }
 
         return linearLayout;
