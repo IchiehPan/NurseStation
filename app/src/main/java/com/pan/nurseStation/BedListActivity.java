@@ -114,14 +114,20 @@ public class BedListActivity extends AppCompatActivity implements CommonView {
         dbHisBusiness.bedlist(bedListRequestBean, response -> {
             Log.i(TAG, "onResponse: " + response);
             BedListResponseBean responseBean = BeanKit.string2Bean(response, BedListResponseBean.class);
-            // 房子组件的绑定数据
-            dataList.addAll(responseBean.getData().getList());
-            bedListAdapter.notifyDataSetChanged();
+            BedListResponseBean.Data data = responseBean.getData();
 
             // 底下的数据
             departmentName.setText(DBHisBusiness.loginBean.getDepartment_name());
-            totalCount.setText(responseBean.getData().getRecords());
-            leaveCount.setText(responseBean.getData().getRemain_bed());
+            totalCount.setText(data.getRecords());
+            leaveCount.setText(data.getRemain_bed());
+
+            // 房子组件的绑定数据
+            if (page > data.getPages()) {
+                return;
+            }
+
+            dataList.addAll(data.getList());
+            bedListAdapter.notifyDataSetChanged();
         }, error -> Log.e(TAG, "onResponse: " + error.toString(), error));
     }
 
