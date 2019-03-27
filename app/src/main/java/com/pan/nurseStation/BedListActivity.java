@@ -115,6 +115,7 @@ public class BedListActivity extends AppCompatActivity implements CommonView {
     }
 
     public void initListData(String level, String search, int page) {
+        Log.d(TAG, "initListData: level=" + level + ", search=" + search + ", page=" + page);
         DBHisBusiness dbHisBusiness = new DBHisBusiness();
         BedListRequestBean bedListRequestBean = new BedListRequestBean();
         bedListRequestBean.setNumber(DBHisBusiness.loginBean.getNumber());
@@ -156,9 +157,11 @@ public class BedListActivity extends AppCompatActivity implements CommonView {
 
         searchEditText.setOnEditorActionListener((TextView textView, int id, KeyEvent keyEvent) -> {
             if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
-                page = 1;
-                search = textView.getText().toString();
+                dataList = new ArrayList<>();
+                bedListAdapter.notifyDataSetChanged();
                 level = "";
+                search = textView.getText().toString();
+                page = 1;
                 initListData(level, search, page);
                 return true;
             }
@@ -181,6 +184,8 @@ public class BedListActivity extends AppCompatActivity implements CommonView {
                     }
                 }
 
+                dataList = new ArrayList<>();
+                bedListAdapter.notifyDataSetChanged();
                 search = "";
                 page = 1;
                 initListData(level, search, page);
