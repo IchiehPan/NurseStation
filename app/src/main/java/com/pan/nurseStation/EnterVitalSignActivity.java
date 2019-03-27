@@ -38,9 +38,10 @@ public class EnterVitalSignActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enter_vital_sign);
 
-        String hosNumber = savedInstanceState.getString("hos_number");
+        Bundle bundle = getIntent().getExtras();
+        String hosNumber = bundle.getString("hos_number");
         Log.d(TAG, "onCreate: hosNumber=" + hosNumber);
-        String patientInfo = savedInstanceState.getString("patientInfo");
+        String patientInfo = bundle.getString("patientInfo");
         Log.d(TAG, "onCreate: patientInfo=" + patientInfo);
 
         initView();

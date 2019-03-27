@@ -54,9 +54,10 @@ public class BedInfoActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bed_info);
 
-        String hosNumber = savedInstanceState.getString("hos_number");
+        Bundle bundle = getIntent().getExtras();
+        String hosNumber = bundle.getString("hos_number");
         Log.d(TAG, "onCreate: hosNumber=" + hosNumber);
-        String patientInfo = savedInstanceState.getString("patientInfo");
+        String patientInfo = bundle.getString("patientInfo");
         Log.d(TAG, "onCreate: patientInfo=" + patientInfo);
 
         initView();
