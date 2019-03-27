@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
+import com.pan.nurseStation.BedInfoActivity;
 import com.pan.nurseStation.EnterMedicalOrderActivity;
 import com.pan.nurseStation.EnterVitalSignActivity;
 import com.pan.nurseStation.R;
@@ -83,15 +84,15 @@ public class JAlertDialog extends AlertDialog {
         patientLevel.setText(data.getLevel());
 
         //绑定一些跳转事件
-        bedInfoDoor.setOnClickListener(view -> clickInBedInfoActivity(data));
+        bedInfoDoor.setOnClickListener(view -> clickInActivity(data, BedInfoActivity.class));
 
-        enterMedicalOrderDoor.setOnClickListener(view -> clickInEnterMedicalOrderActivity(data));
+        enterMedicalOrderDoor.setOnClickListener(view -> clickInActivity(data, EnterMedicalOrderActivity.class));
 
-        enterVitalSignDoor.setOnClickListener(view -> clickInEnterVitalSignActivity(data));
+        enterVitalSignDoor.setOnClickListener(view -> clickInActivity(data, EnterVitalSignActivity.class));
     }
 
-    public void clickInBedInfoActivity(PatientDetailResponseBean.Data data) {
-        Intent intent = new Intent(getContext(), EnterMedicalOrderActivity.class);
+    public void clickInActivity(PatientDetailResponseBean.Data data, Class clazz) {
+        Intent intent = new Intent(getContext(), clazz);
         Bundle bundle = new Bundle();
 
         bundle.putString("patientInfo", JSON.toJSONString(data));
@@ -106,41 +107,4 @@ public class JAlertDialog extends AlertDialog {
         intent.putExtras(bundle);
         getContext().startActivity(intent);
     }
-
-
-    public void clickInEnterMedicalOrderActivity(PatientDetailResponseBean.Data data) {
-        Intent intent = new Intent(getContext(), EnterMedicalOrderActivity.class);
-        Bundle bundle = new Bundle();
-
-        bundle.putString("patientInfo", JSON.toJSONString(data));
-        bundle.putString("hos_number", data.getHos_number());
-        bundle.putString("name", data.getName());
-        bundle.putString("age", data.getAge());
-        bundle.putString("sex", data.getSex());
-        bundle.putString("bedId", data.getBed_id());
-        bundle.putString("level", data.getLevel());
-        bundle.putString("number", data.getNumber());
-        bundle.putString("department_id", data.getDepartment_id());
-        intent.putExtras(bundle);
-        getContext().startActivity(intent);
-    }
-
-    public void clickInEnterVitalSignActivity(PatientDetailResponseBean.Data data) {
-        Intent intent = new Intent(getContext(), EnterVitalSignActivity.class);
-        Bundle bundle = new Bundle();
-
-        bundle.putString("patientInfo", JSON.toJSONString(data));
-        bundle.putString("hos_number", data.getHos_number());
-        bundle.putString("name", data.getName());
-        bundle.putString("age", data.getAge());
-        bundle.putString("sex", data.getSex());
-        bundle.putString("bedId", data.getBed_id());
-        bundle.putString("level", data.getLevel());
-        bundle.putString("number", data.getNumber());
-        bundle.putString("department_id", data.getDepartment_id());
-        intent.putExtras(bundle);
-        getContext().startActivity(intent);
-    }
-
-
 }
