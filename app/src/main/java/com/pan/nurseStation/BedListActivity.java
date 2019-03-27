@@ -6,8 +6,12 @@ import android.content.IntentFilter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -34,6 +38,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 
@@ -46,13 +51,18 @@ public class BedListActivity extends AppCompatActivity implements CommonView {
     private GridView bedListView;
     private RelativeLayout searchBarView;
     private LinearLayout searchEditTextBar;
+    private EditText searchEditText;
     private JAlertDialog dialog;
     private TextView departmentName;
     private TextView totalCount;
     private TextView leaveCount;
-    private int page = 1;
+
     private List<BedListResponseBean.PatientInfo> dataList = new ArrayList<>();
     private BedListAdapter bedListAdapter;
+
+    private String level = "";
+    private String search = "";
+    private int page = 1; // 页数
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +78,7 @@ public class BedListActivity extends AppCompatActivity implements CommonView {
 
     private void initData() {
         initNavData();
-        initListData("", "", page);
+        initListData(level, search, page);
     }
 
     public void initNavData() {
@@ -134,6 +144,7 @@ public class BedListActivity extends AppCompatActivity implements CommonView {
     private void initView() {
         searchBarView = findViewById(R.id.search_bar_view);
         searchEditTextBar = findViewById(R.id.search_edit_text_bar);
+        searchEditText = findViewById(R.id.search_edit_text);
 
         spinner = findViewById(R.id.spinner);
         bedTypeView = findViewById(R.id.bed_type_view);
@@ -143,13 +154,52 @@ public class BedListActivity extends AppCompatActivity implements CommonView {
         totalCount = findViewById(R.id.total_count);
         leaveCount = findViewById(R.id.leave_count);
 
+        searchEditText.setOnEditorActionListener((TextView textView, int id, KeyEvent keyEvent) -> {
+            if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
+                page = 1;
+                search = textView.getText().toString();
+                level = "";
+                initListData(level, search, page);
+                return true;
+            }
+            return false;
+        });
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (position == 0) {
+                    level = "";
+                } else {
+                    TextView textView = view.findViewById(android.R.id.text1);
+                    for (LevelResponseBean.Data data : DBHisBusiness.levelDataList) {
+                        if (!Objects.equals(textView.getText().toString(), data.getName())) {
+                            return;
+                        }
+
+                        level = data.getCode();
+                    }
+                }
+
+                search = "";
+                page = 1;
+                initListData(level, search, page);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
         bedListAdapter = new BedListAdapter(this, dataList);
         bedListView.setAdapter(bedListAdapter);
 
-        AutoLoadListener autoLoadListener = new AutoLoadListener(() -> {
-            initListData("", "", ++page);
-        });
+        AutoLoadListener autoLoadListener = new AutoLoadListener(() -> initListData(level, search, ++page));
         bedListView.setOnScrollListener(autoLoadListener);
+        bedListView.setOnItemClickListener((parent, view, position, id) -> {
+            TextView tv = view.findViewById(R.id.patient_number);
+            clickInBedInfoActivity(tv.getText().toString());
+        });
     }
 
     @Override
@@ -209,5 +259,13 @@ public class BedListActivity extends AppCompatActivity implements CommonView {
     public void hideDialog(View view) {
         Log.i(TAG, "hideErrorDialog: --------------------------");
         dialog.hide();
+    }
+
+    public void clickInBedInfoActivity(String hosNumber) {
+        Intent intent = new Intent(this, BedInfoActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("hos_number", hosNumber);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 }

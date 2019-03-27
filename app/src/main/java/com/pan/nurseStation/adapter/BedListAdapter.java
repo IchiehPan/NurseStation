@@ -32,12 +32,15 @@ public class BedListAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int position) {
+        if (mList != null) {
+            return mList.get(position);
+        }
         return null;
     }
 
     @Override
     public long getItemId(int position) {
-        return 0;
+        return position;
     }
 
     @Override

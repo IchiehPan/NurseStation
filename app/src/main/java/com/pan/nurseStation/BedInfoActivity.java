@@ -7,6 +7,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -16,6 +17,7 @@ import com.pan.nurseStation.fragment.VitalSignFragment;
 
 public class BedInfoActivity extends FragmentActivity {
 
+    private static final String TAG = BedInfoActivity.class.getSimpleName();
     private PatientInfoFragment patientInfoFrag;
     private MedicalOrderFragment doctorToldFrag;
     private VitalSignFragment vitalSignFra;
@@ -52,10 +54,16 @@ public class BedInfoActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bed_info);
 
+        String hosNumber = savedInstanceState.getString("hos_number");
+        Log.d(TAG, "onCreate: hosNumber=" + hosNumber);
+
+        initView();
+        initFragments();
+    }
+
+    private void initView() {
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-
-        initFragments();
     }
 
     private void initFragments() {
@@ -99,7 +107,7 @@ public class BedInfoActivity extends FragmentActivity {
 
     public void backToList(View view) {
         Intent intent = new Intent(this, BedListActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK );
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
 }
