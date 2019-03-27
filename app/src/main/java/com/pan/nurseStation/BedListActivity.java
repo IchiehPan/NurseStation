@@ -157,7 +157,7 @@ public class BedListActivity extends AppCompatActivity implements CommonView {
 
         searchEditText.setOnEditorActionListener((TextView textView, int id, KeyEvent keyEvent) -> {
             if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
-                dataList = new ArrayList<>();
+                dataList.clear();
                 bedListAdapter.notifyDataSetChanged();
                 level = "";
                 search = textView.getText().toString();
@@ -184,7 +184,7 @@ public class BedListActivity extends AppCompatActivity implements CommonView {
                     }
                 }
 
-                dataList = new ArrayList<>();
+                dataList.clear();
                 bedListAdapter.notifyDataSetChanged();
                 search = "";
                 page = 1;
