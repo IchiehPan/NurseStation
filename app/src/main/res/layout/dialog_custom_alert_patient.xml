@@ -68,7 +68,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:includeFontPadding="false"
-                    android:text="@string/example_patient_no"
+                    android:text="@string/example_bed_no"
                     android:textColor="#333333"
                     android:textSize="15sp" />
 

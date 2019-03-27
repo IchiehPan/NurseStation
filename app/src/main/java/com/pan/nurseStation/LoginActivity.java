@@ -17,7 +17,9 @@ import android.widget.Toast;
 import com.android.volley.VolleyError;
 import com.pan.lib.util.BeanKit;
 import com.pan.nurseStation.bean.Constants;
+import com.pan.nurseStation.bean.request.LevelRequestBean;
 import com.pan.nurseStation.bean.request.LoginRequestBean;
+import com.pan.nurseStation.bean.response.LevelResponseBean;
 import com.pan.nurseStation.bean.response.LoginResponseBean;
 import com.pan.nurseStation.business.DBHisBusiness;
 
@@ -113,9 +115,10 @@ public class LoginActivity extends AppCompatActivity {
 //                        e.printStackTrace();
 //                    }
 
-                        DBHisBusiness.loginResponseBean = BeanKit.string2Bean(response, LoginResponseBean.class);
+                        LoginResponseBean responseBean = BeanKit.string2Bean(response, LoginResponseBean.class);
+                        DBHisBusiness.loginBean = responseBean.getData();
 
-                        if (Constants.MESSAGE_SUCCESS_CODE == DBHisBusiness.loginResponseBean.getRet()) {
+                        if (Constants.MESSAGE_SUCCESS_CODE == responseBean.getRet()) {
                             loginSuccess();
                         } else {
                             loginFail();
@@ -131,6 +134,15 @@ public class LoginActivity extends AppCompatActivity {
     public void loginSuccess() {
         Toast.makeText(LoginActivity.this, R.string.login_success_tip, Toast.LENGTH_SHORT).show();
         startActivity(new Intent(LoginActivity.this, BedListActivity.class));
+
+        DBHisBusiness dbHisBusiness = new DBHisBusiness();
+        LevelRequestBean requestBean = new LevelRequestBean();
+        requestBean.setDepartment_id(DBHisBusiness.loginBean.getDepartment_id());
+        dbHisBusiness.level(null, response -> {
+            LevelResponseBean responseBean = BeanKit.string2Bean(response, LevelResponseBean.class);
+            DBHisBusiness.levelDataList = responseBean.getData();
+            DBHisBusiness.initBedTypeColorMap(this);
+        }, error -> Log.e(TAG, "onCreate: error=" + error, error));
     }
 
     public void loginFail() {

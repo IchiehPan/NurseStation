@@ -46,6 +46,7 @@ public class LevelResponseBean {
 
         private String code = "";
         private String name = "";
+        private String total = "";
 
         public void setCode(String code) {
             this.code = code;
@@ -63,21 +64,12 @@ public class LevelResponseBean {
             return name;
         }
 
-        @Override
-        public String toString() {
-            return "Data{" +
-                    "code='" + code + '\'' +
-                    ", name='" + name + '\'' +
-                    '}';
+        public void setTotal(String total) {
+            this.total = total;
         }
-    }
 
-    @Override
-    public String toString() {
-        return "LevelResponseBean{" +
-                "ret=" + ret +
-                ", data=" + data +
-                ", msg='" + msg + '\'' +
-                '}';
+        public String getTotal() {
+            return total;
+        }
     }
 }

@@ -49,11 +49,15 @@ public class BedTypeAdapter extends BaseAdapter {
             TextView headTV = linearLayout.findViewById(R.id.head1);
             TextView contentTV = linearLayout.findViewById(R.id.content1);
 
-            headTV.setText(mLevelDataList.get(position).getName());
+            LevelResponseBean.Data data = mLevelDataList.get(position);
+            String levelCode = data.getCode();
+
             GradientDrawable myGrad = (GradientDrawable) imageView.getBackground();
-            myGrad.setColor(DBHisBusiness.bedTypeColorMap.get(mLevelDataList.get(position).getCode()));
-
-
+            if (DBHisBusiness.bedTypeColorMap.containsKey(levelCode)) {
+                myGrad.setColor(DBHisBusiness.bedTypeColorMap.get(levelCode));
+            }
+            headTV.setText(data.getName());
+            contentTV.setText(data.getTotal());
         } else {
             linearLayout = (LinearLayout) convertView;
         }

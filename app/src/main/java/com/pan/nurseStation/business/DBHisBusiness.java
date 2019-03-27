@@ -38,7 +38,7 @@ import java.util.Objects;
 
 public class DBHisBusiness {
     public static RequestQueue mQueue;
-    public static LoginResponseBean loginResponseBean = new LoginResponseBean();
+    public static LoginResponseBean.Data loginBean = new LoginResponseBean.Data();
     public static List<LevelResponseBean.Data> levelDataList = new ArrayList<>();
     public static Map<String, Integer> bedTypeColorMap = new HashMap<>();
 
@@ -55,12 +55,11 @@ public class DBHisBusiness {
 
     public void bedlist(BedListRequestBean requestBean, Response.Listener<String> listener, @Nullable Response.ErrorListener errorListener) {
         Map<String, String> params = new HashMap<>();
-        params.put("number", loginResponseBean.getData().getNumber());
+        params.put("number", loginBean.getNumber());
         params.put("search", requestBean.getSearch());
         params.put("level", requestBean.getLevel());
         params.put("page", String.valueOf(requestBean.getPage()));
         params.put(Constants.SERVICE_PARAM, Constants.BEDLIST_SERVICE);
-        Log.i(TAG, "bedlist: params=" + params);
         StringRequest stringRequest = VolleyKit.newStringRequest(Request.Method.POST, Constants.URL, params, listener, errorListener);
         mQueue.add(stringRequest);
     }
@@ -75,6 +74,7 @@ public class DBHisBusiness {
 
     public void level(LevelRequestBean requestBean, Response.Listener<String> listener, @Nullable Response.ErrorListener errorListener) {
         Map<String, String> params = new HashMap<>();
+        params.put("department_id", requestBean.getDepartment_id());
         params.put(Constants.SERVICE_PARAM, Constants.LEVEL_SERVICE);
         StringRequest stringRequest = VolleyKit.newStringRequest(Request.Method.POST, Constants.URL, params, listener, errorListener);
         mQueue.add(stringRequest);

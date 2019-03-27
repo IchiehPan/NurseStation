@@ -36,7 +36,7 @@ public class LoginResponseBean {
         this.data = data;
     }
 
-    public class Data {
+    public static class Data {
 
         private String number = "";
         private String department_id = "";

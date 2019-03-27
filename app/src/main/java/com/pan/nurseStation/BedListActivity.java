@@ -57,24 +57,13 @@ public class BedListActivity extends AppCompatActivity implements CommonView {
     }
 
     private void initData() {
-        BedListRequestBean requestBean = new BedListRequestBean();
-        DBHisBusiness dbHisBusiness = new DBHisBusiness();
-        dbHisBusiness.bedlist(requestBean, response -> {
-            Log.i(TAG, "onResponse: " + response);
-            BedListResponseBean responseBean = BeanKit.string2Bean(response, BedListResponseBean.class);
-            Log.i(TAG, "initData: responseBean=" + responseBean);
-
-
-        }, error -> {
-            Log.e(TAG, "onResponse: " + error.toString(), error);
-        });
-
         String[] bedTypes;
         if (Constants.ISDEBUG) {
             bedTypes = this.getResources().getStringArray(R.array.bed_types);
         }
         if (!DBHisBusiness.levelDataList.isEmpty()) {
-            List<String> bedTypeList = new ArrayList<>(DBHisBusiness.levelDataList.size());
+            List<String> bedTypeList = new ArrayList<>();
+            bedTypeList.add(getString(R.string.bed_list_level_head_tip));
             for (LevelResponseBean.Data data : DBHisBusiness.levelDataList) {
                 bedTypeList.add(data.getName());
             }
@@ -87,11 +76,20 @@ public class BedListActivity extends AppCompatActivity implements CommonView {
         arrayAdapter.setDropDownViewResource(R.layout.item_simple_spinner_dropdown);
         spinner.setAdapter(arrayAdapter);
 
-
+        // 绑定颜色
         bedTypeView.setAdapter(new BedTypeAdapter(this, DBHisBusiness.levelDataList));
 
+        BedListRequestBean requestBean = new BedListRequestBean();
+        DBHisBusiness dbHisBusiness = new DBHisBusiness();
+        dbHisBusiness.bedlist(requestBean, response -> {
+            Log.i(TAG, "onResponse: " + response);
+            BedListResponseBean responseBean = BeanKit.string2Bean(response, BedListResponseBean.class);
+            Log.i(TAG, "initData: responseBean=" + responseBean);
+            // 房子组件的绑定数据
+            bedListView.setAdapter(new BedListAdapter(this, responseBean.getData().getList()));
+        }, error -> Log.e(TAG, "onResponse: " + error.toString(), error));
 
-        bedListView.setAdapter(new BedListAdapter(this, 7));
+
     }
 
     private void initView() {
