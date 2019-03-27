@@ -2,6 +2,7 @@ package com.pan.nurseStation.widget.dialog;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.view.View;
@@ -9,6 +10,9 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSON;
+import com.pan.nurseStation.EnterMedicalOrderActivity;
+import com.pan.nurseStation.EnterVitalSignActivity;
 import com.pan.nurseStation.R;
 import com.pan.nurseStation.bean.response.PatientDetailResponseBean;
 
@@ -24,12 +28,13 @@ public class JAlertDialog extends AlertDialog {
     private TextView departmentName;
     private TextView hosNumber;
     private TextView patientLevel;
-    private Context mContext;
+    private TextView bedInfoDoor;
+    private TextView enterMedicalOrderDoor;
+    private TextView enterVitalSignDoor;
     private int mResource;
 
     public JAlertDialog(Context context, int themeResId, @LayoutRes int resource) {
         super(context, themeResId);
-        this.mContext = context;
         this.mResource = resource;
     }
 
@@ -42,7 +47,7 @@ public class JAlertDialog extends AlertDialog {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        View view = View.inflate(getContext(), R.layout.dialog_custom_alert_patient, null);
+        View view = View.inflate(getContext(), mResource, null);
         setContentView(view);
 
         patientName = view.findViewById(R.id.patient_name);
@@ -53,6 +58,10 @@ public class JAlertDialog extends AlertDialog {
         hosNumber = view.findViewById(R.id.hos_number);
         patientLevel = view.findViewById(R.id.patient_level);
 
+        bedInfoDoor = view.findViewById(R.id.bed_info_activity_door);
+        enterMedicalOrderDoor = view.findViewById(R.id.enter_medical_order_activity_door);
+        enterVitalSignDoor = view.findViewById(R.id.enter_vital_sign_activity_door);
+
 //        WindowManager.LayoutParams lp = getWindow().getAttributes();
 //        lp.width = (int) mWidth;
 //        lp.height = (int) mHeight;
@@ -62,16 +71,63 @@ public class JAlertDialog extends AlertDialog {
     public void setData(PatientDetailResponseBean.Data data) {
         String sex = data.getSex();
         patientName.setText(data.getName());
-        if (Objects.equals(sex, mContext.getString(R.string.sex_type_male))) {
-            patientSex.setBackground(mContext.getResources().getDrawable(R.drawable.ic_male));
-        } else if (Objects.equals(sex, mContext.getString(R.string.sex_type_female))) {
-            patientSex.setBackground(mContext.getResources().getDrawable(R.drawable.ic_female));
+        if (Objects.equals(sex, getContext().getString(R.string.sex_type_male))) {
+            patientSex.setBackground(getContext().getResources().getDrawable(R.drawable.ic_male));
+        } else if (Objects.equals(sex, getContext().getString(R.string.sex_type_female))) {
+            patientSex.setBackground(getContext().getResources().getDrawable(R.drawable.ic_female));
         }
         bedId.setText(data.getBed_id());
         patientAge.setText(data.getAge());
         departmentName.setText(data.getDepartment_name());
         hosNumber.setText(data.getHos_number());
         patientLevel.setText(data.getLevel());
+
+        //绑定一些跳转事件
+        bedInfoDoor.setOnClickListener(view -> {
+//                clickInBedInfoActivity(data);
+        });
+
+        enterMedicalOrderDoor.setOnClickListener(view -> {
+            clickInEnterMedicalOrderActivity(data);
+        });
+
+        enterVitalSignDoor.setOnClickListener(view -> {
+            clickInEnterVitalSignActivity(data);
+        });
+    }
+
+    public void clickInEnterMedicalOrderActivity(PatientDetailResponseBean.Data data) {
+        Intent intent = new Intent(getContext(), EnterMedicalOrderActivity.class);
+        Bundle bundle = new Bundle();
+
+        bundle.putString("patientInfo", JSON.toJSONString(data));
+        bundle.putString("hos_number", data.getHos_number());
+        bundle.putString("name", data.getName());
+        bundle.putString("age", data.getAge());
+        bundle.putString("sex", data.getSex());
+        bundle.putString("bedId", data.getBed_id());
+        bundle.putString("level", data.getLevel());
+        bundle.putString("number", data.getNumber());
+        bundle.putString("department_id", data.getDepartment_id());
+        intent.putExtras(bundle);
+        getContext().startActivity(intent);
+    }
+
+    public void clickInEnterVitalSignActivity(PatientDetailResponseBean.Data data) {
+        Intent intent = new Intent(getContext(), EnterVitalSignActivity.class);
+        Bundle bundle = new Bundle();
+
+        bundle.putString("patientInfo", JSON.toJSONString(data));
+        bundle.putString("hos_number", data.getHos_number());
+        bundle.putString("name", data.getName());
+        bundle.putString("age", data.getAge());
+        bundle.putString("sex", data.getSex());
+        bundle.putString("bedId", data.getBed_id());
+        bundle.putString("level", data.getLevel());
+        bundle.putString("number", data.getNumber());
+        bundle.putString("department_id", data.getDepartment_id());
+        intent.putExtras(bundle);
+        getContext().startActivity(intent);
     }
 
 

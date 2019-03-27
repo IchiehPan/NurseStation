@@ -263,7 +263,7 @@ public class BedListActivity extends AppCompatActivity implements CommonView {
 
     public void showDialog(String barCode) {
         dialog = new JAlertDialog(this, R.style.JDialogStyle, R.layout.dialog_custom_alert_patient);
-
+        dialog.show();
 
         DBHisBusiness dbHisBusiness = new DBHisBusiness();
         PatientDetailRequestBean requestBean = new PatientDetailRequestBean();
@@ -273,24 +273,6 @@ public class BedListActivity extends AppCompatActivity implements CommonView {
             PatientDetailResponseBean responseBean = BeanKit.string2Bean(response, PatientDetailResponseBean.class);
             PatientDetailResponseBean.Data data = responseBean.getData();
             dialog.setData(data);
-
-            //绑定一些跳转事件
-            TextView bedInfoDoor = dialog.findViewById(R.id.bed_info_activity_door);
-            TextView enterMedicalOrderDoor = dialog.findViewById(R.id.enter_medical_order_activity_door);
-            TextView enterVitalSignDoor = dialog.findViewById(R.id.enter_vital_sign_activity_door);
-            bedInfoDoor.setOnClickListener(view -> {
-//                clickInBedInfoActivity(data);
-            });
-
-            enterMedicalOrderDoor.setOnClickListener(view -> {
-                clickInEnterMedicalOrderActivity(data);
-            });
-
-            enterVitalSignDoor.setOnClickListener(view -> {
-                clickInEnterVitalSignActivity(data);
-            });
-
-            dialog.show();
         }, error -> {
             Log.e(TAG, "showDialog: ", error);
             Toast.makeText(this, getString(R.string.manual_input_tip), Toast.LENGTH_SHORT).show();
@@ -319,37 +301,5 @@ public class BedListActivity extends AppCompatActivity implements CommonView {
         startActivity(intent);
     }
 
-    public void clickInEnterMedicalOrderActivity(PatientDetailResponseBean.Data data) {
-        Intent intent = new Intent(this, EnterMedicalOrderActivity.class);
-        Bundle bundle = new Bundle();
 
-        bundle.putString("patientInfo", JSON.toJSONString(data));
-        bundle.putString("hos_number", data.getHos_number());
-        bundle.putString("name", data.getName());
-        bundle.putString("age", data.getAge());
-        bundle.putString("sex", data.getSex());
-        bundle.putString("bedId", data.getBed_id());
-        bundle.putString("level", data.getLevel());
-        bundle.putString("number", data.getNumber());
-        bundle.putString("department_id", data.getDepartment_id());
-        intent.putExtras(bundle);
-        startActivity(intent);
-    }
-
-    public void clickInEnterVitalSignActivity(PatientDetailResponseBean.Data data) {
-        Intent intent = new Intent(this, EnterVitalSignActivity.class);
-        Bundle bundle = new Bundle();
-
-        bundle.putString("patientInfo", JSON.toJSONString(data));
-        bundle.putString("hos_number", data.getHos_number());
-        bundle.putString("name", data.getName());
-        bundle.putString("age", data.getAge());
-        bundle.putString("sex", data.getSex());
-        bundle.putString("bedId", data.getBed_id());
-        bundle.putString("level", data.getLevel());
-        bundle.putString("number", data.getNumber());
-        bundle.putString("department_id", data.getDepartment_id());
-        intent.putExtras(bundle);
-        startActivity(intent);
-    }
 }
