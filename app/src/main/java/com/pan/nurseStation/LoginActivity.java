@@ -134,15 +134,6 @@ public class LoginActivity extends AppCompatActivity {
     public void loginSuccess() {
         Toast.makeText(LoginActivity.this, R.string.login_success_tip, Toast.LENGTH_SHORT).show();
         startActivity(new Intent(LoginActivity.this, BedListActivity.class));
-
-        DBHisBusiness dbHisBusiness = new DBHisBusiness();
-        LevelRequestBean requestBean = new LevelRequestBean();
-        requestBean.setDepartment_id(DBHisBusiness.loginBean.getDepartment_id());
-        dbHisBusiness.level(requestBean, response -> {
-            LevelResponseBean responseBean = BeanKit.string2Bean(response, LevelResponseBean.class);
-            DBHisBusiness.levelDataList = responseBean.getData();
-            DBHisBusiness.initBedTypeColorMap(this);
-        }, error -> Log.e(TAG, "onCreate: error=" + error, error));
     }
 
     public void loginFail() {

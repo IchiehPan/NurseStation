@@ -21,6 +21,7 @@ import com.pan.nurseStation.adapter.BedTypeAdapter;
 import com.pan.nurseStation.adapter.SimpleSpinnerAdapter;
 import com.pan.nurseStation.bean.Constants;
 import com.pan.nurseStation.bean.request.BedListRequestBean;
+import com.pan.nurseStation.bean.request.LevelRequestBean;
 import com.pan.nurseStation.bean.response.BedListResponseBean;
 import com.pan.nurseStation.bean.response.LevelResponseBean;
 import com.pan.nurseStation.business.DBHisBusiness;
@@ -57,32 +58,42 @@ public class BedListActivity extends AppCompatActivity implements CommonView {
     }
 
     private void initData() {
-        String[] bedTypes;
-        if (Constants.ISDEBUG) {
-            bedTypes = this.getResources().getStringArray(R.array.bed_types);
-        }
-        if (!DBHisBusiness.levelDataList.isEmpty()) {
-            List<String> bedTypeList = new ArrayList<>();
-            bedTypeList.add(getString(R.string.bed_list_level_head_tip));
-            for (LevelResponseBean.Data data : DBHisBusiness.levelDataList) {
-                bedTypeList.add(data.getName());
-            }
-
-            bedTypes = bedTypeList.toArray(new String[bedTypeList.size()]);
-        }
-
-
-        SimpleSpinnerAdapter<String> arrayAdapter = new SimpleSpinnerAdapter<>(this, R.layout.item_simple_spinner, android.R.id.text1, bedTypes);
-        arrayAdapter.setDropDownViewResource(R.layout.item_simple_spinner_dropdown);
-        spinner.setAdapter(arrayAdapter);
-
-        // 绑定颜色
-        bedTypeView.setAdapter(new BedTypeAdapter(this, DBHisBusiness.levelDataList));
-
         DBHisBusiness dbHisBusiness = new DBHisBusiness();
-        BedListRequestBean requestBean = new BedListRequestBean();
-        requestBean.setNumber(DBHisBusiness.loginBean.getNumber());
-        dbHisBusiness.bedlist(requestBean, response -> {
+        LevelRequestBean levelRequestBean = new LevelRequestBean();
+        levelRequestBean.setDepartment_id(DBHisBusiness.loginBean.getDepartment_id());
+        dbHisBusiness.level(levelRequestBean, response -> {
+            LevelResponseBean responseBean = BeanKit.string2Bean(response, LevelResponseBean.class);
+            DBHisBusiness.levelDataList = responseBean.getData();
+            DBHisBusiness.initBedTypeColorMap(this);
+
+            String[] bedTypes;
+            if (Constants.ISDEBUG) {
+                bedTypes = this.getResources().getStringArray(R.array.bed_types);
+            }
+            if (!DBHisBusiness.levelDataList.isEmpty()) {
+                List<String> bedTypeList = new ArrayList<>();
+                bedTypeList.add(getString(R.string.bed_list_level_head_tip));
+                for (LevelResponseBean.Data data : DBHisBusiness.levelDataList) {
+                    bedTypeList.add(data.getName());
+                }
+
+                bedTypes = bedTypeList.toArray(new String[bedTypeList.size()]);
+            }
+            SimpleSpinnerAdapter<String> arrayAdapter = new SimpleSpinnerAdapter<>(this, R.layout.item_simple_spinner, android.R.id.text1, bedTypes);
+            arrayAdapter.setDropDownViewResource(R.layout.item_simple_spinner_dropdown);
+            spinner.setAdapter(arrayAdapter);
+
+            // 绑定颜色
+            bedTypeView.setAdapter(new BedTypeAdapter(this, DBHisBusiness.levelDataList));
+
+        }, error -> Log.e(TAG, "onCreate: error=" + error, error));
+
+
+
+
+        BedListRequestBean bedListRequestBean = new BedListRequestBean();
+        bedListRequestBean.setNumber(DBHisBusiness.loginBean.getNumber());
+        dbHisBusiness.bedlist(bedListRequestBean, response -> {
             Log.i(TAG, "onResponse: " + response);
             BedListResponseBean responseBean = BeanKit.string2Bean(response, BedListResponseBean.class);
             // 房子组件的绑定数据
