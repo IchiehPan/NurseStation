@@ -41,6 +41,11 @@ public class EnterMedicalOrderActivity extends AppCompatActivity implements Comm
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enter_medical_order);
 
+        String hosNumber = savedInstanceState.getString("hos_number");
+        Log.d(TAG, "onCreate: hosNumber=" + hosNumber);
+        String patientInfo = savedInstanceState.getString("patientInfo");
+        Log.d(TAG, "onCreate: patientInfo=" + patientInfo);
+
         resultReceiver = new ScanResultReceiver(this);
         registerReceiver(resultReceiver, new IntentFilter(com.bben.ydcf.scandome.Constants.DECODE_RESULT_FILTER));
 

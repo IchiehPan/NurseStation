@@ -41,6 +41,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/patient_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -50,6 +51,7 @@
                     android:textSize="15sp" />
 
                 <ImageView
+                    android:id="@+id/patient_sex"
                     android:layout_width="13dp"
                     android:layout_height="10.5dp"
                     android:layout_gravity="center_vertical"
@@ -64,6 +66,7 @@
 
 
                 <TextView
+                    android:id="@+id/bed_id"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -81,6 +84,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/patient_age"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:includeFontPadding="false"
@@ -94,6 +98,7 @@
                     android:layout_weight="1" />
 
                 <TextView
+                    android:id="@+id/department_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:includeFontPadding="false"
@@ -119,6 +124,7 @@
                     android:textSize="12sp" />
 
                 <TextView
+                    android:id="@+id/hos_number"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
@@ -133,6 +139,7 @@
                     android:layout_weight="1" />
 
                 <TextView
+                    android:id="@+id/patient_level"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:includeFontPadding="false"
@@ -165,6 +172,7 @@
 
 
             <TextView
+                android:id="@+id/bed_info_activity_door"
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
                 android:layout_marginTop="16dp"
@@ -181,6 +189,7 @@
                 android:layout_marginTop="14dp">
 
                 <TextView
+                    android:id="@+id/enter_medical_order_activity_door"
                     android:layout_width="119dp"
                     android:layout_height="64dp"
                     android:layout_alignParentStart="true"
@@ -192,6 +201,7 @@
                     android:textSize="14sp" />
 
                 <TextView
+                    android:id="@+id/enter_vital_sign_activity_door"
                     android:layout_width="119dp"
                     android:layout_height="64dp"
                     android:layout_alignParentEnd="true"

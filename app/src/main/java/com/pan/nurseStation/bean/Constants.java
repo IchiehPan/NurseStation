@@ -18,6 +18,8 @@ public class Constants {
     public final static String URL = "http://192.168.10.71:88/dbhospital/";
     //    public final static String URL = "http://api.xiezn.com/dbhospital/?service=Login.index&number=011012&password=pwd";
 
+    public final static String PATIENT_INFO_URL = "http://192.168.10.71:8689/index/ydhl/baseinfo/hos_number/";
+
     /**
      * 确认传参
      */

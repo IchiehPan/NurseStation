@@ -56,9 +56,11 @@ public class BedInfoActivity extends FragmentActivity {
 
         String hosNumber = savedInstanceState.getString("hos_number");
         Log.d(TAG, "onCreate: hosNumber=" + hosNumber);
+        String patientInfo = savedInstanceState.getString("patientInfo");
+        Log.d(TAG, "onCreate: patientInfo=" + patientInfo);
 
         initView();
-        initFragments();
+        initFragments(hosNumber);
     }
 
     private void initView() {
@@ -66,10 +68,20 @@ public class BedInfoActivity extends FragmentActivity {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
 
-    private void initFragments() {
+    private void initFragments(String hosNumber) {
         patientInfoFrag = new PatientInfoFragment();
         doctorToldFrag = new MedicalOrderFragment();
         vitalSignFra = new VitalSignFragment();
+
+        Bundle bundle = new Bundle();
+        /*往bundle中添加数据*/
+        bundle.putString("hos_number", hosNumber);
+        /*把数据设置到Fragment中*/
+        patientInfoFrag.setArguments(bundle);
+        doctorToldFrag.setArguments(bundle);
+        vitalSignFra.setArguments(bundle);
+
+
         fragments = new Fragment[]{patientInfoFrag, doctorToldFrag, vitalSignFra};
         lastShowFragment = 0;
         getSupportFragmentManager().beginTransaction()

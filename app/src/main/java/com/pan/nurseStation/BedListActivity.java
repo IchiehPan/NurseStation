@@ -9,15 +9,17 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
-import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.alibaba.fastjson.JSON;
 import com.bben.ydcf.scandome.CommonView;
 import com.bben.ydcf.scandome.receiver.ScanResultReceiver;
 import com.pan.anlib.util.DensityKit;
@@ -28,18 +30,17 @@ import com.pan.nurseStation.adapter.SimpleSpinnerAdapter;
 import com.pan.nurseStation.bean.Constants;
 import com.pan.nurseStation.bean.request.BedListRequestBean;
 import com.pan.nurseStation.bean.request.LevelRequestBean;
+import com.pan.nurseStation.bean.request.PatientDetailRequestBean;
 import com.pan.nurseStation.bean.response.BedListResponseBean;
 import com.pan.nurseStation.bean.response.LevelResponseBean;
+import com.pan.nurseStation.bean.response.PatientDetailResponseBean;
 import com.pan.nurseStation.business.DBHisBusiness;
 import com.pan.nurseStation.listener.AutoLoadListener;
 import com.pan.nurseStation.widget.dialog.JAlertDialog;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 
 public class BedListActivity extends AppCompatActivity implements CommonView {
@@ -172,11 +173,10 @@ public class BedListActivity extends AppCompatActivity implements CommonView {
                 } else {
                     TextView textView = view.findViewById(android.R.id.text1);
                     for (LevelResponseBean.Data data : DBHisBusiness.levelDataList) {
-                        if (!Objects.equals(textView.getText().toString(), data.getName())) {
-                            return;
+                        if (Objects.equals(textView.getText().toString(), data.getName())) {
+                            level = data.getCode();
+                            break;
                         }
-
-                        level = data.getCode();
                     }
                 }
 
@@ -199,7 +199,14 @@ public class BedListActivity extends AppCompatActivity implements CommonView {
         bedListView.setOnScrollListener(autoLoadListener);
         bedListView.setOnItemClickListener((parent, view, position, id) -> {
             TextView tv = view.findViewById(R.id.patient_number);
-            clickInBedInfoActivity(tv.getText().toString());
+            for (BedListResponseBean.PatientInfo patientInfo : dataList) {
+                if (!Objects.equals(tv.getText().toString(), patientInfo.getHos_number())) {
+                    continue;
+                }
+                clickInBedInfoActivity(patientInfo);
+                return;
+            }
+
         });
     }
 
@@ -217,7 +224,7 @@ public class BedListActivity extends AppCompatActivity implements CommonView {
     public void setScan(String str) {
         Log.i(TAG, "setScan: scanResult=" + str);
 
-        showDialog();
+        showDialog(str);
     }
 
     public void slideIn(View view) {
@@ -252,9 +259,58 @@ public class BedListActivity extends AppCompatActivity implements CommonView {
         startActivity(intent);
     }
 
-    public void showDialog() {
+    public void showDialog(String barCode) {
         dialog = new JAlertDialog(this, R.style.JDialogStyle, R.layout.dialog_custom_alert_patient);
-        dialog.show();
+        TextView patientName = dialog.findViewById(R.id.patient_name);
+        ImageView patientSex = dialog.findViewById(R.id.patient_sex);
+        TextView bedId = dialog.findViewById(R.id.bed_id);
+        TextView patientAge = dialog.findViewById(R.id.patient_age);
+        TextView departmentName = dialog.findViewById(R.id.department_name);
+        TextView hosNumber = dialog.findViewById(R.id.hos_number);
+        TextView patientLevel = dialog.findViewById(R.id.patient_level);
+
+        DBHisBusiness dbHisBusiness = new DBHisBusiness();
+        PatientDetailRequestBean requestBean = new PatientDetailRequestBean();
+        requestBean.setHos_number(barCode);
+        dbHisBusiness.patientdetail(requestBean, response -> {
+            Log.d(TAG, "showDialog: response=" + response);
+            PatientDetailResponseBean responseBean = BeanKit.string2Bean(response, PatientDetailResponseBean.class);
+            PatientDetailResponseBean.Data data = responseBean.getData();
+            String sex = data.getSex();
+
+            patientName.setText(data.getName());
+            if (Objects.equals(sex, getString(R.string.sex_type_male))) {
+                patientSex.setBackground(getResources().getDrawable(R.drawable.ic_male));
+            } else if (Objects.equals(sex, getString(R.string.sex_type_female))) {
+                patientSex.setBackground(getResources().getDrawable(R.drawable.ic_female));
+            }
+            bedId.setText(data.getBed_id());
+            patientAge.setText(data.getAge());
+            departmentName.setText(data.getDepartment_name());
+            hosNumber.setText(data.getHos_number());
+            patientLevel.setText(data.getLevel());
+
+            //绑定一些跳转事件
+            TextView bedInfoDoor = dialog.findViewById(R.id.bed_info_activity_door);
+            TextView enterMedicalOrderDoor = dialog.findViewById(R.id.enter_medical_order_activity_door);
+            TextView enterVitalSignDoor = dialog.findViewById(R.id.enter_vital_sign_activity_door);
+            bedInfoDoor.setOnClickListener(view -> {
+//                clickInBedInfoActivity(data);
+            });
+
+            enterMedicalOrderDoor.setOnClickListener(view -> {
+                clickInEnterMedicalOrderActivity(data);
+            });
+
+            enterVitalSignDoor.setOnClickListener(view -> {
+                clickInEnterVitalSignActivity(data);
+            });
+
+            dialog.show();
+        }, error -> {
+            Log.e(TAG, "showDialog: ", error);
+            Toast.makeText(this, getString(R.string.manual_input_tip), Toast.LENGTH_SHORT).show();
+        });
     }
 
     public void hideDialog(View view) {
@@ -262,10 +318,53 @@ public class BedListActivity extends AppCompatActivity implements CommonView {
         dialog.hide();
     }
 
-    public void clickInBedInfoActivity(String hosNumber) {
+    public void clickInBedInfoActivity(BedListResponseBean.PatientInfo patientInfo) {
         Intent intent = new Intent(this, BedInfoActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putString("hos_number", hosNumber);
+
+        bundle.putString("patientInfo", JSON.toJSONString(patientInfo));
+        bundle.putString("hos_number", patientInfo.getHos_number());
+        bundle.putString("name", patientInfo.getName());
+        bundle.putString("age", patientInfo.getAge());
+        bundle.putString("sex", patientInfo.getSex());
+        bundle.putString("bedId", patientInfo.getBed_id());
+        bundle.putString("level", patientInfo.getLevel());
+        bundle.putString("number", patientInfo.getNumber());
+        bundle.putString("department_id", patientInfo.getDepartment_id());
+        intent.putExtras(bundle);
+        startActivity(intent);
+    }
+
+    public void clickInEnterMedicalOrderActivity(PatientDetailResponseBean.Data data) {
+        Intent intent = new Intent(this, EnterMedicalOrderActivity.class);
+        Bundle bundle = new Bundle();
+
+        bundle.putString("patientInfo", JSON.toJSONString(data));
+        bundle.putString("hos_number", data.getHos_number());
+        bundle.putString("name", data.getName());
+        bundle.putString("age", data.getAge());
+        bundle.putString("sex", data.getSex());
+        bundle.putString("bedId", data.getBed_id());
+        bundle.putString("level", data.getLevel());
+        bundle.putString("number", data.getNumber());
+        bundle.putString("department_id", data.getDepartment_id());
+        intent.putExtras(bundle);
+        startActivity(intent);
+    }
+
+    public void clickInEnterVitalSignActivity(PatientDetailResponseBean.Data data) {
+        Intent intent = new Intent(this, EnterVitalSignActivity.class);
+        Bundle bundle = new Bundle();
+
+        bundle.putString("patientInfo", JSON.toJSONString(data));
+        bundle.putString("hos_number", data.getHos_number());
+        bundle.putString("name", data.getName());
+        bundle.putString("age", data.getAge());
+        bundle.putString("sex", data.getSex());
+        bundle.putString("bedId", data.getBed_id());
+        bundle.putString("level", data.getLevel());
+        bundle.putString("number", data.getNumber());
+        bundle.putString("department_id", data.getDepartment_id());
         intent.putExtras(bundle);
         startActivity(intent);
     }

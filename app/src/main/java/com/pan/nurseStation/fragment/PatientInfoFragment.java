@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.webkit.WebView;
 
 import com.pan.nurseStation.R;
+import com.pan.nurseStation.bean.Constants;
 import com.pan.nurseStation.widget.fragment.BackHandledInterface;
 import com.pan.nurseStation.widget.web.JWebSetting;
 import com.pan.nurseStation.widget.web.JWebViewClient;
@@ -20,6 +21,7 @@ public class PatientInfoFragment extends Fragment implements BackHandledInterfac
     private static final String TAG = PatientInfoFragment.class.getSimpleName();
     private WebView mWebView;
     private TabLayout mTabLayout;
+    private String mHosNumber;
 
     public PatientInfoFragment() {
         // Required empty public constructor
@@ -41,6 +43,10 @@ public class PatientInfoFragment extends Fragment implements BackHandledInterfac
 
     private void initView(View root) {
         mWebView = root.findViewById(R.id.webView);
+        Bundle bundle = this.getArguments();
+        String hosNumber = bundle.getString("hos_number");
+
+
         //声明WebSettings子类
         JWebSetting.setParam(mWebView.getSettings());
         mWebView.loadUrl("http://192.168.8.44/nursing.html");
@@ -59,7 +65,7 @@ public class PatientInfoFragment extends Fragment implements BackHandledInterfac
                 // 选中事件
                 String text = tab.getText().toString();
                 if (Objects.equals(text, getString(R.string.page_basic_info))) {
-                    mWebView.loadUrl("http://192.168.8.44/base-inform.html?_ijt=erb52et96u1rltsm2jih1qrton");
+                    mWebView.loadUrl(Constants.PATIENT_INFO_URL + hosNumber);
                 } else if (Objects.equals(text, getString(R.string.page_order_info))) {
                     mWebView.loadUrl("http://192.168.8.44/doctor-advice.html#");
                 } else if (Objects.equals(text, getString(R.string.page_nursing_record))) {

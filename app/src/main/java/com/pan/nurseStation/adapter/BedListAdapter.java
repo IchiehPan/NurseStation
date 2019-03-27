@@ -51,7 +51,7 @@ public class BedListAdapter extends BaseAdapter {
         if (convertView == null) {
             linearLayout = (LinearLayout) View.inflate(mContext, R.layout.item_simple_house, null);
             // 这里做数据的绑定
-            TextView bedNo = linearLayout.findViewById(R.id.bed_no);
+            TextView bedNo = linearLayout.findViewById(R.id.bed_id);
             TextView patientName = linearLayout.findViewById(R.id.patient_name);
             ImageView patientSex = linearLayout.findViewById(R.id.patient_sex);
             TextView patientAge = linearLayout.findViewById(R.id.patient_age);
@@ -75,7 +75,7 @@ public class BedListAdapter extends BaseAdapter {
             Log.d(TAG, "getView: 新创建组件position=" + position);
         } else {
             linearLayout = (LinearLayout) convertView;
-            TextView bedNo = linearLayout.findViewById(R.id.bed_no);
+            TextView bedNo = linearLayout.findViewById(R.id.bed_id);
             TextView patientName = linearLayout.findViewById(R.id.patient_name);
             ImageView patientSex = linearLayout.findViewById(R.id.patient_sex);
             TextView patientAge = linearLayout.findViewById(R.id.patient_age);
