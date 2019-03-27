@@ -14,12 +14,12 @@
         android:layout_height="36dp">
 
         <LinearLayout
-            android:onClick="signOut"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
             android:layout_marginStart="12dp"
+            android:onClick="signOut"
             android:orientation="horizontal">
 
             <ImageView
@@ -195,6 +195,7 @@
             android:textSize="11sp" />
 
         <TextView
+            android:id="@+id/department_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -213,6 +214,7 @@
             android:textSize="10sp" />
 
         <TextView
+            android:id="@+id/total_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -231,6 +233,7 @@
             android:textSize="10sp" />
 
         <TextView
+            android:id="@+id/leave_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"

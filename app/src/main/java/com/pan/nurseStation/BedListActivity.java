@@ -7,10 +7,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.bben.ydcf.scandome.CommonView;
 import com.bben.ydcf.scandome.receiver.ScanResultReceiver;
@@ -44,6 +46,10 @@ public class BedListActivity extends AppCompatActivity implements CommonView {
     private RelativeLayout searchBarView;
     private LinearLayout searchEditTextBar;
     private JAlertDialog dialog;
+    private TextView departmentName;
+    private TextView totalCount;
+    private TextView leaveCount;
+    private int page = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +64,11 @@ public class BedListActivity extends AppCompatActivity implements CommonView {
     }
 
     private void initData() {
+        initNavData();
+        initListData("", "", page);
+    }
+
+    public void initNavData() {
         DBHisBusiness dbHisBusiness = new DBHisBusiness();
         LevelRequestBean levelRequestBean = new LevelRequestBean();
         levelRequestBean.setDepartment_id(DBHisBusiness.loginBean.getDepartment_id());
@@ -88,19 +99,26 @@ public class BedListActivity extends AppCompatActivity implements CommonView {
 
         }, error -> Log.e(TAG, "onCreate: error=" + error, error));
 
+    }
 
-
-
+    public void initListData(String level, String search, int page) {
+        DBHisBusiness dbHisBusiness = new DBHisBusiness();
         BedListRequestBean bedListRequestBean = new BedListRequestBean();
         bedListRequestBean.setNumber(DBHisBusiness.loginBean.getNumber());
+        bedListRequestBean.setLevel(level);
+        bedListRequestBean.setSearch(search);
+        bedListRequestBean.setPage(page);
         dbHisBusiness.bedlist(bedListRequestBean, response -> {
             Log.i(TAG, "onResponse: " + response);
             BedListResponseBean responseBean = BeanKit.string2Bean(response, BedListResponseBean.class);
             // 房子组件的绑定数据
             bedListView.setAdapter(new BedListAdapter(this, responseBean.getData().getList()));
+
+            // 底下的数据
+            departmentName.setText(DBHisBusiness.loginBean.getDepartment_name());
+            totalCount.setText(responseBean.getData().getRecords());
+            leaveCount.setText(responseBean.getData().getRemain_bed());
         }, error -> Log.e(TAG, "onResponse: " + error.toString(), error));
-
-
     }
 
     private void initView() {
@@ -110,6 +128,36 @@ public class BedListActivity extends AppCompatActivity implements CommonView {
         spinner = findViewById(R.id.spinner);
         bedTypeView = findViewById(R.id.bed_type_view);
         bedListView = findViewById(R.id.bed_list_view);
+
+        departmentName = findViewById(R.id.department_name);
+        totalCount = findViewById(R.id.total_count);
+        leaveCount = findViewById(R.id.leave_count);
+
+        bedListView.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+                Log.i(TAG, "onScrollStateChanged: AbsListView=" + view);
+                Log.i(TAG, "onScrollStateChanged: scrollState=" + scrollState);
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                Log.i(TAG, "onScroll: AbsListView=" + view);
+                Log.i(TAG, "onScroll: firstVisibleItem=" + firstVisibleItem);
+                Log.i(TAG, "onScroll: visibleItemCount=" + visibleItemCount);
+                Log.i(TAG, "onScroll: totalItemCount=" + totalItemCount);
+            }
+        });
+        bedListView.setOnScrollChangeListener(new View.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                Log.i(TAG, "onScrollChange: View=" + v);
+                Log.i(TAG, "onScrollChange: scrollX=" + scrollX);
+                Log.i(TAG, "onScrollChange: scrollY=" + scrollY);
+                Log.i(TAG, "onScrollChange: oldScrollX=" + oldScrollX);
+                Log.i(TAG, "onScrollChange: oldScrollY=" + oldScrollY);
+            }
+        });
     }
 
     @Override
