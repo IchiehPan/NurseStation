@@ -27,6 +27,7 @@ import com.pan.nurseStation.bean.request.LevelRequestBean;
 import com.pan.nurseStation.bean.response.BedListResponseBean;
 import com.pan.nurseStation.bean.response.LevelResponseBean;
 import com.pan.nurseStation.business.DBHisBusiness;
+import com.pan.nurseStation.listener.AutoLoadListener;
 import com.pan.nurseStation.widget.dialog.JAlertDialog;
 
 import java.util.ArrayList;
@@ -133,31 +134,10 @@ public class BedListActivity extends AppCompatActivity implements CommonView {
         totalCount = findViewById(R.id.total_count);
         leaveCount = findViewById(R.id.leave_count);
 
-        bedListView.setOnScrollListener(new AbsListView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(AbsListView view, int scrollState) {
-                Log.i(TAG, "onScrollStateChanged: AbsListView=" + view);
-                Log.i(TAG, "onScrollStateChanged: scrollState=" + scrollState);
-            }
-
-            @Override
-            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-                Log.i(TAG, "onScroll: AbsListView=" + view);
-                Log.i(TAG, "onScroll: firstVisibleItem=" + firstVisibleItem);
-                Log.i(TAG, "onScroll: visibleItemCount=" + visibleItemCount);
-                Log.i(TAG, "onScroll: totalItemCount=" + totalItemCount);
-            }
+        AutoLoadListener autoLoadListener = new AutoLoadListener(() -> {
+            initListData("", "", ++page);
         });
-        bedListView.setOnScrollChangeListener(new View.OnScrollChangeListener() {
-            @Override
-            public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-                Log.i(TAG, "onScrollChange: View=" + v);
-                Log.i(TAG, "onScrollChange: scrollX=" + scrollX);
-                Log.i(TAG, "onScrollChange: scrollY=" + scrollY);
-                Log.i(TAG, "onScrollChange: oldScrollX=" + oldScrollX);
-                Log.i(TAG, "onScrollChange: oldScrollY=" + oldScrollY);
-            }
-        });
+        bedListView.setOnScrollListener(autoLoadListener);
     }
 
     @Override
