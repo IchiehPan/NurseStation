@@ -51,7 +51,7 @@ public class PatientDetailResponseBean {
         private String hos_number = "";
         private String number = "";
         private String department_id = "";
-        private Date time = null;
+        private String time = "";
         private String doctor = "";
         private String diagnose = "";
         private String cost_type = "";
@@ -126,11 +126,11 @@ public class PatientDetailResponseBean {
             return department_id;
         }
 
-        public void setTime(Date time) {
+        public void setTime(String time) {
             this.time = time;
         }
 
-        public Date getTime() {
+        public String getTime() {
             return time;
         }
 
