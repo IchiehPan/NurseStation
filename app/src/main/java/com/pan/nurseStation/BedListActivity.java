@@ -79,12 +79,12 @@ public class BedListActivity extends AppCompatActivity implements CommonView {
         // 绑定颜色
         bedTypeView.setAdapter(new BedTypeAdapter(this, DBHisBusiness.levelDataList));
 
-        BedListRequestBean requestBean = new BedListRequestBean();
         DBHisBusiness dbHisBusiness = new DBHisBusiness();
+        BedListRequestBean requestBean = new BedListRequestBean();
+        requestBean.setNumber(DBHisBusiness.loginBean.getNumber());
         dbHisBusiness.bedlist(requestBean, response -> {
             Log.i(TAG, "onResponse: " + response);
             BedListResponseBean responseBean = BeanKit.string2Bean(response, BedListResponseBean.class);
-            Log.i(TAG, "initData: responseBean=" + responseBean);
             // 房子组件的绑定数据
             bedListView.setAdapter(new BedListAdapter(this, responseBean.getData().getList()));
         }, error -> Log.e(TAG, "onResponse: " + error.toString(), error));

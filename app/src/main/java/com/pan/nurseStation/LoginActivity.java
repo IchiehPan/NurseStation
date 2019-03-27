@@ -138,7 +138,7 @@ public class LoginActivity extends AppCompatActivity {
         DBHisBusiness dbHisBusiness = new DBHisBusiness();
         LevelRequestBean requestBean = new LevelRequestBean();
         requestBean.setDepartment_id(DBHisBusiness.loginBean.getDepartment_id());
-        dbHisBusiness.level(null, response -> {
+        dbHisBusiness.level(requestBean, response -> {
             LevelResponseBean responseBean = BeanKit.string2Bean(response, LevelResponseBean.class);
             DBHisBusiness.levelDataList = responseBean.getData();
             DBHisBusiness.initBedTypeColorMap(this);
