@@ -263,13 +263,7 @@ public class BedListActivity extends AppCompatActivity implements CommonView {
 
     public void showDialog(String barCode) {
         dialog = new JAlertDialog(this, R.style.JDialogStyle, R.layout.dialog_custom_alert_patient);
-        TextView patientName = dialog.findViewById(R.id.patient_name);
-        ImageView patientSex = dialog.findViewById(R.id.patient_sex);
-        TextView bedId = dialog.findViewById(R.id.bed_id);
-        TextView patientAge = dialog.findViewById(R.id.patient_age);
-        TextView departmentName = dialog.findViewById(R.id.department_name);
-        TextView hosNumber = dialog.findViewById(R.id.hos_number);
-        TextView patientLevel = dialog.findViewById(R.id.patient_level);
+
 
         DBHisBusiness dbHisBusiness = new DBHisBusiness();
         PatientDetailRequestBean requestBean = new PatientDetailRequestBean();
@@ -278,19 +272,7 @@ public class BedListActivity extends AppCompatActivity implements CommonView {
             Log.d(TAG, "showDialog: response=" + response);
             PatientDetailResponseBean responseBean = BeanKit.string2Bean(response, PatientDetailResponseBean.class);
             PatientDetailResponseBean.Data data = responseBean.getData();
-            String sex = data.getSex();
-
-            patientName.setText(data.getName());
-            if (Objects.equals(sex, getString(R.string.sex_type_male))) {
-                patientSex.setBackground(getResources().getDrawable(R.drawable.ic_male));
-            } else if (Objects.equals(sex, getString(R.string.sex_type_female))) {
-                patientSex.setBackground(getResources().getDrawable(R.drawable.ic_female));
-            }
-            bedId.setText(data.getBed_id());
-            patientAge.setText(data.getAge());
-            departmentName.setText(data.getDepartment_name());
-            hosNumber.setText(data.getHos_number());
-            patientLevel.setText(data.getLevel());
+            dialog.setData(data);
 
             //绑定一些跳转事件
             TextView bedInfoDoor = dialog.findViewById(R.id.bed_info_activity_door);
