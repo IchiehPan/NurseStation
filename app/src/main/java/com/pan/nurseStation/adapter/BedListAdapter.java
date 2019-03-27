@@ -81,6 +81,22 @@ public class BedListAdapter extends BaseAdapter {
             TextView patientAge = linearLayout.findViewById(R.id.patient_age);
             TextView patientNumber = linearLayout.findViewById(R.id.patient_number);
 
+            BedListResponseBean.PatientInfo patientInfo = mList.get(position);
+            bedNo.setText(patientInfo.getBed_id());
+            GradientDrawable myGrad = (GradientDrawable) bedNo.getBackground();
+            if (DBHisBusiness.bedTypeColorMap.containsKey(patientInfo.getLevel())) {
+                myGrad.setColor(DBHisBusiness.bedTypeColorMap.get(patientInfo.getLevel()));
+            }
+
+            patientName.setText(patientInfo.getName());
+            if (Objects.equals(patientInfo.getSex(), mContext.getString(R.string.sex_type_male))) {
+                patientSex.setBackground(mContext.getResources().getDrawable(R.drawable.ic_male));
+            } else if (Objects.equals(patientInfo.getSex(), mContext.getString(R.string.sex_type_female))) {
+                patientSex.setBackground(mContext.getResources().getDrawable(R.drawable.ic_female));
+            }
+            patientAge.setText(patientInfo.getAge());
+            patientNumber.setText(patientInfo.getHos_number());
+
             Log.d(TAG, "getView: 复用组件position=" + position);
             Log.d(TAG, "getView: bedNo.getText()=" + bedNo.getText());
         }
