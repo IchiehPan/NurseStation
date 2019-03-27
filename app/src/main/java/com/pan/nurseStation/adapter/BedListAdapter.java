@@ -1,6 +1,7 @@
 package com.pan.nurseStation.adapter;
 
 import android.content.Context;
+import android.graphics.drawable.GradientDrawable;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import com.pan.nurseStation.R;
 import com.pan.nurseStation.bean.response.BedListResponseBean;
+import com.pan.nurseStation.business.DBHisBusiness;
 
 import java.util.List;
 import java.util.Objects;
@@ -52,6 +54,11 @@ public class BedListAdapter extends BaseAdapter {
 
             BedListResponseBean.PatientInfo patientInfo = mList.get(position);
             bedNo.setText(patientInfo.getBed_id());
+            GradientDrawable myGrad = (GradientDrawable) bedNo.getBackground();
+            if (DBHisBusiness.bedTypeColorMap.containsKey(patientInfo.getLevel())) {
+                myGrad.setColor(DBHisBusiness.bedTypeColorMap.get(patientInfo.getLevel()));
+            }
+
             patientName.setText(patientInfo.getName());
             if (Objects.equals(patientInfo.getSex(), mContext.getString(R.string.sex_type_male))) {
                 patientSex.setBackground(mContext.getResources().getDrawable(R.drawable.ic_male));

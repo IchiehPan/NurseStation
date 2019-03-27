@@ -43,7 +43,7 @@ public class BedTypeAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LinearLayout linearLayout;
-        if (convertView == null) {
+//        if (convertView == null) {
             linearLayout = (LinearLayout) View.inflate(mContext, R.layout.item_simple_example_icon, null);
             ImageView imageView = linearLayout.findViewById(R.id.head_iv);
             TextView headTV = linearLayout.findViewById(R.id.head1);
@@ -58,9 +58,10 @@ public class BedTypeAdapter extends BaseAdapter {
             }
             headTV.setText(data.getName());
             contentTV.setText(data.getTotal());
-        } else {
-            linearLayout = (LinearLayout) convertView;
-        }
+//        }
+//        else {
+//            linearLayout = (LinearLayout) convertView;
+//        }
         return linearLayout;
     }
 }
