@@ -75,7 +75,14 @@ public class BedListAdapter extends BaseAdapter {
             Log.d(TAG, "getView: 新创建组件position=" + position);
         } else {
             linearLayout = (LinearLayout) convertView;
+            TextView bedNo = linearLayout.findViewById(R.id.bed_no);
+            TextView patientName = linearLayout.findViewById(R.id.patient_name);
+            ImageView patientSex = linearLayout.findViewById(R.id.patient_sex);
+            TextView patientAge = linearLayout.findViewById(R.id.patient_age);
+            TextView patientNumber = linearLayout.findViewById(R.id.patient_number);
+
             Log.d(TAG, "getView: 复用组件position=" + position);
+            Log.d(TAG, "getView: bedNo.getText()=" + bedNo.getText());
         }
 
         return linearLayout;
