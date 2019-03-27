@@ -83,18 +83,30 @@ public class JAlertDialog extends AlertDialog {
         patientLevel.setText(data.getLevel());
 
         //绑定一些跳转事件
-        bedInfoDoor.setOnClickListener(view -> {
-//                clickInBedInfoActivity(data);
-        });
+        bedInfoDoor.setOnClickListener(view -> clickInBedInfoActivity(data));
 
-        enterMedicalOrderDoor.setOnClickListener(view -> {
-            clickInEnterMedicalOrderActivity(data);
-        });
+        enterMedicalOrderDoor.setOnClickListener(view -> clickInEnterMedicalOrderActivity(data));
 
-        enterVitalSignDoor.setOnClickListener(view -> {
-            clickInEnterVitalSignActivity(data);
-        });
+        enterVitalSignDoor.setOnClickListener(view -> clickInEnterVitalSignActivity(data));
     }
+
+    public void clickInBedInfoActivity(PatientDetailResponseBean.Data data) {
+        Intent intent = new Intent(getContext(), EnterMedicalOrderActivity.class);
+        Bundle bundle = new Bundle();
+
+        bundle.putString("patientInfo", JSON.toJSONString(data));
+        bundle.putString("hos_number", data.getHos_number());
+        bundle.putString("name", data.getName());
+        bundle.putString("age", data.getAge());
+        bundle.putString("sex", data.getSex());
+        bundle.putString("bedId", data.getBed_id());
+        bundle.putString("level", data.getLevel());
+        bundle.putString("number", data.getNumber());
+        bundle.putString("department_id", data.getDepartment_id());
+        intent.putExtras(bundle);
+        getContext().startActivity(intent);
+    }
+
 
     public void clickInEnterMedicalOrderActivity(PatientDetailResponseBean.Data data) {
         Intent intent = new Intent(getContext(), EnterMedicalOrderActivity.class);

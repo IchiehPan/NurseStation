@@ -1,5 +1,6 @@
 package com.pan.nurseStation;
 
+import android.content.Intent;
 import android.content.IntentFilter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -47,6 +48,9 @@ public class EnterMedicalOrderActivity extends AppCompatActivity implements Comm
         String patientInfo = bundle.getString("patientInfo");
         Log.d(TAG, "onCreate: patientInfo=" + patientInfo);
 
+
+
+
         resultReceiver = new ScanResultReceiver(this);
         registerReceiver(resultReceiver, new IntentFilter(com.bben.ydcf.scandome.Constants.DECODE_RESULT_FILTER));
 
@@ -71,7 +75,6 @@ public class EnterMedicalOrderActivity extends AppCompatActivity implements Comm
     public void setScan(String str) {
         scanSuccess();
         scanFail();
-        showErrorDialog();
     }
 
     private void scanFail() {
@@ -234,5 +237,11 @@ public class EnterMedicalOrderActivity extends AppCompatActivity implements Comm
         for (Object value : checkedMap.values()) {
             System.out.println(value);
         }
+    }
+
+    public void backToList(View view) {
+        Intent intent = new Intent(this, BedListActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 }
