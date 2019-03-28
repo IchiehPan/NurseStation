@@ -16,7 +16,12 @@ import android.widget.TextView;
 
 import com.pan.lib.util.BeanKit;
 import com.pan.nurseStation.adapter.SimpleSpinnerAdapter;
+import com.pan.nurseStation.animate.AnimateBusiness;
+import com.pan.nurseStation.bean.Constants;
 import com.pan.nurseStation.bean.response.PatientDetailResponseBean;
+import com.pan.nurseStation.widget.button.RoundButton;
+import com.pan.nurseStation.widget.dialog.ScanErrorDialog;
+import com.pan.nurseStation.widget.dialog.ScanInputDialog;
 
 import java.util.Objects;
 
@@ -45,6 +50,10 @@ public class EnterVitalSignActivity extends AppCompatActivity {
     private TextView hosNumber;
     private TextView departmentName;
     private TextView bedId;
+    private ScanInputDialog inputDialog;
+    private RoundButton successButtonBar;
+    private TextView scanSuccessTip;
+    private ScanErrorDialog errorDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +66,9 @@ public class EnterVitalSignActivity extends AppCompatActivity {
 
         initView();
         initData(data);
+
+        scanSuccess();
+        scanFail();
     }
 
     private void initData(PatientDetailResponseBean.Data data) {
@@ -114,6 +126,9 @@ public class EnterVitalSignActivity extends AppCompatActivity {
         hosNumber = findViewById(R.id.hos_number);
         departmentName = findViewById(R.id.department_name);
         bedId = findViewById(R.id.bed_id);
+
+        successButtonBar = findViewById(R.id.success_button_bar);
+        scanSuccessTip = findViewById(R.id.scan_success_tip);
     }
 
     public void resetForm(View view) {
@@ -166,5 +181,36 @@ public class EnterVitalSignActivity extends AppCompatActivity {
         Intent intent = new Intent(this, BedListActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
+    }
+
+    public void showInputDialog(View view) {
+        inputDialog = new ScanInputDialog(this, R.style.JDialogStyle, R.layout.dialog_custom_scan_input);
+        inputDialog.setCanceledOnTouchOutside(false);
+        inputDialog.show();
+    }
+
+    public void hideInputDialog(View view) {
+        Log.i(TAG, "hideInputDialog: --------------------------");
+        inputDialog.hide();
+    }
+
+    private void scanFail() {
+        showErrorDialog();
+    }
+
+    private void scanSuccess() {
+        AnimateBusiness.slideToggle(successButtonBar, 200, Constants.SLIDE_DURATION_MS, Constants.SLIDE_DURATION_MS);
+        scanSuccessTip.setText(getString(R.string.scan_success_tip2));
+    }
+
+    public void showErrorDialog() {
+        errorDialog = new ScanErrorDialog(this, R.style.JDialogStyle, R.layout.dialog_custom_scan_error);
+        errorDialog.setCanceledOnTouchOutside(false);
+        errorDialog.show();
+    }
+
+    public void hideErrorDialog(View view) {
+        Log.i(TAG, "hideErrorDialog: --------------------------");
+        errorDialog.hide();
     }
 }

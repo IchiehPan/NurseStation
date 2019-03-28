@@ -38,7 +38,7 @@ public class EnterMedicalOrderActivity extends AppCompatActivity implements Comm
     private ScanInputDialog inputDialog;
     private LinearLayout linearLayout;
     private TextView quantityContent;
-    private TextView scan_success_tip;
+    private TextView scanSuccessTip;
     private TextView patientName;
     private ImageView patientSex;
     private TextView patientAge;
@@ -63,7 +63,8 @@ public class EnterMedicalOrderActivity extends AppCompatActivity implements Comm
         initView();
         initData(data);
 
-        AnimateBusiness.slideToggle(successButtonBar, 200, Constants.SLIDE_DURATION_MS, Constants.SLIDE_DURATION_MS);
+        scanSuccess();
+        scanFail();
     }
 
     private void initData(PatientDetailResponseBean.Data data) {
@@ -86,7 +87,7 @@ public class EnterMedicalOrderActivity extends AppCompatActivity implements Comm
         successButtonBar = findViewById(R.id.success_button_bar);
         linearLayout = findViewById(R.id.linearLayout1);
         quantityContent = findViewById(R.id.quantity_content);
-        scan_success_tip = findViewById(R.id.scan_success_tip);
+        scanSuccessTip = findViewById(R.id.scan_success_tip);
 
         patientName = findViewById(R.id.patient_name);
         patientSex = findViewById(R.id.patient_sex);
@@ -108,7 +109,8 @@ public class EnterMedicalOrderActivity extends AppCompatActivity implements Comm
     }
 
     private void scanSuccess() {
-        scan_success_tip.setText(getString(R.string.scan_success_tip2));
+        AnimateBusiness.slideToggle(successButtonBar, 200, Constants.SLIDE_DURATION_MS, Constants.SLIDE_DURATION_MS);
+        scanSuccessTip.setText(getString(R.string.scan_success_tip2));
     }
 
     @Override
