@@ -100,7 +100,7 @@
                 android:textSize="11sp" />
 
             <TextView
-                android:id="@+id/ke_shi_text"
+                android:id="@+id/department_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/hos_number_head"
@@ -117,7 +117,7 @@
                 android:layout_below="@id/hos_number_head"
                 android:layout_marginTop="7dp"
                 android:layout_marginBottom="14dp"
-                android:layout_toRightOf="@id/ke_shi_text"
+                android:layout_toRightOf="@id/department_name"
                 android:includeFontPadding="false"
                 android:text="@string/example_bed_no"
                 android:textColor="#666666"

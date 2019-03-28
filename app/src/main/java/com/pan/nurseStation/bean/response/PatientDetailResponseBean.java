@@ -41,7 +41,7 @@ public class PatientDetailResponseBean {
         return msg;
     }
 
-    public class Data {
+    public static class Data {
 
         private String name = "";
         private String bed_id = "";
