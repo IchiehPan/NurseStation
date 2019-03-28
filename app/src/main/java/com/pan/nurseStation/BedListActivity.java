@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -159,19 +161,24 @@ public class BedListActivity extends AppCompatActivity implements CommonView {
         totalCount = findViewById(R.id.total_count);
         leaveCount = findViewById(R.id.leave_count);
 
-        searchEditText.setOnKeyListener((View v, int keyCode, KeyEvent event) -> {
-            Log.d(TAG, "initView: keyCode=" + keyCode);
-            Log.d(TAG, "initView: KeyEvent=" + event);
-            if (keyCode == EditorInfo.IME_ACTION_DONE || keyCode == EditorInfo.IME_NULL) {
+        searchEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
                 dataList.clear();
                 bedListAdapter.notifyDataSetChanged();
                 level = "";
                 search = searchEditText.getText().toString();
                 page = 1;
                 initListData(level, search, page);
-                return true;
             }
-            return false;
         });
 
         searchEditText.setOnEditorActionListener((TextView textView, int id, KeyEvent keyEvent) -> {
