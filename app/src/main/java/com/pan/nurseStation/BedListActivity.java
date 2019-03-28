@@ -159,6 +159,21 @@ public class BedListActivity extends AppCompatActivity implements CommonView {
         totalCount = findViewById(R.id.total_count);
         leaveCount = findViewById(R.id.leave_count);
 
+        searchEditText.setOnKeyListener((View v, int keyCode, KeyEvent event) -> {
+            Log.d(TAG, "initView: keyCode=" + keyCode);
+            Log.d(TAG, "initView: KeyEvent=" + event);
+            if (keyCode == EditorInfo.IME_ACTION_DONE || keyCode == EditorInfo.IME_NULL) {
+                dataList.clear();
+                bedListAdapter.notifyDataSetChanged();
+                level = "";
+                search = searchEditText.getText().toString();
+                page = 1;
+                initListData(level, search, page);
+                return true;
+            }
+            return false;
+        });
+
         searchEditText.setOnEditorActionListener((TextView textView, int id, KeyEvent keyEvent) -> {
             if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
                 dataList.clear();
