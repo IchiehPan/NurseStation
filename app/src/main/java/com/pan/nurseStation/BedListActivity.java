@@ -102,6 +102,11 @@ public class BedListActivity extends AppCompatActivity implements CommonView {
 
                 bedTypes = bedTypeList.toArray(new String[bedTypeList.size()]);
             }
+            // 设置高度
+            int rows = bedTypes.length % 3 == 0 ? bedTypes.length / 3 : bedTypes.length / 3 + 1;
+
+            bedTypeView.setMinimumHeight(rows * getResources().getDimensionPixelSize(R.dimen.single_level_type_height));
+
             SimpleSpinnerAdapter<String> arrayAdapter = new SimpleSpinnerAdapter<>(this, R.layout.item_simple_spinner, android.R.id.text1, bedTypes);
             arrayAdapter.setDropDownViewResource(R.layout.item_simple_spinner_dropdown);
             spinner.setAdapter(arrayAdapter);

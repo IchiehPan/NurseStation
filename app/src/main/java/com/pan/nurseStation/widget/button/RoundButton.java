@@ -29,7 +29,7 @@ public class RoundButton extends AppCompatButton {
     public RoundButton(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.RoundButton, defStyleAttr, 0);
-        cornerSize = a.getDimension(R.styleable.RoundButton_corner_radius, cornerSize);
+        cornerSize = a.getDimensionPixelSize(R.styleable.RoundButton_corner_radius, 14);
 
         backgroundColor = a.getColor(R.styleable.RoundButton_background_color, Color.WHITE);
         a.recycle();

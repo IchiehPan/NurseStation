@@ -8,6 +8,8 @@
     <!--SpinnerDropDownStyle-->
     <dimen name="line_size">0.5dp</dimen>
 
+    <dimen name="single_level_type_height">17dp</dimen>
+
     <!-- BottomNavigationView 字体大小 -->
     <dimen name="design_bottom_navigation_active_text_size">10sp</dimen>
     <dimen name="design_bottom_navigation_inactive_text_size">10sp</dimen>

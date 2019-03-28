@@ -8,14 +8,17 @@ import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bben.ydcf.scandome.CommonView;
 import com.bben.ydcf.scandome.receiver.ScanResultReceiver;
+import com.pan.lib.util.BeanKit;
 import com.pan.lib.util.NumberKit;
 import com.pan.nurseStation.animate.AnimateBusiness;
 import com.pan.nurseStation.bean.Constants;
+import com.pan.nurseStation.bean.response.PatientDetailResponseBean;
 import com.pan.nurseStation.widget.button.RoundButton;
 import com.pan.nurseStation.widget.dialog.ScanErrorDialog;
 import com.pan.nurseStation.widget.dialog.ScanInputDialog;
@@ -25,6 +28,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class EnterMedicalOrderActivity extends AppCompatActivity implements CommonView {
     private static final String TAG = EnterMedicalOrderActivity.class.getSimpleName();
@@ -35,6 +39,12 @@ public class EnterMedicalOrderActivity extends AppCompatActivity implements Comm
     private LinearLayout linearLayout;
     private TextView quantityContent;
     private TextView scan_success_tip;
+    private TextView patientName;
+    private ImageView patientSex;
+    private TextView patientAge;
+    private TextView hosNumber;
+    private TextView departmentName;
+    private TextView bedId;
     static Map<Object, Object> checkedMap;
 
     @Override
@@ -43,22 +53,33 @@ public class EnterMedicalOrderActivity extends AppCompatActivity implements Comm
         setContentView(R.layout.activity_enter_medical_order);
 
         Bundle bundle = getIntent().getExtras();
-        String hosNumber = bundle.getString("hos_number");
-        Log.d(TAG, "onCreate: hosNumber=" + hosNumber);
         String patientInfo = bundle.getString("patientInfo");
-        Log.d(TAG, "onCreate: patientInfo=" + patientInfo);
-
-
-
+        PatientDetailResponseBean.Data data = BeanKit.string2Bean(patientInfo, PatientDetailResponseBean.Data.class);
 
         resultReceiver = new ScanResultReceiver(this);
         registerReceiver(resultReceiver, new IntentFilter(com.bben.ydcf.scandome.Constants.DECODE_RESULT_FILTER));
 
-        initView();
-
         checkedMap = new HashMap<>();
+        initView();
+        initData(data);
 
         AnimateBusiness.slideToggle(successButtonBar, 200, Constants.SLIDE_DURATION_MS, Constants.SLIDE_DURATION_MS);
+    }
+
+    private void initData(PatientDetailResponseBean.Data data) {
+        String sex = data.getSex();
+        patientName.setText(data.getName());
+        if (Objects.equals(sex, getString(R.string.sex_type_male))) {
+            patientSex.setBackground(getResources().getDrawable(R.drawable.ic_male));
+        } else if (Objects.equals(sex, getString(R.string.sex_type_female))) {
+            patientSex.setBackground(getResources().getDrawable(R.drawable.ic_female));
+        }
+        patientAge.setText(data.getAge());
+        hosNumber.setText(data.getHos_number());
+        departmentName.setText(data.getDepartment_name());
+        bedId.setText(data.getBed_id());
+
+        getMedicalOrderData();
     }
 
     private void initView() {
@@ -67,7 +88,12 @@ public class EnterMedicalOrderActivity extends AppCompatActivity implements Comm
         quantityContent = findViewById(R.id.quantity_content);
         scan_success_tip = findViewById(R.id.scan_success_tip);
 
-        getMedicalOrderData();
+        patientName = findViewById(R.id.patient_name);
+        patientSex = findViewById(R.id.patient_sex);
+        patientAge = findViewById(R.id.patient_age);
+        hosNumber = findViewById(R.id.hos_number);
+        departmentName = findViewById(R.id.department_name);
+        bedId = findViewById(R.id.bed_id);
     }
 
 

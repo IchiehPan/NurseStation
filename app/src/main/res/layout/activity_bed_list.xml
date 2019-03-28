@@ -142,7 +142,7 @@
         <GridView
             android:id="@+id/bed_type_view"
             android:layout_width="match_parent"
-            android:layout_height="32dp"
+            android:layout_height="34dp"
             android:layout_columnWeight="1"
             android:layout_marginLeft="12dp"
             android:layout_marginTop="10dp"

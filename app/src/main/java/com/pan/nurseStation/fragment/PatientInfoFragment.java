@@ -47,7 +47,7 @@ public class PatientInfoFragment extends Fragment implements BackHandledInterfac
 
         //声明WebSettings子类
         JWebSetting.setParam(mWebView.getSettings());
-        mWebView.loadUrl("http://192.168.8.44/nursing.html");
+        mWebView.loadUrl(Constants.PATIENT_INFO_URL + hosNumber);
         mWebView.setWebViewClient(JWebViewClient.getInstance());
 
         mTabLayout = root.findViewById(R.id.tabs);

@@ -22,7 +22,7 @@ public class BedInfoActivity extends FragmentActivity {
 
     private static final String TAG = BedInfoActivity.class.getSimpleName();
     private TextView patientExampleInfo;
-    BottomNavigationView bottomNavigationView;
+    private BottomNavigationView bottomNavigationView;
     private PatientInfoFragment patientInfoFragment;
     private MedicalOrderFragment medicalOrderFragment;
     private VitalSignFragment vitalSignFragment;
@@ -60,15 +60,12 @@ public class BedInfoActivity extends FragmentActivity {
         setContentView(R.layout.activity_bed_info);
 
         Bundle bundle = getIntent().getExtras();
-        String hosNumber = bundle.getString("hos_number");
-        Log.d(TAG, "onCreate: hosNumber=" + hosNumber);
         String patientInfo = bundle.getString("patientInfo");
-        Log.d(TAG, "onCreate: patientInfo=" + patientInfo);
         BedListResponseBean.PatientInfo patientInfoBean = BeanKit.string2Bean(patientInfo, BedListResponseBean.PatientInfo.class);
 
         initView();
         initData(patientInfoBean);
-        initFragments(hosNumber);
+        initFragments(patientInfoBean.getHos_number());
     }
 
     private void initData(BedListResponseBean.PatientInfo patientInfoBean) {

@@ -1,17 +1,24 @@
 package com.pan.nurseStation;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.ScrollView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
+import com.pan.lib.util.BeanKit;
 import com.pan.nurseStation.adapter.SimpleSpinnerAdapter;
+import com.pan.nurseStation.bean.response.PatientDetailResponseBean;
+
+import java.util.Objects;
 
 public class EnterVitalSignActivity extends AppCompatActivity {
     private static final String TAG = EnterVitalSignActivity.class.getSimpleName();
@@ -32,6 +39,12 @@ public class EnterVitalSignActivity extends AppCompatActivity {
     private EditText weightEditText;
     private EditText otherEditText;
     private CheckBox assistedBreatheCheckBox;
+    private TextView patientName;
+    private ImageView patientSex;
+    private TextView patientAge;
+    private TextView hosNumber;
+    private TextView departmentName;
+    private TextView bedId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,16 +52,27 @@ public class EnterVitalSignActivity extends AppCompatActivity {
         setContentView(R.layout.activity_enter_vital_sign);
 
         Bundle bundle = getIntent().getExtras();
-        String hosNumber = bundle.getString("hos_number");
-        Log.d(TAG, "onCreate: hosNumber=" + hosNumber);
         String patientInfo = bundle.getString("patientInfo");
-        Log.d(TAG, "onCreate: patientInfo=" + patientInfo);
+        PatientDetailResponseBean.Data data = BeanKit.string2Bean(patientInfo, PatientDetailResponseBean.Data.class);
 
         initView();
-        initData();
+        initData(data);
     }
 
-    private void initData() {
+    private void initData(PatientDetailResponseBean.Data data) {
+        String sex = data.getSex();
+        patientName.setText(data.getName());
+        if (Objects.equals(sex, getString(R.string.sex_type_male))) {
+            patientSex.setBackground(getResources().getDrawable(R.drawable.ic_male));
+        } else if (Objects.equals(sex, getString(R.string.sex_type_female))) {
+            patientSex.setBackground(getResources().getDrawable(R.drawable.ic_female));
+        }
+        patientAge.setText(data.getAge());
+        hosNumber.setText(data.getHos_number());
+        departmentName.setText(data.getDepartment_name());
+        bedId.setText(data.getBed_id());
+
+
         String[] dateData = {"2018-02-01", "2018-02-02"};
         SimpleSpinnerAdapter<String> arrayAdapter1 = new SimpleSpinnerAdapter<>(this, R.layout.item_simple_spinner, android.R.id.text1, dateData);
         arrayAdapter1.setDropDownViewResource(R.layout.item_simple_spinner_dropdown);
@@ -83,6 +107,13 @@ public class EnterVitalSignActivity extends AppCompatActivity {
         weightEditText = findViewById(R.id.weight);
         otherEditText = findViewById(R.id.other);
         assistedBreatheCheckBox = findViewById(R.id.assisted_breathe);
+
+        patientName = findViewById(R.id.patient_name);
+        patientSex = findViewById(R.id.patient_sex);
+        patientAge = findViewById(R.id.patient_age);
+        hosNumber = findViewById(R.id.hos_number);
+        departmentName = findViewById(R.id.department_name);
+        bedId = findViewById(R.id.bed_id);
     }
 
     public void resetForm(View view) {
@@ -129,5 +160,11 @@ public class EnterVitalSignActivity extends AppCompatActivity {
         Log.i(TAG, "submitForm: isAssistedBreathe=" + isAssistedBreathe);
 
 
+    }
+
+    public void backToList(View view) {
+        Intent intent = new Intent(this, BedListActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 }

@@ -69,18 +69,19 @@
                 android:textSize="14sp" />
 
             <ImageView
+                android:id="@+id/patient_sex"
                 android:layout_width="10dp"
                 android:layout_height="13dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="20dp"
-                android:layout_toRightOf="@id/name_text"
+                android:layout_toRightOf="@id/patient_name"
                 android:background="@drawable/ic_male" />
 
             <TextView
                 android:id="@+id/patient_age"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/name_text"
+                android:layout_below="@id/patient_name"
                 android:layout_marginStart="18dp"
                 android:layout_marginTop="9dp"
                 android:includeFontPadding="false"
@@ -89,10 +90,10 @@
                 android:textSize="11sp" />
 
             <TextView
-                android:id="@+id/hos_number"
+                android:id="@+id/hos_number_head"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/age_text"
+                android:layout_below="@id/patient_age"
                 android:layout_marginStart="18dp"
                 android:layout_marginTop="7dp"
                 android:includeFontPadding="false"
@@ -101,11 +102,12 @@
                 android:textSize="11sp" />
 
             <TextView
+                android:id="@+id/hos_number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/age_text"
+                android:layout_below="@id/patient_age"
                 android:layout_marginTop="7dp"
-                android:layout_toRightOf="@id/his_no_head"
+                android:layout_toRightOf="@id/hos_number_head"
                 android:includeFontPadding="false"
                 android:text="@string/example_patient_number"
                 android:textColor="#666666"
@@ -115,7 +117,7 @@
                 android:id="@+id/department_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/his_no_head"
+                android:layout_below="@+id/hos_number_head"
                 android:layout_marginStart="18dp"
                 android:layout_marginTop="7dp"
                 android:includeFontPadding="false"
@@ -127,10 +129,10 @@
                 android:id="@+id/bed_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/his_no_head"
+                android:layout_below="@id/hos_number_head"
                 android:layout_marginTop="7dp"
                 android:layout_marginBottom="14dp"
-                android:layout_toRightOf="@id/ke_shi_text"
+                android:layout_toRightOf="@id/department_name"
                 android:includeFontPadding="false"
                 android:text="@string/example_bed_no"
                 android:textColor="#666666"
