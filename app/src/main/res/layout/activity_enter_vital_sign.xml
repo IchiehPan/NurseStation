@@ -18,8 +18,8 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginStart="9dp"
-            android:onClick="backToList"
-            android:background="@drawable/ic_back" />
+            android:background="@drawable/ic_back"
+            android:onClick="backToList" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -112,6 +112,7 @@
                 android:textSize="11sp" />
 
             <TextView
+                android:id="@+id/bed_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/hos_number_head"
