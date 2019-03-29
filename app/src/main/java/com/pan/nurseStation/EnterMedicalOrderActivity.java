@@ -301,18 +301,20 @@ public class EnterMedicalOrderActivity extends AppCompatActivity implements Comm
     }
 
     public void submitQuantity(View view) {
-        Map<String, String> ids = new ArrayMap<>();
+        List<EnjoinDoRequestBean.Data> dataList = new ArrayList<>();
         for (Map.Entry entry : checkedMap.entrySet()) {
             List<EnjoinDoInfoResponseBean.Data.MedicalOrder> medicalOrderList = (List<EnjoinDoInfoResponseBean.Data.MedicalOrder>) entry.getKey();
-            String status = (String) entry.getValue();
             for (EnjoinDoInfoResponseBean.Data.MedicalOrder medicalOrder : medicalOrderList) {
-                ids.put(medicalOrder.getId(), status);
+                EnjoinDoRequestBean.Data data = new EnjoinDoRequestBean.Data();
+                data.setId(medicalOrder.getId());
+                data.setStatus(medicalOrder.getStatus());
+                dataList.add(data);
             }
         }
 
         DBHisBusiness dbHisBusiness = new DBHisBusiness();
         EnjoinDoRequestBean requestBean = new EnjoinDoRequestBean();
-        requestBean.setIds(ids);
+        requestBean.setIds(dataList);
 
         Log.i(TAG, "submitQuantity: EnjoinDoRequestBean=" + JSON.toJSONString(requestBean));
 
