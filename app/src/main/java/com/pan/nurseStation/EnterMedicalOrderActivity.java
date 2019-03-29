@@ -171,14 +171,14 @@ public class EnterMedicalOrderActivity extends AppCompatActivity implements Comm
         String status = medicalOrder.getStatus();
         typeText.setText(title);
         unitText.setText(dosage + "/" + amount + "/" + useMethod);
-        List<EnjoinDoInfoResponseBean.Data.MedicalOrder> dataList = new ArrayList<>();
-        dataList.add(medicalOrder);
+        List<EnjoinDoInfoResponseBean.Data.MedicalOrder> data = new ArrayList<>();
+        data.add(medicalOrder);
         cb.setOnCheckedChangeListener((CompoundButton buttonView, boolean isChecked) -> {
             if (isChecked) {
-                checkedMap.put(dataList, status);
+                checkedMap.put(data, status);
                 increaseQuantityNum();
             } else {
-                checkedMap.remove(dataList);
+                checkedMap.remove(data);
                 decreaseQuantityNum();
             }
         });
@@ -211,10 +211,10 @@ public class EnterMedicalOrderActivity extends AppCompatActivity implements Comm
                     } else {
                         cb.setOnCheckedChangeListener((CompoundButton buttonView, boolean isChecked) -> {
                             if (isChecked) {
-                                checkedMap.put(dataList, status);
+                                checkedMap.put(data, status);
                                 increaseQuantityNum();
                             } else {
-                                checkedMap.remove(dataList);
+                                checkedMap.remove(data);
                                 decreaseQuantityNum();
                             }
                         });
