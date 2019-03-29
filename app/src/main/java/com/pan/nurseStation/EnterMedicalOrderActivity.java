@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.ArrayMap;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
@@ -11,6 +12,7 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bben.ydcf.scandome.CommonView;
 import com.bben.ydcf.scandome.receiver.ScanResultReceiver;
@@ -19,7 +21,9 @@ import com.pan.lib.util.NumberKit;
 import com.pan.nurseStation.animate.AnimateBusiness;
 import com.pan.nurseStation.bean.Constants;
 import com.pan.nurseStation.bean.request.EnjoinDoInfoRequestBean;
+import com.pan.nurseStation.bean.request.EnjoinDoRequestBean;
 import com.pan.nurseStation.bean.response.EnjoinDoInfoResponseBean;
+import com.pan.nurseStation.bean.response.EnjoinDoResponseBean;
 import com.pan.nurseStation.bean.response.PatientDetailResponseBean;
 import com.pan.nurseStation.business.DBHisBusiness;
 import com.pan.nurseStation.widget.button.RoundButton;
@@ -296,10 +300,34 @@ public class EnterMedicalOrderActivity extends AppCompatActivity implements Comm
     }
 
     public void submitQuantity(View view) {
+        Map<String, String> ids = new ArrayMap<>();
         for (Map.Entry entry : checkedMap.entrySet()) {
             Log.i(TAG, "submitQuantity: getKey()=" + entry.getKey());
             Log.i(TAG, "submitQuantity: getValue()=" + entry.getValue());
+
+            List<EnjoinDoInfoResponseBean.Data.MedicalOrder> medicalOrderList = (List<EnjoinDoInfoResponseBean.Data.MedicalOrder>) entry.getKey();
+            String status = (String) entry.getValue();
+            for (EnjoinDoInfoResponseBean.Data.MedicalOrder medicalOrder : medicalOrderList) {
+                ids.put(medicalOrder.getId(), status);
+            }
         }
+
+        DBHisBusiness dbHisBusiness = new DBHisBusiness();
+        EnjoinDoRequestBean requestBean = new EnjoinDoRequestBean();
+        requestBean.setIds(ids);
+
+        dbHisBusiness.patientEnjoinDo(requestBean, response -> {
+            Log.i(TAG, "submitQuantity: response=" + response);
+            EnjoinDoResponseBean responseBean = BeanKit.string2Bean(response, EnjoinDoResponseBean.class);
+            if (responseBean.getRet() == Constants.MESSAGE_SUCCESS_CODE) {
+                Toast.makeText(this, getString(R.string.request_success_tip), Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, getString(R.string.request_fail_tip), Toast.LENGTH_SHORT).show();
+            }
+
+        }, error -> {
+            Log.e(TAG, "submitQuantity: ", error);
+        });
     }
 
     public void backToList(View view) {

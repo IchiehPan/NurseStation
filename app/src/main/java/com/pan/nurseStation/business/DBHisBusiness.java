@@ -3,6 +3,7 @@ package com.pan.nurseStation.business;
 import android.content.Context;
 import android.support.annotation.Nullable;
 
+import com.alibaba.fastjson.JSON;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -12,6 +13,7 @@ import com.pan.nurseStation.R;
 import com.pan.nurseStation.bean.Constants;
 import com.pan.nurseStation.bean.request.BedListRequestBean;
 import com.pan.nurseStation.bean.request.EnjoinDoInfoRequestBean;
+import com.pan.nurseStation.bean.request.EnjoinDoRequestBean;
 import com.pan.nurseStation.bean.request.LevelRequestBean;
 import com.pan.nurseStation.bean.request.LoginRequestBean;
 import com.pan.nurseStation.bean.request.PatientDetailRequestBean;
@@ -70,7 +72,15 @@ public class DBHisBusiness {
     public void patientEnjoinDoInfo(EnjoinDoInfoRequestBean requestBean, Response.Listener<String> listener, @Nullable Response.ErrorListener errorListener) {
         Map<String, String> params = new HashMap<>();
         params.put("hos_number", requestBean.getHos_number());
-        params.put(Constants.SERVICE_PARAM, Constants.PATIENT_ENJOINDOINFO_SERVICE);
+        params.put(Constants.SERVICE_PARAM, Constants.PATIENT_ENJOIN_DO_INFO_SERVICE);
+        StringRequest stringRequest = VolleyKit.newStringRequest(Request.Method.POST, Constants.URL, params, listener, errorListener);
+        mQueue.add(stringRequest);
+    }
+
+    public void patientEnjoinDo(EnjoinDoRequestBean requestBean, Response.Listener<String> listener, @Nullable Response.ErrorListener errorListener) {
+        Map<String, String> params = new HashMap<>();
+        params.put("ids", JSON.toJSONString(requestBean.getIds()));
+        params.put(Constants.SERVICE_PARAM, Constants.PATIENT_ENJOIN_DO_SERVICE);
         StringRequest stringRequest = VolleyKit.newStringRequest(Request.Method.POST, Constants.URL, params, listener, errorListener);
         mQueue.add(stringRequest);
     }

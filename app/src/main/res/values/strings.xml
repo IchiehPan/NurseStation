@@ -25,6 +25,8 @@
     <string name="login_password_hint">请输入密码</string>
     <string name="login_success_tip">登录成功</string>
     <string name="login_fail_tip">登录失败</string>
+    <string name="request_success_tip">保存成功</string>
+    <string name="request_fail_tip">网络繁忙</string>
     <string name="scan_code_tip">请扫描病人腕带</string>
     <string name="manual_input_tip">手动输入</string>
     <string name="submit_warning_tip">提示: 提交后不可撤销,请谨慎操作！</string>
