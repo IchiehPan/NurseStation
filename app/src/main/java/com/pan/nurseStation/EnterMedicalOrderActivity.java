@@ -179,59 +179,59 @@ public class EnterMedicalOrderActivity extends AppCompatActivity implements Comm
         return contentView;
     }
 
-    public void addCheckContentView(LinearLayout view, List<EnjoinDoInfoResponseBean.Data.MedicalOrder> dataList) {
-        if (dataList.size() > 1) {
-            int index = 0;
-            for (EnjoinDoInfoResponseBean.Data.MedicalOrder medicalOrder : dataList) {
+    public void addCheckContentView(LinearLayout view, List<List<EnjoinDoInfoResponseBean.Data.MedicalOrder>> dataList) {
+        for (List<EnjoinDoInfoResponseBean.Data.MedicalOrder> data : dataList) {
+            if (dataList.size() > 1) {
+                int index = 0;
+                for (EnjoinDoInfoResponseBean.Data.MedicalOrder medicalOrder : data) {
+                    String title = medicalOrder.getTitle();
+                    String dosage = medicalOrder.getDosage();
+                    String amount = medicalOrder.getAmount();
+                    String useMethod = medicalOrder.getUse_method();
+                    String id = medicalOrder.getId();
+                    String status = medicalOrder.getStatus();
+
+                    View contentView = getLayoutInflater().inflate(R.layout.item_checkbox_text_content, null);
+                    TextView typeText = contentView.findViewById(R.id.medical_type_text);
+                    TextView unitText = contentView.findViewById(R.id.medical_unit_text);
+                    CheckBox cb = contentView.findViewById(R.id.checkbox);
+
+                    typeText.setText(title);
+                    unitText.setText(dosage + "/" + amount + "/" + useMethod);
+
+                    if (index != 0) {
+                        cb.setVisibility(View.INVISIBLE);
+//                ((ViewGroup) cb.getParent()).removeView(cb);
+                    } else {
+                        cb.setOnCheckedChangeListener((CompoundButton buttonView, boolean isChecked) -> {
+                            if (isChecked) {
+                                checkedMap.put(id, status);
+                                increaseQuantityNum();
+                            } else {
+                                checkedMap.remove(id);
+                                decreaseQuantityNum();
+                            }
+                        });
+                    }
+
+                    LinearLayout marginLinearLayout = contentView.findViewById(R.id.margin_linear_layout);
+                    LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) marginLinearLayout.getLayoutParams();
+                    lp.setMargins(0, 0, 0, 0);
+                    lp.height = LinearLayout.LayoutParams.WRAP_CONTENT;
+                    marginLinearLayout.setLayoutParams(lp);
+
+                    view.addView(contentView);
+                    ++index;
+                }
+            } else if (dataList.size() == 0) {
+                EnjoinDoInfoResponseBean.Data.MedicalOrder medicalOrder = data.get(0);
                 String title = medicalOrder.getTitle();
                 String dosage = medicalOrder.getDosage();
                 String amount = medicalOrder.getAmount();
                 String useMethod = medicalOrder.getUse_method();
-                String id = medicalOrder.getId();
-                String status = medicalOrder.getStatus();
-
-                View contentView = getLayoutInflater().inflate(R.layout.item_checkbox_text_content, null);
-                TextView typeText = contentView.findViewById(R.id.medical_type_text);
-                TextView unitText = contentView.findViewById(R.id.medical_unit_text);
-                CheckBox cb = contentView.findViewById(R.id.checkbox);
-
-                typeText.setText(title);
-                unitText.setText(dosage + "/" + amount + "/" + useMethod);
-
-                if (index != 0) {
-                    cb.setVisibility(View.INVISIBLE);
-//                ((ViewGroup) cb.getParent()).removeView(cb);
-                } else {
-                    cb.setOnCheckedChangeListener((CompoundButton buttonView, boolean isChecked) -> {
-                        if (isChecked) {
-                            checkedMap.put(id, status);
-                            increaseQuantityNum();
-                        } else {
-                            checkedMap.remove(id);
-                            decreaseQuantityNum();
-                        }
-                    });
-                }
-
-                LinearLayout marginLinearLayout = contentView.findViewById(R.id.margin_linear_layout);
-                LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) marginLinearLayout.getLayoutParams();
-                lp.setMargins(0, 0, 0, 0);
-                lp.height = LinearLayout.LayoutParams.WRAP_CONTENT;
-                marginLinearLayout.setLayoutParams(lp);
-
-                view.addView(contentView);
-                ++index;
+                linearLayout.addView(getCheckContentView(title, dosage + "/" + amount + "/" + useMethod));
             }
-        } else if (dataList.size() == 0) {
-            EnjoinDoInfoResponseBean.Data.MedicalOrder medicalOrder = dataList.get(0);
-            String title = medicalOrder.getTitle();
-            String dosage = medicalOrder.getDosage();
-            String amount = medicalOrder.getAmount();
-            String useMethod = medicalOrder.getUse_method();
-            linearLayout.addView(getCheckContentView(title, dosage + "/" + amount + "/" + useMethod));
         }
-
-
     }
 
     public void getMedicalOrderData(PatientDetailResponseBean.Data data) {
@@ -248,7 +248,7 @@ public class EnterMedicalOrderActivity extends AppCompatActivity implements Comm
 
             for (EnjoinDoInfoResponseBean.Data infoData : responseBean.getData()) {
                 int status = infoData.getStatus();
-                List<EnjoinDoInfoResponseBean.Data.MedicalOrder> list = infoData.getList();
+                List<List<EnjoinDoInfoResponseBean.Data.MedicalOrder>> list = infoData.getList();
                 switch (status) {
                     case Constants.ORDER_STATUS_WAIT_MEDICAL:
                         linearLayout.addView(getCheckHeadView(getString(R.string.order_status_waiting_for_medicine)));

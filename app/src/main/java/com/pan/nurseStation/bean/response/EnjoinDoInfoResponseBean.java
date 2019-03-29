@@ -67,7 +67,7 @@ public class EnjoinDoInfoResponseBean {
     public static class Data {
 
         private int status;
-        private List<MedicalOrder> list;
+        private List<List<MedicalOrder>> list;
 
         public void setStatus(int status) {
             this.status = status;
@@ -77,11 +77,11 @@ public class EnjoinDoInfoResponseBean {
             return status;
         }
 
-        public void setList(List<MedicalOrder> list) {
+        public void setList(List<List<MedicalOrder>> list) {
             this.list = list;
         }
 
-        public List<MedicalOrder> getList() {
+        public List<List<MedicalOrder>> getList() {
             return list;
         }
 
