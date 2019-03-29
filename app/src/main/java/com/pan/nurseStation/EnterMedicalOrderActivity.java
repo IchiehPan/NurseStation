@@ -158,21 +158,25 @@ public class EnterMedicalOrderActivity extends AppCompatActivity implements Comm
         return imageExampleLayout;
     }
 
-    public View getCheckContentView(String type, String unit) {
+    public View getCheckContentView(EnjoinDoInfoResponseBean.Data.MedicalOrder medicalOrder) {
         View contentView = getLayoutInflater().inflate(R.layout.item_checkbox_text_content, null);
         TextView typeText = contentView.findViewById(R.id.medical_type_text);
         TextView unitText = contentView.findViewById(R.id.medical_unit_text);
         CheckBox cb = contentView.findViewById(R.id.checkbox);
-        typeText.setText(type);
-        unitText.setText(unit);
-        cb.setTag(type);
+        String title = medicalOrder.getTitle();
+        String dosage = medicalOrder.getDosage();
+        String amount = medicalOrder.getAmount();
+        String useMethod = medicalOrder.getUse_method();
+        String id = medicalOrder.getId();
+        String status = medicalOrder.getStatus();
+        typeText.setText(title);
+        unitText.setText(dosage + "/" + amount + "/" + useMethod);
         cb.setOnCheckedChangeListener((CompoundButton buttonView, boolean isChecked) -> {
-            Object tag = buttonView.getTag();
             if (isChecked) {
-                checkedMap.put(buttonView, tag);
+                checkedMap.put(medicalOrder, status);
                 increaseQuantityNum();
             } else {
-                checkedMap.remove(tag);
+                checkedMap.remove(medicalOrder);
                 decreaseQuantityNum();
             }
         });
@@ -205,10 +209,10 @@ public class EnterMedicalOrderActivity extends AppCompatActivity implements Comm
                     } else {
                         cb.setOnCheckedChangeListener((CompoundButton buttonView, boolean isChecked) -> {
                             if (isChecked) {
-                                checkedMap.put(id, status);
+                                checkedMap.put(data, status);
                                 increaseQuantityNum();
                             } else {
-                                checkedMap.remove(id);
+                                checkedMap.remove(data);
                                 decreaseQuantityNum();
                             }
                         });
@@ -224,12 +228,7 @@ public class EnterMedicalOrderActivity extends AppCompatActivity implements Comm
                     ++index;
                 }
             } else if (dataList.size() == 0) {
-                EnjoinDoInfoResponseBean.Data.MedicalOrder medicalOrder = data.get(0);
-                String title = medicalOrder.getTitle();
-                String dosage = medicalOrder.getDosage();
-                String amount = medicalOrder.getAmount();
-                String useMethod = medicalOrder.getUse_method();
-                linearLayout.addView(getCheckContentView(title, dosage + "/" + amount + "/" + useMethod));
+                linearLayout.addView(getCheckContentView(data.get(0)));
             }
         }
     }
@@ -241,10 +240,6 @@ public class EnterMedicalOrderActivity extends AppCompatActivity implements Comm
         dbHisBusiness.patientEnjoinDoInfo(requestBean, response -> {
             Log.d(TAG, "getMedicalOrderData: response=" + response);
             EnjoinDoInfoResponseBean responseBean = BeanKit.string2Bean(response, EnjoinDoInfoResponseBean.class);
-
-            List<EnjoinDoInfoResponseBean.Data> waitMedicalList = new ArrayList<>();
-            List<EnjoinDoInfoResponseBean.Data> waitExecList = new ArrayList<>();
-            List<EnjoinDoInfoResponseBean.Data> doExecList = new ArrayList<>();
 
             for (EnjoinDoInfoResponseBean.Data infoData : responseBean.getData()) {
                 int status = infoData.getStatus();
