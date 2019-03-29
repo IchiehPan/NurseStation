@@ -35,7 +35,7 @@ public class Constants {
     /**
      * 病人详细信息接口服务
      */
-    public final static String PATIENT_DETAIL_SERVICE = "Patientdetail.index";
+    public final static String PATIENT_DETAIL_SERVICE = "Patient.index";
     /**
      * 护理级别接口服务
      */
