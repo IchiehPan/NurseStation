@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.JSON;
 import com.bben.ydcf.scandome.CommonView;
 import com.bben.ydcf.scandome.receiver.ScanResultReceiver;
 import com.pan.lib.util.BeanKit;
@@ -302,9 +303,6 @@ public class EnterMedicalOrderActivity extends AppCompatActivity implements Comm
     public void submitQuantity(View view) {
         Map<String, String> ids = new ArrayMap<>();
         for (Map.Entry entry : checkedMap.entrySet()) {
-            Log.i(TAG, "submitQuantity: getKey()=" + entry.getKey());
-            Log.i(TAG, "submitQuantity: getValue()=" + entry.getValue());
-
             List<EnjoinDoInfoResponseBean.Data.MedicalOrder> medicalOrderList = (List<EnjoinDoInfoResponseBean.Data.MedicalOrder>) entry.getKey();
             String status = (String) entry.getValue();
             for (EnjoinDoInfoResponseBean.Data.MedicalOrder medicalOrder : medicalOrderList) {
@@ -315,6 +313,8 @@ public class EnterMedicalOrderActivity extends AppCompatActivity implements Comm
         DBHisBusiness dbHisBusiness = new DBHisBusiness();
         EnjoinDoRequestBean requestBean = new EnjoinDoRequestBean();
         requestBean.setIds(ids);
+
+        Log.i(TAG, "submitQuantity: EnjoinDoRequestBean=" + JSON.toJSONString(requestBean));
 
         dbHisBusiness.patientEnjoinDo(requestBean, response -> {
             Log.i(TAG, "submitQuantity: response=" + response);
