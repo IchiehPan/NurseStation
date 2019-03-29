@@ -31,13 +31,22 @@ public class Constants {
     /**
      * 床位列表接口服务
      */
-    public final static String BEDLIST_SERVICE = "Bedlist.index";
+    public final static String BED_LIST_SERVICE = "Bedlist.index";
     /**
      * 病人详细信息接口服务
      */
-    public final static String PATIENTDETAIL_SERVICE = "Patientdetail.index";
+    public final static String PATIENT_DETAIL_SERVICE = "Patientdetail.index";
     /**
      * 护理级别接口服务
      */
     public final static String LEVEL_SERVICE = "Level.index";
+    /**
+     * 医嘱需执行信息接口服务
+     */
+    public final static String PATIENT_ENJOINDOINFO_SERVICE = "Patient.EnjoinDoInfo";
+
+    public final static int ORDER_STATUS_WAIT_MEDICAL = 0;
+    public final static int ORDER_STATUS_WAIT_EXEC = 1;
+    public final static int ORDER_STATUS_DO_EXEC = 2;
+    public final static int ORDER_STATUS_DONE_EXEC = 3;
 }
