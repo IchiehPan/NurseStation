@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.pan.lib.util.BeanKit;
+import com.pan.lib.util.StringKit;
 import com.pan.nurseStation.adapter.SimpleSpinnerAdapter;
 import com.pan.nurseStation.animate.AnimateBusiness;
 import com.pan.nurseStation.bean.Constants;
@@ -107,8 +108,6 @@ public class EnterVitalSignActivity extends AppCompatActivity {
 
         temperatureGroup = findViewById(R.id.radio_temperature);
         pulseGroup = findViewById(R.id.pulse_radio);
-        temperatureButton = findViewById(temperatureGroup.getCheckedRadioButtonId());
-        pulseButton = findViewById(pulseGroup.getCheckedRadioButtonId());
         temperatureEditText = findViewById(R.id.temperature);
         pulseEditText = findViewById(R.id.pulse);
         breatheEditText = findViewById(R.id.breathe);
@@ -147,6 +146,14 @@ public class EnterVitalSignActivity extends AppCompatActivity {
     }
 
     public void submitForm(View view) {
+        temperatureButton = findViewById(temperatureGroup.getCheckedRadioButtonId());
+        pulseButton = findViewById(pulseGroup.getCheckedRadioButtonId());
+
+        if (temperatureGroup.isSelected() || pulseGroup.isSelected()) {
+            Toast.makeText(this, getString(R.string.input_not_tip), Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         //
         String temperatureType = temperatureButton.getText().toString();
         String pulseType = pulseButton.getText().toString();
@@ -159,6 +166,13 @@ public class EnterVitalSignActivity extends AppCompatActivity {
         String inputVolume = inputVolumeEditText.getText().toString();
         String weight = weightEditText.getText().toString();
         String other = otherEditText.getText().toString();
+
+        if (!StringKit.isValid(temperature) || !StringKit.isValid(pulse) || !StringKit.isValid(breathe) || !StringKit.isValid(bloodPressure)
+                || !StringKit.isValid(stoolFrequency) || !StringKit.isValid(urineVolume) || !StringKit.isValid(inputVolume) || !StringKit.isValid(weight) || !StringKit.isValid(other)) {
+            Toast.makeText(this, getString(R.string.input_not_tip), Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         boolean isAssistedBreathe = assistedBreatheCheckBox.isChecked();
 
         Log.i(TAG, "submitForm: temperatureType=" + temperatureType);

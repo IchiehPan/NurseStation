@@ -70,7 +70,7 @@ public class PatientInfoFragment extends Fragment implements BackHandledInterfac
                 if (Objects.equals(text, getString(R.string.page_basic_info))) {
                     mWebView.loadUrl(Constants.PATIENT_INFO_URL + hosNumber);
                 } else if (Objects.equals(text, getString(R.string.page_order_info))) {
-                    mWebView.loadUrl("http://192.168.8.44/doctor-advice.html#");
+                    mWebView.loadUrl(Constants.MEDICAL_INFO_URL + hosNumber);
                 } else if (Objects.equals(text, getString(R.string.page_nursing_record))) {
                     mWebView.loadUrl("http://192.168.8.44/course-record.html#");
                 } else if (Objects.equals(text, getString(R.string.page_progress_note))) {

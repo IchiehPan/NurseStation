@@ -14,6 +14,7 @@ import com.pan.lib.util.BeanKit;
 import com.pan.nurseStation.EnterMedicalOrderActivity;
 import com.pan.nurseStation.EnterVitalSignActivity;
 import com.pan.nurseStation.R;
+import com.pan.nurseStation.bean.Constants;
 import com.pan.nurseStation.bean.response.BedListResponseBean;
 import com.pan.nurseStation.widget.web.JWebSetting;
 import com.pan.nurseStation.widget.web.JWebViewClient;
@@ -56,7 +57,7 @@ public class VitalSignFragment extends Fragment {
 
         //声明WebSettings子类
         JWebSetting.setParam(mWebView.getSettings());
-        mWebView.loadUrl("http://192.168.8.104:8080/DyWeb_war_exploded/life.html" + patientInfoBean.getHos_number());
+        mWebView.loadUrl(Constants.VITAL_SIGN_URL + patientInfoBean.getHos_number());
         mWebView.setWebViewClient(JWebViewClient.getInstance());
     }
 

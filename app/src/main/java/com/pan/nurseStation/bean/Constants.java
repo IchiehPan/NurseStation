@@ -1,11 +1,5 @@
 package com.pan.nurseStation.bean;
 
-import com.pan.nurseStation.bean.response.LevelResponseBean;
-import com.pan.nurseStation.bean.response.LoginResponseBean;
-
-import java.util.ArrayList;
-import java.util.List;
-
 public class Constants {
     public final static long SLIDE_DURATION_MS = 500;
 
@@ -19,7 +13,9 @@ public class Constants {
     //    public final static String URL = "http://api.xiezn.com/dbhospital/?service=Login.index&number=011012&password=pwd";
 
     public final static String PATIENT_INFO_URL = "http://192.168.10.71:8689/index/ydhl/baseinfo/hos_number/";
-    public final static String MEDICAL_ORDER_URL = "http://192.168.10.71:8689/index/ydhl/doctorenjoininfo/hos_number/";
+    public final static String MEDICAL_INFO_URL = "http://192.168.10.71:8689/index/ydhl/doctorenjoininfo/hos_number/";
+    public final static String MEDICAL_ORDER_URL = "http://192.168.10.71:8689/index/ydhl/enjoinInfo /hos_number/";
+    public final static String VITAL_SIGN_URL = "http://192.168.10.71:8689/index/ydhl/physicalRecord/hos_number/";
 
     /**
      * 确认传参
