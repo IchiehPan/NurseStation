@@ -105,6 +105,7 @@ public class BedInfoActivity extends FragmentActivity {
 
         int fragmentIndex = bundle.getInt("fragmentIndex");
         switchFragment(lastShowFragment, fragmentIndex);
+        bottomNavigationView.setSelectedItemId(bottomNavigationView.getMenu().getItem(fragmentIndex).getItemId());
     }
 
 
