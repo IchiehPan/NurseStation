@@ -1,2 +1,1 @@
-include ':app', ':MPChartExample', ':MPChartLib', ':MultiShapeView', ':javalib', ':anlib'
-project(':MultiShapeView').projectDir = new File('MultiShapeView-master/app')
+include ':app', ':javalib', ':anlib'
