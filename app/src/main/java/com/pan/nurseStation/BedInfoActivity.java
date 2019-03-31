@@ -20,7 +20,6 @@ import com.pan.nurseStation.fragment.PatientInfoFragment;
 import com.pan.nurseStation.fragment.VitalSignFragment;
 
 public class BedInfoActivity extends FragmentActivity {
-
     private static final String TAG = BedInfoActivity.class.getSimpleName();
     private TextView patientExampleInfo;
     private BottomNavigationView bottomNavigationView;
@@ -67,8 +66,10 @@ public class BedInfoActivity extends FragmentActivity {
         setContentView(R.layout.activity_bed_info);
 
         Bundle bundle = getIntent().getExtras();
-        String patientInfo = bundle.getString("patientInfo");
-        patientInfoBean = BeanKit.string2Bean(patientInfo, BedListResponseBean.PatientInfo.class);
+        if (bundle != null) {
+            String patientInfo = bundle.getString("patientInfo");
+            patientInfoBean = BeanKit.string2Bean(patientInfo, BedListResponseBean.PatientInfo.class);
+        }
 
         initView();
         initData(patientInfoBean);
@@ -144,11 +145,13 @@ public class BedInfoActivity extends FragmentActivity {
 //        super.onBackPressed();
     }
 
-    public void backToList(View view) {
+    public void inBedListActivity(View view) {
         Intent intent = new Intent(this, BedListActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
+
+
 
     public void refreshTheWeb(View view) {
         switch (lastShowFragment) {
