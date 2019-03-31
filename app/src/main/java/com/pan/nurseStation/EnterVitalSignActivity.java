@@ -149,7 +149,7 @@ public class EnterVitalSignActivity extends AppCompatActivity {
         temperatureButton = findViewById(temperatureGroup.getCheckedRadioButtonId());
         pulseButton = findViewById(pulseGroup.getCheckedRadioButtonId());
 
-        if (temperatureGroup.isSelected() || pulseGroup.isSelected()) {
+        if (temperatureButton == null || pulseButton == null) {
             Toast.makeText(this, getString(R.string.input_not_tip), Toast.LENGTH_SHORT).show();
             return;
         }
