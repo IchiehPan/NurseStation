@@ -330,6 +330,7 @@ public class EnterMedicalOrderActivity extends AppCompatActivity implements Comm
                 Intent intent = new Intent(this, BedInfoActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("patientInfo", JSON.toJSONString(data));
+                bundle.putInt("fragmentIndex", BedInfoActivity.FRAG_MEDICAL_ORDER_INDEX);
                 intent.putExtras(bundle);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
