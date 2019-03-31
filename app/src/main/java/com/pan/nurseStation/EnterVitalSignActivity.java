@@ -13,6 +13,7 @@ import android.widget.RadioGroup;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.pan.lib.util.BeanKit;
 import com.pan.nurseStation.adapter.SimpleSpinnerAdapter;
@@ -172,7 +173,7 @@ public class EnterVitalSignActivity extends AppCompatActivity {
         Log.i(TAG, "submitForm: other=" + other);
         Log.i(TAG, "submitForm: isAssistedBreathe=" + isAssistedBreathe);
 
-
+        Toast.makeText(this, getString(R.string.request_success_tip), Toast.LENGTH_SHORT).show();
     }
 
     public void backToList(View view) {
