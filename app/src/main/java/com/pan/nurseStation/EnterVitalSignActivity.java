@@ -201,6 +201,7 @@ public class EnterVitalSignActivity extends AppCompatActivity {
         } else {
             scanFail();
         }
+        inputDialog.hide();
     }
 
     private void scanFail() {
@@ -208,7 +209,6 @@ public class EnterVitalSignActivity extends AppCompatActivity {
     }
 
     private void scanSuccess() {
-        successButtonBar.setVisibility(View.VISIBLE);
         AnimateBusiness.slideToggle(successButtonBar, 200, Constants.SLIDE_DURATION_MS, Constants.SLIDE_DURATION_MS);
         scanSuccessTip.setText(getString(R.string.scan_success_tip2));
     }

@@ -7,6 +7,7 @@ import android.view.View;
 
 public class AnimateBusiness {
     public static void slideToggle(View view, float translationY, long duration1, long duration2) {
+        view.setVisibility(View.VISIBLE);
         ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(view, "translationY", 0, translationY);
         objectAnimator.addListener(new Animator.AnimatorListener() {
 
@@ -34,6 +35,7 @@ public class AnimateBusiness {
     }
 
     public static void slideDown(View view, float translationY, long duration) {
+        view.setVisibility(View.VISIBLE);
         ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(view, "translationY", 0, translationY);
         objectAnimator.setDuration(duration).start();
     }
@@ -41,5 +43,6 @@ public class AnimateBusiness {
     public static void slideUp(View view, float translationY, long duration) {
         ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(view, "translationY", translationY, 0);
         objectAnimator.setDuration(duration).start();
+        view.setVisibility(View.INVISIBLE);
     }
 }

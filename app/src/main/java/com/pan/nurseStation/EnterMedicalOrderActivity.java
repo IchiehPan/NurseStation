@@ -115,7 +115,6 @@ public class EnterMedicalOrderActivity extends AppCompatActivity implements Comm
     }
 
     private void scanSuccess() {
-        successButtonBar.setVisibility(View.VISIBLE);
         AnimateBusiness.slideToggle(successButtonBar, 200, Constants.SLIDE_DURATION_MS, Constants.SLIDE_DURATION_MS);
         scanSuccessTip.setText(getString(R.string.scan_success_tip2));
     }
@@ -161,6 +160,7 @@ public class EnterMedicalOrderActivity extends AppCompatActivity implements Comm
         } else {
             scanFail();
         }
+        inputDialog.hide();
     }
 
     public View getCheckHeadView(String exampleString) {
