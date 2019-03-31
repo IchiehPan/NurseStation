@@ -37,12 +37,49 @@ public class AnimateBusiness {
     public static void slideDown(View view, float translationY, long duration) {
         view.setVisibility(View.VISIBLE);
         ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(view, "translationY", 0, translationY);
+        objectAnimator.addListener(new Animator.AnimatorListener() {
+
+            @Override
+            public void onAnimationStart(Animator animation) {
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+            }
+        });
         objectAnimator.setDuration(duration).start();
     }
 
     public static void slideUp(View view, float translationY, long duration) {
         ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(view, "translationY", translationY, 0);
+        objectAnimator.addListener(new Animator.AnimatorListener() {
+
+            @Override
+            public void onAnimationStart(Animator animation) {
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                view.setVisibility(View.INVISIBLE);
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+            }
+        });
         objectAnimator.setDuration(duration).start();
-        view.setVisibility(View.INVISIBLE);
+
     }
 }

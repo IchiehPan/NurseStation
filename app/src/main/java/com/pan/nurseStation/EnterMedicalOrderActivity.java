@@ -115,7 +115,7 @@ public class EnterMedicalOrderActivity extends AppCompatActivity implements Comm
     }
 
     private void scanSuccess() {
-        AnimateBusiness.slideToggle(successButtonBar, 200, Constants.SLIDE_DURATION_MS, Constants.SLIDE_DURATION_MS);
+        AnimateBusiness.slideToggle(successButtonBar, 40, Constants.SLIDE_DURATION_MS, Constants.SLIDE_DURATION_MS);
         scanSuccessTip.setText(getString(R.string.scan_success_tip2));
     }
 
