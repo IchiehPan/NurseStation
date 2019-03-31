@@ -19,7 +19,7 @@
             android:layout_centerVertical="true"
             android:layout_marginStart="9dp"
             android:background="@drawable/ic_back"
-            android:onClick="backToList" />
+            android:onClick="inBedListActivity" />
 
         <TextView
             android:layout_width="wrap_content"

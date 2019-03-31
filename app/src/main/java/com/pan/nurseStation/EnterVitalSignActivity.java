@@ -178,12 +178,13 @@ public class EnterVitalSignActivity extends AppCompatActivity {
         Intent intent = new Intent(this, BedInfoActivity.class);
         Bundle bundle = new Bundle();
         bundle.putString("patientInfo", JSON.toJSONString(data));
+        bundle.putInt("fragmentIndex", 2);
         intent.putExtras(bundle);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
 
-    public void backToList(View view) {
+    public void inBedListActivity(View view) {
         Intent intent = new Intent(this, BedListActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);

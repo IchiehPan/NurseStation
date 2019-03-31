@@ -40,7 +40,7 @@ public class VitalSignFragment extends Fragment {
 
         //声明WebSettings子类
         JWebSetting.setParam(mWebView.getSettings());
-        mWebView.loadUrl("http://192.168.8.104:8080/DyWeb_war_exploded/life.html");
+        mWebView.loadUrl("http://192.168.8.104:8080/DyWeb_war_exploded/life.html" + patientInfoBean.getHos_number());
         mWebView.setWebViewClient(JWebViewClient.getInstance());
     }
 

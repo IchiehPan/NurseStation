@@ -342,7 +342,7 @@ public class EnterMedicalOrderActivity extends AppCompatActivity implements Comm
         });
     }
 
-    public void backToList(View view) {
+    public void inBedListActivity(View view) {
         Intent intent = new Intent(this, BedListActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);

@@ -91,7 +91,6 @@ public class PatientInfoFragment extends Fragment implements BackHandledInterfac
 
     @Override
     public void onDestroy() {
-
         //避免WebView内存泄露
         //在 Activity 销毁（ WebView ）的时候，先让 WebView 加载null内容，然后移除 WebView，再销毁 WebView，最后置空。
         if (mWebView != null) {
@@ -102,7 +101,6 @@ public class PatientInfoFragment extends Fragment implements BackHandledInterfac
             mWebView.destroy();
             mWebView = null;
         }
-
 
         super.onDestroy();
     }

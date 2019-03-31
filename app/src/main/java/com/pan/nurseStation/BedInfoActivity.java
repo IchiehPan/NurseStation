@@ -28,6 +28,11 @@ public class BedInfoActivity extends FragmentActivity {
     private MedicalOrderFragment medicalOrderFragment;
     private VitalSignFragment vitalSignFragment;
     private Fragment[] fragments;
+    public final static int FRAG_PATIENT_INFO_INDEX = 0;
+    public final static int FRAG_MEDICAL_ORDER_INDEX = 1;
+    public final static int FRAG_VITAL_SIGN_INDEX = 2;
+
+
     private int lastShowFragment = 0;
     private BedListResponseBean.PatientInfo patientInfoBean;
 
@@ -35,21 +40,21 @@ public class BedInfoActivity extends FragmentActivity {
             = (@NonNull MenuItem item) -> {
         switch (item.getItemId()) {
             case R.id.navigation_info:
-                if (lastShowFragment != 0) {
-                    switchFragment(lastShowFragment, 0);
-                    lastShowFragment = 0;
+                if (lastShowFragment != FRAG_PATIENT_INFO_INDEX) {
+                    switchFragment(lastShowFragment, FRAG_PATIENT_INFO_INDEX);
+                    lastShowFragment = FRAG_PATIENT_INFO_INDEX;
                 }
                 return true;
             case R.id.navigation_doctor:
                 if (lastShowFragment != 1) {
-                    switchFragment(lastShowFragment, 1);
-                    lastShowFragment = 1;
+                    switchFragment(lastShowFragment, FRAG_MEDICAL_ORDER_INDEX);
+                    lastShowFragment = FRAG_MEDICAL_ORDER_INDEX;
                 }
                 return true;
             case R.id.navigation_sign:
                 if (lastShowFragment != 2) {
-                    switchFragment(lastShowFragment, 2);
-                    lastShowFragment = 2;
+                    switchFragment(lastShowFragment, FRAG_VITAL_SIGN_INDEX);
+                    lastShowFragment = FRAG_VITAL_SIGN_INDEX;
                 }
                 return true;
         }
@@ -67,7 +72,7 @@ public class BedInfoActivity extends FragmentActivity {
 
         initView();
         initData(patientInfoBean);
-        initFragments(patientInfoBean.getHos_number());
+        initFragments(bundle);
     }
 
     private void initData(BedListResponseBean.PatientInfo patientInfoBean) {
@@ -77,30 +82,39 @@ public class BedInfoActivity extends FragmentActivity {
     private void initView() {
         patientExampleInfo = findViewById(R.id.patient_example_info);
         bottomNavigationView = findViewById(R.id.navigation);
-
         bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
 
-    private void initFragments(String hosNumber) {
+    private void initFragments(Bundle bundle) {
         patientInfoFragment = new PatientInfoFragment();
         medicalOrderFragment = new MedicalOrderFragment();
         vitalSignFragment = new VitalSignFragment();
 
-        Bundle bundle = new Bundle();
-        /*往bundle中添加数据*/
-        bundle.putString("patientInfo", JSON.toJSONString(patientInfoBean));
         /*把数据设置到Fragment中*/
         patientInfoFragment.setArguments(bundle);
         medicalOrderFragment.setArguments(bundle);
         vitalSignFragment.setArguments(bundle);
 
-
         fragments = new Fragment[]{patientInfoFragment, medicalOrderFragment, vitalSignFragment};
+
         lastShowFragment = 0;
-        getSupportFragmentManager().beginTransaction()
-                .add(R.id.fragment_container, patientInfoFragment)
-                .show(patientInfoFragment)
-                .commit();
+        int fragmentIndex = bundle.getInt("fragmentIndex");
+        lastShowFragment = fragmentIndex;
+
+        switch (lastShowFragment) {
+            case FRAG_PATIENT_INFO_INDEX:
+                getSupportFragmentManager().beginTransaction()
+                        .add(R.id.fragment_container, patientInfoFragment).show(patientInfoFragment).commit();
+                break;
+            case FRAG_MEDICAL_ORDER_INDEX:
+                getSupportFragmentManager().beginTransaction()
+                        .add(R.id.fragment_container, medicalOrderFragment).show(medicalOrderFragment).commit();
+                break;
+            case FRAG_VITAL_SIGN_INDEX:
+                getSupportFragmentManager().beginTransaction()
+                        .add(R.id.fragment_container, vitalSignFragment).show(vitalSignFragment).commit();
+                break;
+        }
     }
 
 
