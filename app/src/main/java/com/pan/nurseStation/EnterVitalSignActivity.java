@@ -54,6 +54,7 @@ public class EnterVitalSignActivity extends AppCompatActivity {
     private RoundButton successButtonBar;
     private TextView scanSuccessTip;
     private ScanErrorDialog errorDialog;
+    private PatientDetailResponseBean.Data data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,13 +63,10 @@ public class EnterVitalSignActivity extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         String patientInfo = bundle.getString("patientInfo");
-        PatientDetailResponseBean.Data data = BeanKit.string2Bean(patientInfo, PatientDetailResponseBean.Data.class);
+        data = BeanKit.string2Bean(patientInfo, PatientDetailResponseBean.Data.class);
 
         initView();
         initData(data);
-
-        scanSuccess();
-        scanFail();
     }
 
     private void initData(PatientDetailResponseBean.Data data) {
@@ -192,6 +190,17 @@ public class EnterVitalSignActivity extends AppCompatActivity {
     public void hideInputDialog(View view) {
         Log.i(TAG, "hideInputDialog: --------------------------");
         inputDialog.hide();
+    }
+
+    public void submitInputDialog(View view) {
+        EditText editText = inputDialog.findViewById(R.id.hos_id);
+        String hosId = editText.getText().toString();
+        Log.i(TAG, "submitInputDialog: --------------------------hosId=" + hosId);
+        if (Objects.equals(hosId, data.getHos_number())) {
+            scanSuccess();
+        } else {
+            scanFail();
+        }
     }
 
     private void scanFail() {

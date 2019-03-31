@@ -14,7 +14,6 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.GridView;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
@@ -227,7 +226,7 @@ public class BedListActivity extends AppCompatActivity implements CommonView {
         AutoLoadListener autoLoadListener = new AutoLoadListener(() -> initListData(level, search, ++page));
         bedListView.setOnScrollListener(autoLoadListener);
         bedListView.setOnItemClickListener((parent, view, position, id) -> {
-            TextView tv = view.findViewById(R.id.patient_number);
+            TextView tv = view.findViewById(R.id.hos_id);
             for (BedListResponseBean.PatientInfo patientInfo : dataList) {
                 if (!Objects.equals(tv.getText().toString(), patientInfo.getHos_number())) {
                     continue;

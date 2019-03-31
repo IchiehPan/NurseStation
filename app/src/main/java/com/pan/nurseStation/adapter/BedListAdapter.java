@@ -2,7 +2,6 @@ package com.pan.nurseStation.adapter;
 
 import android.content.Context;
 import android.graphics.drawable.GradientDrawable;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -58,7 +57,7 @@ public class BedListAdapter extends BaseAdapter {
         TextView patientName = linearLayout.findViewById(R.id.patient_name);
         ImageView patientSex = linearLayout.findViewById(R.id.patient_sex);
         TextView patientAge = linearLayout.findViewById(R.id.patient_age);
-        TextView patientNumber = linearLayout.findViewById(R.id.patient_number);
+        TextView patientNumber = linearLayout.findViewById(R.id.hos_id);
 
         BedListResponseBean.PatientInfo patientInfo = mList.get(position);
         bedNo.setText(patientInfo.getBed_id());

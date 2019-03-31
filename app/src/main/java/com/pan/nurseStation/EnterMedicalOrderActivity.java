@@ -4,11 +4,11 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.ArrayMap;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -53,7 +53,8 @@ public class EnterMedicalOrderActivity extends AppCompatActivity implements Comm
     private TextView hosNumber;
     private TextView departmentName;
     private TextView bedId;
-    static Map<Object, Object> checkedMap;
+    private Map<Object, Object> checkedMap;
+    private PatientDetailResponseBean.Data data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +63,7 @@ public class EnterMedicalOrderActivity extends AppCompatActivity implements Comm
 
         Bundle bundle = getIntent().getExtras();
         String patientInfo = bundle.getString("patientInfo");
-        PatientDetailResponseBean.Data data = BeanKit.string2Bean(patientInfo, PatientDetailResponseBean.Data.class);
+        data = BeanKit.string2Bean(patientInfo, PatientDetailResponseBean.Data.class);
 
         resultReceiver = new ScanResultReceiver(this);
         registerReceiver(resultReceiver, new IntentFilter(com.bben.ydcf.scandome.Constants.DECODE_RESULT_FILTER));
@@ -70,9 +71,6 @@ public class EnterMedicalOrderActivity extends AppCompatActivity implements Comm
         checkedMap = new HashMap<>();
         initView();
         initData(data);
-
-        scanSuccess();
-        scanFail();
     }
 
     private void initData(PatientDetailResponseBean.Data data) {
@@ -154,7 +152,14 @@ public class EnterMedicalOrderActivity extends AppCompatActivity implements Comm
     }
 
     public void submitInputDialog(View view) {
-        Log.i(TAG, "submitInputDialog: --------------------------");
+        EditText editText = inputDialog.findViewById(R.id.hos_id);
+        String hosId = editText.getText().toString();
+        Log.i(TAG, "submitInputDialog: --------------------------hosId=" + hosId);
+        if (Objects.equals(hosId, data.getHos_number())) {
+            scanSuccess();
+        } else {
+            scanFail();
+        }
     }
 
     public View getCheckHeadView(String exampleString) {
@@ -267,8 +272,6 @@ public class EnterMedicalOrderActivity extends AppCompatActivity implements Comm
                 }
 
             }
-
-
         }, error -> {
             Log.e(TAG, "getMedicalOrderData: ", error);
         });

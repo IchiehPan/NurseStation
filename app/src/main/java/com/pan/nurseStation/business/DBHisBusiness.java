@@ -2,8 +2,10 @@ package com.pan.nurseStation.business;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -79,7 +81,8 @@ public class DBHisBusiness {
 
     public void patientEnjoinDo(EnjoinDoRequestBean requestBean, Response.Listener<String> listener, @Nullable Response.ErrorListener errorListener) {
         Map<String, String> params = new HashMap<>();
-        params.put("ids", JSON.toJSONString(requestBean.getIds()));
+        params.put("ids", JSON.toJSONString(requestBean.getIds(), SerializerFeature.DisableCheckSpecialChar));
+        Log.d(TAG, "patientEnjoinDo: params= " + params);
         params.put(Constants.SERVICE_PARAM, Constants.PATIENT_ENJOIN_DO_SERVICE);
         StringRequest stringRequest = VolleyKit.newStringRequest(Request.Method.POST, Constants.URL, params, listener, errorListener);
         mQueue.add(stringRequest);
