@@ -9,8 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 
+import com.pan.lib.util.BeanKit;
 import com.pan.nurseStation.R;
 import com.pan.nurseStation.bean.Constants;
+import com.pan.nurseStation.bean.response.BedListResponseBean;
 import com.pan.nurseStation.widget.fragment.BackHandledInterface;
 import com.pan.nurseStation.widget.web.JWebSetting;
 import com.pan.nurseStation.widget.web.JWebViewClient;
@@ -21,6 +23,7 @@ public class PatientInfoFragment extends Fragment implements BackHandledInterfac
     private static final String TAG = PatientInfoFragment.class.getSimpleName();
     private WebView mWebView;
     private TabLayout mTabLayout;
+    private BedListResponseBean.PatientInfo patientInfoBean;
 
     public PatientInfoFragment() {
         // Required empty public constructor
@@ -43,7 +46,9 @@ public class PatientInfoFragment extends Fragment implements BackHandledInterfac
     private void initView(View root) {
         mWebView = root.findViewById(R.id.webView);
         Bundle bundle = this.getArguments();
-        String hosNumber = bundle.getString("hos_number");
+        String patientInfo = bundle.getString("patientInfo");
+        patientInfoBean = BeanKit.string2Bean(patientInfo, BedListResponseBean.PatientInfo.class);
+        String hosNumber = patientInfoBean.getHos_number();
 
         //声明WebSettings子类
         JWebSetting.setParam(mWebView.getSettings());

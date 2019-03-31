@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSON;
 import com.pan.lib.util.BeanKit;
 import com.pan.nurseStation.bean.response.BedListResponseBean;
 import com.pan.nurseStation.fragment.MedicalOrderFragment;
@@ -28,6 +29,7 @@ public class BedInfoActivity extends FragmentActivity {
     private VitalSignFragment vitalSignFragment;
     private Fragment[] fragments;
     private int lastShowFragment = 0;
+    private BedListResponseBean.PatientInfo patientInfoBean;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = (@NonNull MenuItem item) -> {
@@ -61,7 +63,7 @@ public class BedInfoActivity extends FragmentActivity {
 
         Bundle bundle = getIntent().getExtras();
         String patientInfo = bundle.getString("patientInfo");
-        BedListResponseBean.PatientInfo patientInfoBean = BeanKit.string2Bean(patientInfo, BedListResponseBean.PatientInfo.class);
+        patientInfoBean = BeanKit.string2Bean(patientInfo, BedListResponseBean.PatientInfo.class);
 
         initView();
         initData(patientInfoBean);
@@ -86,7 +88,7 @@ public class BedInfoActivity extends FragmentActivity {
 
         Bundle bundle = new Bundle();
         /*往bundle中添加数据*/
-        bundle.putString("hos_number", hosNumber);
+        bundle.putString("patientInfo", JSON.toJSONString(patientInfoBean));
         /*把数据设置到Fragment中*/
         patientInfoFragment.setArguments(bundle);
         medicalOrderFragment.setArguments(bundle);

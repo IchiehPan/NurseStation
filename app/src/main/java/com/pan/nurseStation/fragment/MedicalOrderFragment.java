@@ -7,13 +7,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 
+import com.pan.lib.util.BeanKit;
 import com.pan.nurseStation.R;
 import com.pan.nurseStation.bean.Constants;
+import com.pan.nurseStation.bean.response.BedListResponseBean;
 import com.pan.nurseStation.widget.web.JWebSetting;
 import com.pan.nurseStation.widget.web.JWebViewClient;
 
 public class MedicalOrderFragment extends Fragment {
     private WebView mWebView;
+    private BedListResponseBean.PatientInfo patientInfoBean;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -32,11 +35,13 @@ public class MedicalOrderFragment extends Fragment {
     private void initView(View root) {
         mWebView = root.findViewById(R.id.web_view);
         Bundle bundle = this.getArguments();
-        String hosNumber = bundle.getString("hos_number");
+        String patientInfo = bundle.getString("patientInfo");
+        patientInfoBean = BeanKit.string2Bean(patientInfo, BedListResponseBean.PatientInfo.class);
+
         //声明WebSettings子类
         JWebSetting.setParam(mWebView.getSettings());
 
-        mWebView.loadUrl(Constants.MEDICAL_ORDER_URL + hosNumber);
+        mWebView.loadUrl(Constants.MEDICAL_ORDER_URL + patientInfoBean.getHos_number());
         mWebView.setWebViewClient(JWebViewClient.getInstance());
     }
 
@@ -60,5 +65,10 @@ public class MedicalOrderFragment extends Fragment {
 
     public WebView getWebView() {
         return mWebView;
+    }
+
+    public void inEnterMedicalOrderActivity(View view) {
+
+
     }
 }

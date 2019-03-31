@@ -28,6 +28,7 @@
                 android:layout_height="27dp"
                 android:layout_centerInParent="true"
                 android:background="@color/custom_blue"
+                android:onClick="inEnterMedicalOrderActivity"
                 android:text="@string/medical_order_title"
                 android:textColor="@color/custom_white"
                 android:textSize="10sp" />

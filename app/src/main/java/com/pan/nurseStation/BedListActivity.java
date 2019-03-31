@@ -231,7 +231,7 @@ public class BedListActivity extends AppCompatActivity implements CommonView {
                 if (!Objects.equals(tv.getText().toString(), patientInfo.getHos_number())) {
                     continue;
                 }
-                clickInBedInfoActivity(patientInfo);
+                inBedInfoActivity(patientInfo);
                 return;
             }
 
@@ -310,7 +310,7 @@ public class BedListActivity extends AppCompatActivity implements CommonView {
         dialog.hide();
     }
 
-    public void clickInBedInfoActivity(BedListResponseBean.PatientInfo patientInfo) {
+    public void inBedInfoActivity(BedListResponseBean.PatientInfo patientInfo) {
         Intent intent = new Intent(this, BedInfoActivity.class);
         Bundle bundle = new Bundle();
         bundle.putString("patientInfo", JSON.toJSONString(patientInfo));
