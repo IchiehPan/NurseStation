@@ -53,8 +53,8 @@ public class PatientInfoFragment extends Fragment implements BackHandledInterfac
         mTabLayout = root.findViewById(R.id.tabs);
         mTabLayout.addTab(mTabLayout.newTab().setText(getString(R.string.page_basic_info)), true);
         mTabLayout.addTab(mTabLayout.newTab().setText(getString(R.string.page_order_info)));
-        mTabLayout.addTab(mTabLayout.newTab().setText(getString(R.string.page_nursing_record)));
-        mTabLayout.addTab(mTabLayout.newTab().setText(getString(R.string.page_progress_note)));
+//        mTabLayout.addTab(mTabLayout.newTab().setText(getString(R.string.page_nursing_record)));
+//        mTabLayout.addTab(mTabLayout.newTab().setText(getString(R.string.page_progress_note)));
 
         mTabLayout.addOnTabSelectedListener(new TabLayout.BaseOnTabSelectedListener() {
             @Override
