@@ -76,8 +76,12 @@ public class BedInfoActivity extends FragmentActivity {
         initFragments(bundle);
 
         int fragmentIndex = bundle.getInt("fragmentIndex");
-        switchFragment(lastShowFragment, fragmentIndex);
-        bottomNavigationView.setSelectedItemId(bottomNavigationView.getMenu().getItem(fragmentIndex).getItemId());
+        if (fragmentIndex != lastShowFragment) {
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.hide(fragments[lastShowFragment]);
+            transaction.show(fragments[fragmentIndex]).commitAllowingStateLoss();
+            bottomNavigationView.setSelectedItemId(bottomNavigationView.getMenu().getItem(fragmentIndex).getItemId());
+        }
     }
 
     private void initData(BedListResponseBean.PatientInfo patientInfoBean) {
