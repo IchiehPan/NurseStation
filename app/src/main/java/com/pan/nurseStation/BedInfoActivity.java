@@ -99,23 +99,12 @@ public class BedInfoActivity extends FragmentActivity {
         fragments = new Fragment[]{patientInfoFragment, medicalOrderFragment, vitalSignFragment};
 
         lastShowFragment = 0;
-        int fragmentIndex = bundle.getInt("fragmentIndex");
-        lastShowFragment = fragmentIndex;
 
-        switch (lastShowFragment) {
-            case FRAG_PATIENT_INFO_INDEX:
-                getSupportFragmentManager().beginTransaction()
-                        .add(R.id.fragment_container, patientInfoFragment).show(patientInfoFragment).commit();
-                break;
-            case FRAG_MEDICAL_ORDER_INDEX:
-                getSupportFragmentManager().beginTransaction()
-                        .add(R.id.fragment_container, medicalOrderFragment).show(medicalOrderFragment).commit();
-                break;
-            case FRAG_VITAL_SIGN_INDEX:
-                getSupportFragmentManager().beginTransaction()
-                        .add(R.id.fragment_container, vitalSignFragment).show(vitalSignFragment).commit();
-                break;
-        }
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.fragment_container, patientInfoFragment).show(patientInfoFragment).commit();
+
+        int fragmentIndex = bundle.getInt("fragmentIndex");
+        switchFragment(lastShowFragment, fragmentIndex);
     }
 
 
@@ -150,7 +139,6 @@ public class BedInfoActivity extends FragmentActivity {
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
-
 
 
     public void refreshTheWeb(View view) {
