@@ -74,6 +74,10 @@ public class BedInfoActivity extends FragmentActivity {
         initView();
         initData(patientInfoBean);
         initFragments(bundle);
+
+        int fragmentIndex = bundle.getInt("fragmentIndex");
+        switchFragment(lastShowFragment, fragmentIndex);
+        bottomNavigationView.setSelectedItemId(bottomNavigationView.getMenu().getItem(fragmentIndex).getItemId());
     }
 
     private void initData(BedListResponseBean.PatientInfo patientInfoBean) {
@@ -99,13 +103,7 @@ public class BedInfoActivity extends FragmentActivity {
         fragments = new Fragment[]{patientInfoFragment, medicalOrderFragment, vitalSignFragment};
 
         lastShowFragment = 0;
-
-        getSupportFragmentManager().beginTransaction()
-                .add(R.id.fragment_container, patientInfoFragment).show(patientInfoFragment).commit();
-
-        int fragmentIndex = bundle.getInt("fragmentIndex");
-        switchFragment(lastShowFragment, fragmentIndex);
-        bottomNavigationView.setSelectedItemId(bottomNavigationView.getMenu().getItem(fragmentIndex).getItemId());
+        getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, patientInfoFragment).show(patientInfoFragment).commit();
     }
 
 
