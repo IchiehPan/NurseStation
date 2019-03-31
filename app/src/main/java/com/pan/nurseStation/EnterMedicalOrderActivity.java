@@ -327,6 +327,12 @@ public class EnterMedicalOrderActivity extends AppCompatActivity implements Comm
             EnjoinDoResponseBean responseBean = BeanKit.string2Bean(response, EnjoinDoResponseBean.class);
             if (responseBean.getRet() == Constants.MESSAGE_SUCCESS_CODE) {
                 Toast.makeText(this, getString(R.string.request_success_tip), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(this, BedInfoActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("patientInfo", JSON.toJSONString(data));
+                intent.putExtras(bundle);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
             } else {
                 Toast.makeText(this, getString(R.string.request_fail_tip), Toast.LENGTH_SHORT).show();
             }

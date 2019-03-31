@@ -15,6 +15,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.JSON;
 import com.pan.lib.util.BeanKit;
 import com.pan.nurseStation.adapter.SimpleSpinnerAdapter;
 import com.pan.nurseStation.animate.AnimateBusiness;
@@ -174,6 +175,12 @@ public class EnterVitalSignActivity extends AppCompatActivity {
         Log.i(TAG, "submitForm: isAssistedBreathe=" + isAssistedBreathe);
 
         Toast.makeText(this, getString(R.string.request_success_tip), Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, BedInfoActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("patientInfo", JSON.toJSONString(data));
+        intent.putExtras(bundle);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 
     public void backToList(View view) {

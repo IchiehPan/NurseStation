@@ -313,16 +313,7 @@ public class BedListActivity extends AppCompatActivity implements CommonView {
     public void clickInBedInfoActivity(BedListResponseBean.PatientInfo patientInfo) {
         Intent intent = new Intent(this, BedInfoActivity.class);
         Bundle bundle = new Bundle();
-
         bundle.putString("patientInfo", JSON.toJSONString(patientInfo));
-        bundle.putString("hos_number", patientInfo.getHos_number());
-        bundle.putString("name", patientInfo.getName());
-        bundle.putString("age", patientInfo.getAge());
-        bundle.putString("sex", patientInfo.getSex());
-        bundle.putString("bedId", patientInfo.getBed_id());
-        bundle.putString("level", patientInfo.getLevel());
-        bundle.putString("number", patientInfo.getNumber());
-        bundle.putString("department_id", patientInfo.getDepartment_id());
         intent.putExtras(bundle);
         startActivity(intent);
     }
