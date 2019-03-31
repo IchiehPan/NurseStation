@@ -54,6 +54,7 @@
                 android:text="@string/scan_success_tip"
                 android:textColor="@color/custom_white"
                 android:textSize="10sp"
+                android:visibility="invisible"
                 app:background_color="#68ce99"
                 app:corner_radius="14dp" />
 
