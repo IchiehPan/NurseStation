@@ -76,8 +76,6 @@ public class BedListActivity extends AppCompatActivity implements CommonView {
 
         resultReceiver = new ScanResultReceiver(this);
         registerReceiver(resultReceiver, new IntentFilter(com.bben.ydcf.scandome.Constants.DECODE_RESULT_FILTER));
-
-        showDialog("90254");
     }
 
 

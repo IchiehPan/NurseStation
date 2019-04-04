@@ -65,33 +65,53 @@ public class BedInfoActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bed_info);
 
+        initView();
+
         Bundle bundle = getIntent().getExtras();
-        if (bundle != null) {
-            String patientInfo = bundle.getString("patientInfo");
-            patientInfoBean = BeanKit.string2Bean(patientInfo, BedListResponseBean.PatientInfo.class);
+        if (bundle == null) {
+            return;
         }
 
-        initView();
+        String patientInfo = bundle.getString("patientInfo");
+        patientInfoBean = BeanKit.string2Bean(patientInfo, BedListResponseBean.PatientInfo.class);
         initData(patientInfoBean);
         initFragments(bundle);
-
         int fragmentIndex = bundle.getInt("fragmentIndex");
-        if (fragmentIndex != lastShowFragment) {
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            transaction.hide(fragments[lastShowFragment]);
-            transaction.show(fragments[fragmentIndex]).commitAllowingStateLoss();
-            bottomNavigationView.setSelectedItemId(bottomNavigationView.getMenu().getItem(fragmentIndex).getItemId());
+        if (fragmentIndex == lastShowFragment) {
+            return;
         }
+
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.hide(fragments[lastShowFragment]);
+        transaction.show(fragments[fragmentIndex]).commitAllowingStateLoss();
+
+        if (bottomNavigationView == null) {
+            return;
+        }
+        MenuItem menuItem = bottomNavigationView.getMenu().getItem(fragmentIndex);
+        if (menuItem == null) {
+            return;
+        }
+        bottomNavigationView.setSelectedItemId(menuItem.getItemId());
     }
 
     private void initData(BedListResponseBean.PatientInfo patientInfoBean) {
-        patientExampleInfo.setText(patientInfoBean.getBed_id() + " " + patientInfoBean.getName());
+        String bedId = "";
+        String name = "";
+        if (patientInfoBean != null) {
+            bedId = patientInfoBean.getBed_id();
+            name = patientInfoBean.getName();
+        }
+        patientExampleInfo.setText(bedId + " " + name);
     }
 
     private void initView() {
         patientExampleInfo = findViewById(R.id.patient_example_info);
         bottomNavigationView = findViewById(R.id.navigation);
-        bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        if (bottomNavigationView != null) {
+            bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        }
     }
 
     private void initFragments(Bundle bundle) {

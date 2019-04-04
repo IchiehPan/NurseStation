@@ -63,12 +63,15 @@ public class EnterVitalSignActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enter_vital_sign);
+        initView();
 
         Bundle bundle = getIntent().getExtras();
+        if(bundle == null){
+            Toast.makeText(this, getString(R.string.request_fail_tip), Toast.LENGTH_SHORT).show();
+            return;
+        }
         String patientInfo = bundle.getString("patientInfo");
         data = BeanKit.string2Bean(patientInfo, PatientDetailResponseBean.Data.class);
-
-        initView();
         initData(data);
     }
 

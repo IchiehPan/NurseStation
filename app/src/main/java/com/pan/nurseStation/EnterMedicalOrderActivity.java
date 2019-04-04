@@ -60,16 +60,20 @@ public class EnterMedicalOrderActivity extends AppCompatActivity implements Comm
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enter_medical_order);
-
-        Bundle bundle = getIntent().getExtras();
-        String patientInfo = bundle.getString("patientInfo");
-        data = BeanKit.string2Bean(patientInfo, PatientDetailResponseBean.Data.class);
+        initView();
 
         resultReceiver = new ScanResultReceiver(this);
         registerReceiver(resultReceiver, new IntentFilter(com.bben.ydcf.scandome.Constants.DECODE_RESULT_FILTER));
 
+        Bundle bundle = getIntent().getExtras();
+        if (bundle == null) {
+            Toast.makeText(this, getString(R.string.request_fail_tip), Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        String patientInfo = bundle.getString("patientInfo");
+        data = BeanKit.string2Bean(patientInfo, PatientDetailResponseBean.Data.class);
         checkedMap = new HashMap<>();
-        initView();
         initData(data);
     }
 
