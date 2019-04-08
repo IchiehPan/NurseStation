@@ -196,6 +196,41 @@ public class EnterVitalSignActivity extends AppCompatActivity {
 
         DBHisBusiness dbHisBusiness = new DBHisBusiness();
         SignsDoRequestBean requestBean = new SignsDoRequestBean();
+        SignsDoRequestBean.Info info = new SignsDoRequestBean.Info();
+        if (Objects.equals(temperatureType, "口表")) {
+            info.setTemp_type(String.valueOf(1));
+        }
+        if (Objects.equals(temperatureType, "掖表")) {
+            info.setTemp_type(String.valueOf(2));
+        }
+        if (Objects.equals(temperatureType, "肛表")) {
+            info.setTemp_type(String.valueOf(3));
+        }
+
+        if (Objects.equals(pulseType, "脉率")) {
+            info.setPulse_type(String.valueOf(1));
+        }
+        if (Objects.equals(pulseType, "心率")) {
+            info.setPulse_type(String.valueOf(2));
+        }
+
+        info.setTemperature(temperature);
+        info.setPulse(pulse);
+        info.setBreath(breathe);
+        info.setBlood_pressure(bloodPressure);
+        info.setStool_frequency(stoolFrequency);
+        info.setUrine_volume(urineVolume);
+        info.setInput_fluid_volume(inputVolume);
+        info.setWeight(weight);
+        info.setOther(other);
+
+        if (isAssistedBreathe) {
+            info.setBreath_type(String.valueOf(1));
+        } else {
+            info.setBreath_type(String.valueOf(0));
+        }
+
+
         dbHisBusiness.patientSignsDo(requestBean, response -> {
             SignsDoResponseBean responseBean = BeanKit.string2Bean(response, SignsDoResponseBean.class);
             if (responseBean.getRet() == Constants.MESSAGE_SUCCESS_CODE) {
