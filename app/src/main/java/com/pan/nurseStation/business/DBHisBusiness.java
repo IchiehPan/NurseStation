@@ -19,6 +19,7 @@ import com.pan.nurseStation.bean.request.EnjoinDoRequestBean;
 import com.pan.nurseStation.bean.request.LevelRequestBean;
 import com.pan.nurseStation.bean.request.LoginRequestBean;
 import com.pan.nurseStation.bean.request.PatientDetailRequestBean;
+import com.pan.nurseStation.bean.request.SignsDoRequestBean;
 import com.pan.nurseStation.bean.response.LevelResponseBean;
 import com.pan.nurseStation.bean.response.LoginResponseBean;
 
@@ -84,6 +85,15 @@ public class DBHisBusiness {
         params.put("ids", JSON.toJSONString(requestBean.getIds(), SerializerFeature.DisableCheckSpecialChar));
         Log.d(TAG, "patientEnjoinDo: params= " + params);
         params.put(Constants.SERVICE_PARAM, Constants.PATIENT_ENJOIN_DO_SERVICE);
+        StringRequest stringRequest = VolleyKit.newStringRequest(Request.Method.POST, Constants.URL, params, listener, errorListener);
+        mQueue.add(stringRequest);
+    }
+
+    public void patientSignsDo(SignsDoRequestBean requestBean, Response.Listener<String> listener, @Nullable Response.ErrorListener errorListener) {
+        Map<String, String> params = new HashMap<>();
+        params.put("info", JSON.toJSONString(requestBean.getInfo(), SerializerFeature.DisableCheckSpecialChar));
+        Log.d(TAG, "patientSignsDo: params= " + params);
+        params.put(Constants.SERVICE_PARAM, Constants.PATIENT_SIGNS_DO_SERVICE);
         StringRequest stringRequest = VolleyKit.newStringRequest(Request.Method.POST, Constants.URL, params, listener, errorListener);
         mQueue.add(stringRequest);
     }

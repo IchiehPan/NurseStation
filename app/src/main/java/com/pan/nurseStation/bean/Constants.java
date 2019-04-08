@@ -46,6 +46,11 @@ public class Constants {
      */
     public final static String PATIENT_ENJOIN_DO_SERVICE = "Patient.EnjoinDo";
 
+    /**
+     * 体征信息提交接口服务
+     */
+    public final static String PATIENT_SIGNS_DO_SERVICE = "Patient.SignsDo";
+
     public final static int ORDER_STATUS_WAIT_MEDICAL = 0;
     public final static int ORDER_STATUS_WAIT_EXEC = 1;
     public final static int ORDER_STATUS_DO_EXEC = 2;

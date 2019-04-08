@@ -37,7 +37,7 @@ public class BedTypeAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        return 0;
+        return position;
     }
 
     @Override
@@ -45,22 +45,22 @@ public class BedTypeAdapter extends BaseAdapter {
         LinearLayout linearLayout;
         if (convertView == null) {
             linearLayout = (LinearLayout) View.inflate(mContext, R.layout.item_simple_example_icon, null);
-            ImageView imageView = linearLayout.findViewById(R.id.head_iv);
-            TextView headTV = linearLayout.findViewById(R.id.head1);
-            TextView contentTV = linearLayout.findViewById(R.id.content1);
-
-            LevelResponseBean.Data data = mLevelDataList.get(position);
-            String levelCode = data.getCode();
-
-            GradientDrawable myGrad = (GradientDrawable) imageView.getBackground();
-            if (DBHisBusiness.bedTypeColorMap.containsKey(levelCode)) {
-                myGrad.setColor(DBHisBusiness.bedTypeColorMap.get(levelCode));
-            }
-            headTV.setText(data.getName());
-            contentTV.setText(data.getTotal());
         } else {
             linearLayout = (LinearLayout) convertView;
         }
+        ImageView imageView = linearLayout.findViewById(R.id.head_iv);
+        TextView headTV = linearLayout.findViewById(R.id.head1);
+        TextView contentTV = linearLayout.findViewById(R.id.content1);
+
+        LevelResponseBean.Data data = mLevelDataList.get(position);
+        String levelCode = data.getCode();
+
+        GradientDrawable myGrad = (GradientDrawable) imageView.getBackground();
+        if (DBHisBusiness.bedTypeColorMap.containsKey(levelCode)) {
+            myGrad.setColor(DBHisBusiness.bedTypeColorMap.get(levelCode));
+        }
+        headTV.setText(data.getName());
+        contentTV.setText(data.getTotal());
         return linearLayout;
     }
 }

@@ -18,6 +18,7 @@
     <color name="bed_type_color_cyanine">#1dcdcd</color>
     <color name="bed_type_color_green">#03ba7e</color>
     <color name="bed_type_color_orange">#ff9b6a</color>
+    <color name="bed_type_color_brown">#895e37</color>
 
     <array name="bed_type_color">
         <!--护理级别的颜色-->
@@ -27,5 +28,6 @@
         <item>@color/bed_type_color_cyanine</item>
         <item>@color/bed_type_color_green</item>
         <item>@color/bed_type_color_orange</item>
+        <item>@color/bed_type_color_brown</item>
     </array>
 </resources>

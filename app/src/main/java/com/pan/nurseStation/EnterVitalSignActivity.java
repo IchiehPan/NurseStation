@@ -21,7 +21,10 @@ import com.pan.lib.util.StringKit;
 import com.pan.nurseStation.adapter.SimpleSpinnerAdapter;
 import com.pan.nurseStation.animate.AnimateBusiness;
 import com.pan.nurseStation.bean.Constants;
+import com.pan.nurseStation.bean.request.SignsDoRequestBean;
 import com.pan.nurseStation.bean.response.PatientDetailResponseBean;
+import com.pan.nurseStation.bean.response.SignsDoResponseBean;
+import com.pan.nurseStation.business.DBHisBusiness;
 import com.pan.nurseStation.widget.button.RoundButton;
 import com.pan.nurseStation.widget.dialog.ScanErrorDialog;
 import com.pan.nurseStation.widget.dialog.ScanInputDialog;
@@ -66,7 +69,7 @@ public class EnterVitalSignActivity extends AppCompatActivity {
         initView();
 
         Bundle bundle = getIntent().getExtras();
-        if(bundle == null){
+        if (bundle == null) {
             Toast.makeText(this, getString(R.string.request_fail_tip), Toast.LENGTH_SHORT).show();
             return;
         }
@@ -191,14 +194,25 @@ public class EnterVitalSignActivity extends AppCompatActivity {
         Log.i(TAG, "submitForm: other=" + other);
         Log.i(TAG, "submitForm: isAssistedBreathe=" + isAssistedBreathe);
 
-        Toast.makeText(this, getString(R.string.request_success_tip), Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(this, BedInfoActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putString("patientInfo", JSON.toJSONString(data));
-        bundle.putInt("fragmentIndex", BedInfoActivity.FRAG_VITAL_SIGN_INDEX);
-        intent.putExtras(bundle);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
+        DBHisBusiness dbHisBusiness = new DBHisBusiness();
+        SignsDoRequestBean requestBean = new SignsDoRequestBean();
+        dbHisBusiness.patientSignsDo(requestBean, response -> {
+            SignsDoResponseBean responseBean = BeanKit.string2Bean(response, SignsDoResponseBean.class);
+            if (responseBean.getRet() == Constants.MESSAGE_SUCCESS_CODE) {
+                Toast.makeText(this, getString(R.string.request_success_tip), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(this, BedInfoActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("patientInfo", JSON.toJSONString(data));
+                bundle.putInt("fragmentIndex", BedInfoActivity.FRAG_VITAL_SIGN_INDEX);
+                intent.putExtras(bundle);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+            } else {
+                Toast.makeText(this, getString(R.string.request_fail_tip), Toast.LENGTH_SHORT).show();
+            }
+        }, error -> {
+            Toast.makeText(this, getString(R.string.request_fail_tip), Toast.LENGTH_SHORT).show();
+        });
     }
 
     public void inBedListActivity(View view) {
