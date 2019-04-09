@@ -40,9 +40,17 @@ public class SignsDoRequestBean {
          */
         private String temperature = "";
         /**
-         * 脉搏类型，1:脉率;2:心率
+         * 脉搏类型，0:自然脉率;1:脉搏短绌
          */
         private String pulse_type = "";
+        /**
+         * 心率类型，0:自然心率;1:起搏器
+         */
+        private String heart_rate_type = "";
+        /**
+         * 心率
+         */
+        private String heart_rate = "";
         /**
          * 脉搏
          */
@@ -214,6 +222,22 @@ public class SignsDoRequestBean {
 
         public String getEtime() {
             return etime;
+        }
+
+        public void setHeart_rate(String heart_rate) {
+            this.heart_rate = heart_rate;
+        }
+
+        public String getHeart_rate() {
+            return heart_rate;
+        }
+
+        public void setHeart_rate_type(String heart_rate_type) {
+            this.heart_rate_type = heart_rate_type;
+        }
+
+        public String getHeart_rate_type() {
+            return heart_rate_type;
         }
     }
 }

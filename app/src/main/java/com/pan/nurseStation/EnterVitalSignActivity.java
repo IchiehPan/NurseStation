@@ -37,11 +37,10 @@ public class EnterVitalSignActivity extends AppCompatActivity {
     private Spinner timeSpinner;
     private ScrollView scrollView;
     private RadioGroup temperatureGroup;
-    private RadioGroup pulseGroup;
     private RadioButton temperatureButton;
-    private RadioButton pulseButton;
     private EditText temperatureEditText;
     private EditText pulseEditText;
+    private EditText heartEditText;
     private EditText breatheEditText;
     private EditText bloodPressureEditText;
     private EditText stoolFrequencyEditText;
@@ -50,6 +49,8 @@ public class EnterVitalSignActivity extends AppCompatActivity {
     private EditText weightEditText;
     private EditText otherEditText;
     private CheckBox assistedBreatheCheckBox;
+    private CheckBox shortPulseCheckBox;
+    private CheckBox withPacemakerCheckBox;
     private TextView patientName;
     private ImageView patientSex;
     private TextView patientAge;
@@ -113,9 +114,9 @@ public class EnterVitalSignActivity extends AppCompatActivity {
         scrollView.addView(View.inflate(this, R.layout.view_form_table, null));
 
         temperatureGroup = findViewById(R.id.radio_temperature);
-        pulseGroup = findViewById(R.id.pulse_radio);
         temperatureEditText = findViewById(R.id.temperature);
         pulseEditText = findViewById(R.id.pulse);
+        heartEditText = findViewById(R.id.heart);
         breatheEditText = findViewById(R.id.breathe);
         bloodPressureEditText = findViewById(R.id.blood_pressure);
         stoolFrequencyEditText = findViewById(R.id.stool_frequency);
@@ -124,6 +125,8 @@ public class EnterVitalSignActivity extends AppCompatActivity {
         weightEditText = findViewById(R.id.weight);
         otherEditText = findViewById(R.id.other);
         assistedBreatheCheckBox = findViewById(R.id.assisted_breathe);
+        shortPulseCheckBox = findViewById(R.id.short_pulse);
+        withPacemakerCheckBox = findViewById(R.id.with_pacemaker);
 
         patientName = findViewById(R.id.patient_name);
         patientSex = findViewById(R.id.patient_sex);
@@ -134,13 +137,26 @@ public class EnterVitalSignActivity extends AppCompatActivity {
 
         successButtonBar = findViewById(R.id.success_button_bar);
         scanSuccessTip = findViewById(R.id.scan_success_tip);
+
+
+        // 这里有一个非空复制的操作
+        pulseEditText.setOnFocusChangeListener((View view, boolean b) -> {
+            if (b && !StringKit.isValid(heartEditText.getText().toString())) {
+                heartEditText.setText(pulseEditText.getText().toString());
+            }
+        });
+        heartEditText.setOnFocusChangeListener((View view, boolean b) -> {
+            if (b && !StringKit.isValid(pulseEditText.getText().toString())) {
+                pulseEditText.setText(heartEditText.getText().toString());
+            }
+        });
     }
 
     public void resetForm(View view) {
         temperatureGroup.clearCheck();
-        pulseGroup.clearCheck();
         temperatureEditText.setText("");
         pulseEditText.setText("");
+        heartEditText.setText("");
         breatheEditText.setText("");
         bloodPressureEditText.setText("");
         stoolFrequencyEditText.setText("");
@@ -149,22 +165,23 @@ public class EnterVitalSignActivity extends AppCompatActivity {
         weightEditText.setText("");
         otherEditText.setText("");
         assistedBreatheCheckBox.setChecked(false);
+        shortPulseCheckBox.setChecked(false);
+        withPacemakerCheckBox.setChecked(false);
     }
 
     public void submitForm(View view) {
         temperatureButton = findViewById(temperatureGroup.getCheckedRadioButtonId());
-        pulseButton = findViewById(pulseGroup.getCheckedRadioButtonId());
 
-        if (temperatureButton == null || pulseButton == null) {
+        if (temperatureButton == null) {
             Toast.makeText(this, getString(R.string.input_not_tip), Toast.LENGTH_SHORT).show();
             return;
         }
 
         //
         String temperatureType = temperatureButton.getText().toString();
-        String pulseType = pulseButton.getText().toString();
         String temperature = temperatureEditText.getText().toString();
         String pulse = pulseEditText.getText().toString();
+        String heart = heartEditText.getText().toString();
         String breathe = breatheEditText.getText().toString();
         String bloodPressure = bloodPressureEditText.getText().toString();
         String stoolFrequency = stoolFrequencyEditText.getText().toString();
@@ -173,16 +190,17 @@ public class EnterVitalSignActivity extends AppCompatActivity {
         String weight = weightEditText.getText().toString();
         String other = otherEditText.getText().toString();
 
-        if (!StringKit.isValid(temperature) || !StringKit.isValid(pulse) || !StringKit.isValid(breathe) || !StringKit.isValid(bloodPressure)
+        if (!StringKit.isValid(temperature) || !StringKit.isValid(pulse) || !StringKit.isValid(heart) || !StringKit.isValid(breathe) || !StringKit.isValid(bloodPressure)
                 || !StringKit.isValid(stoolFrequency) || !StringKit.isValid(urineVolume) || !StringKit.isValid(inputVolume) || !StringKit.isValid(weight) || !StringKit.isValid(other)) {
             Toast.makeText(this, getString(R.string.input_not_tip), Toast.LENGTH_SHORT).show();
             return;
         }
 
         boolean isAssistedBreathe = assistedBreatheCheckBox.isChecked();
+        boolean shortPulse = shortPulseCheckBox.isChecked();
+        boolean withPacemaker = withPacemakerCheckBox.isChecked();
 
         Log.i(TAG, "submitForm: temperatureType=" + temperatureType);
-        Log.i(TAG, "submitForm: pulseType=" + pulseType);
         Log.i(TAG, "submitForm: temperature=" + temperature);
         Log.i(TAG, "submitForm: pulse=" + pulse);
         Log.i(TAG, "submitForm: breathe=" + breathe);
@@ -193,6 +211,8 @@ public class EnterVitalSignActivity extends AppCompatActivity {
         Log.i(TAG, "submitForm: weight=" + weight);
         Log.i(TAG, "submitForm: other=" + other);
         Log.i(TAG, "submitForm: isAssistedBreathe=" + isAssistedBreathe);
+        Log.i(TAG, "submitForm: shortPulse=" + shortPulse);
+        Log.i(TAG, "submitForm: withPacemaker=" + withPacemaker);
 
         DBHisBusiness dbHisBusiness = new DBHisBusiness();
         SignsDoRequestBean requestBean = new SignsDoRequestBean();
@@ -207,15 +227,20 @@ public class EnterVitalSignActivity extends AppCompatActivity {
             info.setTemp_type(String.valueOf(3));
         }
 
-        if (Objects.equals(pulseType, "脉率")) {
-            info.setPulse_type(String.valueOf(1));
+        info.setTemperature(temperature);
+        if (withPacemaker) {
+            info.setHeart_rate_type(String.valueOf(1));
+        } else {
+            info.setHeart_rate_type(String.valueOf(0));
         }
-        if (Objects.equals(pulseType, "心率")) {
-            info.setPulse_type(String.valueOf(2));
+        if (shortPulse) {
+            info.setPulse_type(String.valueOf(1));
+        } else {
+            info.setPulse_type(String.valueOf(0));
         }
 
-        info.setTemperature(temperature);
         info.setPulse(pulse);
+        info.setHeart_rate(heart);
         info.setBreath(breathe);
         info.setBlood_pressure(bloodPressure);
         info.setStool_frequency(stoolFrequency);
@@ -229,7 +254,6 @@ public class EnterVitalSignActivity extends AppCompatActivity {
         } else {
             info.setBreath_type(String.valueOf(0));
         }
-
 
         dbHisBusiness.patientSignsDo(requestBean, response -> {
             SignsDoResponseBean responseBean = BeanKit.string2Bean(response, SignsDoResponseBean.class);

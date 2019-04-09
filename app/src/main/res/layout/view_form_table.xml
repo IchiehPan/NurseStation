@@ -94,58 +94,6 @@
         </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/form_tab_height"
-        android:layout_margin="@dimen/form_margin_size"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="@dimen/form_tab_width"
-            android:layout_height="match_parent"
-            android:background="@color/custom_white"
-            android:gravity="center"
-            android:text="@string/form_pulse_type"
-            android:textColor="@color/form_text_color"
-            android:textSize="@dimen/form_text_size" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="@dimen/form_margin_size"
-            android:background="@color/custom_white">
-
-            <RadioGroup
-                android:id="@+id/pulse_radio"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <RadioButton
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/form_pulse_type_pulse"
-                    android:textColor="@color/form_text_color"
-                    android:textSize="@dimen/form_text_size" />
-
-                <RadioButton
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/form_pulse_type_heart"
-                    android:textColor="@color/form_text_color"
-                    android:textSize="@dimen/form_text_size" />
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
-            </RadioGroup>
-
-        </LinearLayout>
-    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -163,9 +111,10 @@
             android:textSize="@dimen/form_text_size" />
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginStart="@dimen/form_margin_size"
+            android:layout_weight="1"
             android:background="@color/custom_white">
 
             <EditText
@@ -178,6 +127,73 @@
                 android:textColor="@color/form_text_color"
                 android:textSize="@dimen/form_text_size" />
 
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="@dimen/form_checkbox_width"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/form_margin_size"
+            android:background="@color/custom_white"
+            android:gravity="center_vertical">
+
+            <CheckBox
+                android:id="@+id/short_pulse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/form_short_pulse"
+                android:textColor="@color/form_text_color"
+                android:textSize="@dimen/form_text_size" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/form_tab_height"
+        android:layout_margin="@dimen/form_margin_size"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="@dimen/form_tab_width"
+            android:layout_height="match_parent"
+            android:background="@color/custom_white"
+            android:gravity="center"
+            android:text="@string/form_heart"
+            android:textColor="@color/form_text_color"
+            android:textSize="@dimen/form_text_size" />
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/form_margin_size"
+            android:layout_weight="1"
+            android:background="@color/custom_white">
+
+            <EditText
+                android:id="@+id/heart"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/form_text_margin"
+                android:background="@null"
+                android:hint="@string/form_hint_text"
+                android:textColor="@color/form_text_color"
+                android:textSize="@dimen/form_text_size" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="@dimen/form_checkbox_width"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/form_margin_size"
+            android:background="@color/custom_white"
+            android:gravity="center_vertical">
+
+            <CheckBox
+                android:id="@+id/with_pacemaker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/form_with_pacemaker"
+                android:textColor="@color/form_text_color"
+                android:textSize="@dimen/form_text_size" />
         </LinearLayout>
     </LinearLayout>
 
@@ -195,7 +211,6 @@
             android:text="@string/form_breathe"
             android:textColor="@color/form_text_color"
             android:textSize="@dimen/form_text_size" />
-
 
         <LinearLayout
             android:layout_width="0dp"
@@ -220,7 +235,7 @@
             android:layout_height="match_parent"
             android:layout_marginStart="@dimen/form_margin_size"
             android:background="@color/custom_white"
-            android:gravity="center">
+            android:gravity="center_vertical">
 
             <CheckBox
                 android:id="@+id/assisted_breathe"
