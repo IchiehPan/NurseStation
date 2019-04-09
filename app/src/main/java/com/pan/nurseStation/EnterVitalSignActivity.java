@@ -141,12 +141,12 @@ public class EnterVitalSignActivity extends AppCompatActivity {
 
         // 这里有一个非空复制的操作
         pulseEditText.setOnFocusChangeListener((View view, boolean b) -> {
-            if (b && !StringKit.isValid(heartEditText.getText().toString())) {
+            if (!b && !StringKit.isValid(heartEditText.getText().toString())) {
                 heartEditText.setText(pulseEditText.getText().toString());
             }
         });
         heartEditText.setOnFocusChangeListener((View view, boolean b) -> {
-            if (b && !StringKit.isValid(pulseEditText.getText().toString())) {
+            if (!b && !StringKit.isValid(pulseEditText.getText().toString())) {
                 pulseEditText.setText(heartEditText.getText().toString());
             }
         });
@@ -254,6 +254,8 @@ public class EnterVitalSignActivity extends AppCompatActivity {
         } else {
             info.setBreath_type(String.valueOf(0));
         }
+
+        requestBean.setInfo(info);
 
         dbHisBusiness.patientSignsDo(requestBean, response -> {
             SignsDoResponseBean responseBean = BeanKit.string2Bean(response, SignsDoResponseBean.class);
