@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -62,6 +63,9 @@ public class EnterVitalSignActivity extends AppCompatActivity {
     private TextView scanSuccessTip;
     private ScanErrorDialog errorDialog;
     private PatientDetailResponseBean.Data data;
+
+    private String date;
+    private String time;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,6 +141,34 @@ public class EnterVitalSignActivity extends AppCompatActivity {
 
         successButtonBar = findViewById(R.id.success_button_bar);
         scanSuccessTip = findViewById(R.id.scan_success_tip);
+
+        dateSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                TextView textView = view.findViewById(android.R.id.text1);
+                if (textView != null) {
+                    date = textView.getText().toString();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
+
+        timeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                TextView textView = view.findViewById(android.R.id.text1);
+                if (textView != null) {
+                    time = textView.getText().toString();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
 
 
         // 这里有一个非空复制的操作
@@ -248,6 +280,11 @@ public class EnterVitalSignActivity extends AppCompatActivity {
         info.setInput_fluid_volume(inputVolume);
         info.setWeight(weight);
         info.setOther(other);
+
+        info.setEday(date);
+        info.setEtime(time);
+        info.setHos_number(data.getHos_number());
+        info.setNumber(DBHisBusiness.loginBean.getNumber());
 
         if (isAssistedBreathe) {
             info.setBreath_type(String.valueOf(1));
