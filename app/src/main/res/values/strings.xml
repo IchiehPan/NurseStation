@@ -124,4 +124,7 @@
     <string name="form_input_volume">输入液量(ml)</string>
     <string name="form_weight">体重(kg)</string>
     <string name="form_other">其他</string>
+
+    <string name="form_date">2018-02-01</string>
+    <string name="form_time">08：00</string>
 </resources>

@@ -1,6 +1,9 @@
 package com.pan.nurseStation.bean;
 
 public class Constants {
+    /**
+     * 动画时间.单位ms
+     */
     public final static long SLIDE_DURATION_MS = 500;
 
     public final static int MESSAGE_SUCCESS_CODE = 0;

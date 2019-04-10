@@ -23,8 +23,6 @@
         <activity
             android:name=".EnterVitalSignActivity"
             android:windowSoftInputMode="adjustPan">
-
-
         </activity>
         <activity android:name=".EnterMedicalOrderActivity">
 

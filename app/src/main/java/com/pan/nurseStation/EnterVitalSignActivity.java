@@ -1,25 +1,27 @@
 package com.pan.nurseStation;
 
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.ScrollView;
-import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.pan.lib.util.BeanKit;
+import com.pan.lib.util.DateKit;
 import com.pan.lib.util.StringKit;
-import com.pan.nurseStation.adapter.SimpleSpinnerAdapter;
 import com.pan.nurseStation.animate.AnimateBusiness;
 import com.pan.nurseStation.bean.Constants;
 import com.pan.nurseStation.bean.request.SignsDoRequestBean;
@@ -30,12 +32,11 @@ import com.pan.nurseStation.widget.button.RoundButton;
 import com.pan.nurseStation.widget.dialog.ScanErrorDialog;
 import com.pan.nurseStation.widget.dialog.ScanInputDialog;
 
+import java.util.Calendar;
 import java.util.Objects;
 
 public class EnterVitalSignActivity extends AppCompatActivity {
     private static final String TAG = EnterVitalSignActivity.class.getSimpleName();
-    private Spinner dateSpinner;
-    private Spinner timeSpinner;
     private ScrollView scrollView;
     private RadioGroup temperatureGroup;
     private RadioButton temperatureButton;
@@ -63,6 +64,8 @@ public class EnterVitalSignActivity extends AppCompatActivity {
     private TextView scanSuccessTip;
     private ScanErrorDialog errorDialog;
     private PatientDetailResponseBean.Data data;
+    private TextView dateTextView;
+    private TextView timeTextView;
 
     private String date;
     private String time;
@@ -95,24 +98,9 @@ public class EnterVitalSignActivity extends AppCompatActivity {
         hosNumber.setText(data.getHos_number());
         departmentName.setText(data.getDepartment_name());
         bedId.setText(data.getBed_id());
-
-
-        String[] dateData = {"2018-02-01", "2018-02-02"};
-        SimpleSpinnerAdapter<String> arrayAdapter1 = new SimpleSpinnerAdapter<>(this, R.layout.item_simple_spinner, android.R.id.text1, dateData);
-        arrayAdapter1.setDropDownViewResource(R.layout.item_simple_spinner_dropdown);
-        arrayAdapter1.setSpaceDistance(30);
-        dateSpinner.setAdapter(arrayAdapter1);
-
-        String[] timeData = {"08：00", "10：00"};
-        SimpleSpinnerAdapter<String> arrayAdapter2 = new SimpleSpinnerAdapter<>(this, R.layout.item_simple_spinner, android.R.id.text1, timeData);
-        arrayAdapter2.setDropDownViewResource(R.layout.item_simple_spinner_dropdown);
-        arrayAdapter2.setSpaceDistance(30);
-        timeSpinner.setAdapter(arrayAdapter2);
     }
 
     private void initView() {
-        dateSpinner = findViewById(R.id.date_spinner);
-        timeSpinner = findViewById(R.id.time_spinner);
         scrollView = findViewById(R.id.scroll_view);
 
         scrollView.addView(View.inflate(this, R.layout.view_form_table, null));
@@ -142,32 +130,29 @@ public class EnterVitalSignActivity extends AppCompatActivity {
         successButtonBar = findViewById(R.id.success_button_bar);
         scanSuccessTip = findViewById(R.id.scan_success_tip);
 
-        dateSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                TextView textView = view.findViewById(android.R.id.text1);
-                if (textView != null) {
-                    date = textView.getText().toString();
-                }
-            }
+        dateTextView = findViewById(R.id.date_text);
+        timeTextView = findViewById(R.id.time_text);
 
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-            }
+        Calendar calendar = Calendar.getInstance();
+        dateTextView.setText(DateKit.formatDate(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)));
+        timeTextView.setText(DateKit.formatTime(calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE)));
+
+        //获取系统的日期
+        dateTextView.setOnClickListener(view -> {
+            DatePickerDialog dateDialog = new DatePickerDialog(this, (DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) -> {
+                date = DateKit.formatDate(year, monthOfYear, dayOfMonth);
+                dateTextView.setText(date);
+            }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+            dateDialog.show();
         });
 
-        timeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                TextView textView = view.findViewById(android.R.id.text1);
-                if (textView != null) {
-                    time = textView.getText().toString();
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-            }
+        //获取系统时间
+        timeTextView.setOnClickListener(view -> {
+            TimePickerDialog timeDialog = new TimePickerDialog(this, (TimePicker timePicker, int hourOfDay, int minute) -> {
+                time = DateKit.formatTime(hourOfDay, minute);
+                timeTextView.setText(time);
+            }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true);
+            timeDialog.show();
         });
 
 
