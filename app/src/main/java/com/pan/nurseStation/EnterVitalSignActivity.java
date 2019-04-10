@@ -242,7 +242,7 @@ public class EnterVitalSignActivity extends AppCompatActivity {
         String other = otherEditText.getText().toString();
         String skinTest = skinTestEditText.getText().toString();
 
-        if (!StringKit.isValid(temperature) || !StringKit.isValid(pulse) || !StringKit.isValid(heart) || !StringKit.isValid(breathe) || !StringKit.isValid(bloodPressure)
+        if (!StringKit.isValid(temperature) || !StringKit.isValid(breathe) || !StringKit.isValid(bloodPressure)
                 || !StringKit.isValid(stoolFrequency) || !StringKit.isValid(urineVolume) || !StringKit.isValid(inputVolume) || !StringKit.isValid(outputVolume)
                 || !StringKit.isValid(weight) || !StringKit.isValid(height) || !StringKit.isValid(skinTest) || !StringKit.isValid(other)) {
             Toast.makeText(this, getString(R.string.input_not_tip), Toast.LENGTH_SHORT).show();
@@ -286,13 +286,25 @@ public class EnterVitalSignActivity extends AppCompatActivity {
 
         if (Objects.equals(pulseType, getString(R.string.form_pulse_type_pulse))) {
             info.setPulse(pulse);
+            if (!StringKit.isValid(pulse)) {
+                Toast.makeText(this, getString(R.string.input_not_tip), Toast.LENGTH_SHORT).show();
+                return;
+            }
         }
         if (Objects.equals(pulseType, getString(R.string.form_pulse_type_heart))) {
             info.setHeart_rate(heart);
+            if (!StringKit.isValid(heart)) {
+                Toast.makeText(this, getString(R.string.input_not_tip), Toast.LENGTH_SHORT).show();
+                return;
+            }
         }
         if (Objects.equals(pulseType, getString(R.string.form_pulse_type_all))) {
             info.setPulse(pulse);
             info.setHeart_rate(heart);
+            if (!StringKit.isValid(pulse) || !StringKit.isValid(heart)) {
+                Toast.makeText(this, getString(R.string.input_not_tip), Toast.LENGTH_SHORT).show();
+                return;
+            }
         }
 
         info.setBreath(breathe);
