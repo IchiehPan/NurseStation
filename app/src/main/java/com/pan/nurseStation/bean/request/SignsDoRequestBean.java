@@ -40,13 +40,13 @@ public class SignsDoRequestBean {
          */
         private String temperature = "";
         /**
-         * 脉搏类型，0:自然脉率;1:脉搏短绌
+         * 是否物理降温，0：否；1：是
+         */
+        private String is_pcool = "";
+        /**
+         * 脉搏类型，1:脉率;2:心率；3：脉率+心率
          */
         private String pulse_type = "";
-        /**
-         * 心率类型，0:自然心率;1:起搏器
-         */
-        private String heart_rate_type = "";
         /**
          * 心率
          */
@@ -76,17 +76,29 @@ public class SignsDoRequestBean {
          */
         private String urine_volume = "";
         /**
-         * 输入液量
+         * 总入液量
          */
         private String input_fluid_volume = "";
+        /**
+         * 总出液量
+         */
+        private String output_fluid_volume = "";
         /**
          * 体重
          */
         private String weight = "";
         /**
-         * 其他
+         * 身高
          */
-        private String other = "";
+        private String height = "";
+        /**
+         * 皮试
+         */
+        private String skin_test = "";
+        /**
+         * 备注
+         */
+        private String remark = "";
         /**
          * 录入日期，例：2018.05.07
          */
@@ -200,12 +212,44 @@ public class SignsDoRequestBean {
             return weight;
         }
 
-        public void setOther(String other) {
-            this.other = other;
+        public String getIs_pcool() {
+            return is_pcool;
         }
 
-        public String getOther() {
-            return other;
+        public void setIs_pcool(String is_pcool) {
+            this.is_pcool = is_pcool;
+        }
+
+        public String getOutput_fluid_volume() {
+            return output_fluid_volume;
+        }
+
+        public void setOutput_fluid_volume(String output_fluid_volume) {
+            this.output_fluid_volume = output_fluid_volume;
+        }
+
+        public String getHeight() {
+            return height;
+        }
+
+        public void setHeight(String height) {
+            this.height = height;
+        }
+
+        public String getSkin_test() {
+            return skin_test;
+        }
+
+        public void setSkin_test(String skin_test) {
+            this.skin_test = skin_test;
+        }
+
+        public String getRemark() {
+            return remark;
+        }
+
+        public void setRemark(String remark) {
+            this.remark = remark;
         }
 
         public void setEday(String eday) {
@@ -232,12 +276,5 @@ public class SignsDoRequestBean {
             return heart_rate;
         }
 
-        public void setHeart_rate_type(String heart_rate_type) {
-            this.heart_rate_type = heart_rate_type;
-        }
-
-        public String getHeart_rate_type() {
-            return heart_rate_type;
-        }
     }
 }

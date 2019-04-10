@@ -108,22 +108,31 @@
 
     <string name="form_hint_text">请填写</string>
     <string name="form_temperature_type">体温类型</string>
+    <string name="form_pulse_type">脉搏类型</string>
     <string name="form_temperature_type_mouth">口表</string>
     <string name="form_temperature_type_underarm">腋表</string>
     <string name="form_temperature_type_anus">肛表</string>
-    <string name="form_temperature">体温(℃)</string>
-    <string name="form_pulse">脉搏(次/分)</string>
+    <string name="form_temperature">体温\n(℃)</string>
+    <string name="form_physical_cooling">物理降温</string>
+    <string name="form_pulse">脉搏\n(次/分)</string>
     <string name="form_short_pulse">脉搏短绌</string>
-    <string name="form_heart">心率(次/分)</string>
+    <string name="form_heart">心率\n(次/分)</string>
     <string name="form_with_pacemaker">起搏器</string>
-    <string name="form_breathe">呼吸(次/分)</string>
+    <string name="form_breathe">呼吸\n(次/分)</string>
     <string name="form_assisted_breathe">辅助呼吸</string>
-    <string name="form_blood_pressure">血压(mmHg)</string>
-    <string name="form_stool_frequency">大便次数(次)</string>
-    <string name="form_urine_volume">尿量(ml)</string>
-    <string name="form_input_volume">输入液量(ml)</string>
-    <string name="form_weight">体重(kg)</string>
-    <string name="form_other">其他</string>
+    <string name="form_blood_pressure">血压\n(mmHg)</string>
+    <string name="form_stool_frequency">大便次数\n(次)</string>
+    <string name="form_urine_volume">尿量\n(ml)</string>
+    <string name="form_input_volume">总入液量\n(ml)</string>
+    <string name="form_output_volume">总出液量\n(ml)</string>
+    <string name="form_weight">体重\n(kg)</string>
+    <string name="form_height">身高\n(cm)</string>
+    <string name="form_skin_test">皮试</string>
+    <string name="form_other">备注</string>
+    <string name="form_pulse_type_pulse">脉率</string>
+    <string name="form_pulse_type_heart">心率</string>
+    <string name="form_pulse_type_all">脉率+心率</string>
+
 
     <string name="form_date">2018-02-01</string>
     <string name="form_time">08：00</string>

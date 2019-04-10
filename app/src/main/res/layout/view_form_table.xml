@@ -76,9 +76,10 @@
             android:textSize="@dimen/form_text_size" />
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginStart="@dimen/form_margin_size"
+            android:layout_weight="1"
             android:background="@color/custom_white">
 
             <EditText
@@ -90,7 +91,79 @@
                 android:hint="@string/form_hint_text"
                 android:textColor="@color/form_text_color"
                 android:textSize="@dimen/form_text_size" />
+        </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="@dimen/form_checkbox_width"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/form_margin_size"
+            android:background="@color/custom_white"
+            android:gravity="center_vertical">
+
+            <CheckBox
+                android:id="@+id/physical_cooling"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/form_physical_cooling"
+                android:textColor="@color/form_text_color"
+                android:textSize="@dimen/form_text_size" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/form_tab_height"
+        android:layout_margin="@dimen/form_margin_size"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="@dimen/form_tab_width"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_corner_fill_top_left_white"
+            android:gravity="center"
+            android:text="@string/form_pulse_type"
+            android:textColor="@color/form_text_color"
+            android:textSize="@dimen/form_text_size" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/form_margin_size"
+            android:background="@drawable/bg_corner_fill_top_right_white"
+            android:orientation="horizontal">
+
+            <RadioGroup
+                android:id="@+id/radio_pulse"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/form_pulse_type_pulse"
+                    android:textColor="@color/form_text_color"
+                    android:textSize="@dimen/form_text_size" />
+
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/form_pulse_type_heart"
+                    android:textColor="@color/form_text_color"
+                    android:textSize="@dimen/form_text_size" />
+
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/form_pulse_type_all"
+                    android:textColor="@color/form_text_color"
+                    android:textSize="@dimen/form_text_size" />
+            </RadioGroup>
         </LinearLayout>
     </LinearLayout>
 
@@ -111,10 +184,9 @@
             android:textSize="@dimen/form_text_size" />
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="@dimen/form_margin_size"
-            android:layout_weight="1"
             android:background="@color/custom_white">
 
             <EditText
@@ -129,21 +201,6 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="@dimen/form_checkbox_width"
-            android:layout_height="match_parent"
-            android:layout_marginStart="@dimen/form_margin_size"
-            android:background="@color/custom_white"
-            android:gravity="center_vertical">
-
-            <CheckBox
-                android:id="@+id/short_pulse"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/form_short_pulse"
-                android:textColor="@color/form_text_color"
-                android:textSize="@dimen/form_text_size" />
-        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -163,10 +220,9 @@
 
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="@dimen/form_margin_size"
-            android:layout_weight="1"
             android:background="@color/custom_white">
 
             <EditText
@@ -176,22 +232,6 @@
                 android:layout_marginStart="@dimen/form_text_margin"
                 android:background="@null"
                 android:hint="@string/form_hint_text"
-                android:textColor="@color/form_text_color"
-                android:textSize="@dimen/form_text_size" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="@dimen/form_checkbox_width"
-            android:layout_height="match_parent"
-            android:layout_marginStart="@dimen/form_margin_size"
-            android:background="@color/custom_white"
-            android:gravity="center_vertical">
-
-            <CheckBox
-                android:id="@+id/with_pacemaker"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/form_with_pacemaker"
                 android:textColor="@color/form_text_color"
                 android:textSize="@dimen/form_text_size" />
         </LinearLayout>
@@ -297,10 +337,9 @@
             android:textSize="@dimen/form_text_size" />
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="@dimen/form_margin_size"
-            android:layout_weight="1"
             android:background="@color/custom_white">
 
             <EditText
@@ -313,6 +352,14 @@
                 android:textColor="@color/form_text_color"
                 android:textSize="@dimen/form_text_size" />
         </LinearLayout>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/form_tab_height"
+        android:layout_margin="@dimen/form_margin_size"
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="@dimen/form_tab_width"
@@ -320,7 +367,7 @@
             android:layout_marginStart="@dimen/form_margin_size"
             android:background="@color/custom_white"
             android:gravity="center"
-            android:text="@string/form_urine_volume"
+            android:text="@string/form_weight"
             android:textColor="@color/form_text_color"
             android:textSize="@dimen/form_text_size" />
 
@@ -332,7 +379,35 @@
             android:background="@color/custom_white">
 
             <EditText
-                android:id="@+id/urine_volume"
+                android:id="@+id/weight"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/form_text_margin"
+                android:background="@null"
+                android:hint="@string/form_hint_text"
+                android:textColor="@color/form_text_color"
+                android:textSize="@dimen/form_text_size" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="@dimen/form_tab_width"
+            android:layout_height="match_parent"
+            android:background="@color/custom_white"
+            android:gravity="center"
+            android:text="@string/form_height"
+            android:textColor="@color/form_text_color"
+            android:textSize="@dimen/form_text_size" />
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/form_margin_size"
+            android:layout_weight="1"
+            android:background="@color/custom_white">
+
+            <EditText
+                android:id="@+id/height"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/form_text_margin"
@@ -342,6 +417,7 @@
                 android:textSize="@dimen/form_text_size" />
         </LinearLayout>
     </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -377,13 +453,20 @@
                 android:textSize="@dimen/form_text_size" />
         </LinearLayout>
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/form_tab_height"
+        android:layout_margin="@dimen/form_margin_size"
+        android:orientation="horizontal">
+
         <TextView
             android:layout_width="@dimen/form_tab_width"
             android:layout_height="match_parent"
-            android:layout_marginStart="@dimen/form_margin_size"
             android:background="@color/custom_white"
             android:gravity="center"
-            android:text="@string/form_weight"
+            android:text="@string/form_output_volume"
             android:textColor="@color/form_text_color"
             android:textSize="@dimen/form_text_size" />
 
@@ -396,7 +479,75 @@
             android:background="@color/custom_white">
 
             <EditText
-                android:id="@+id/weight"
+                android:id="@+id/output_volume"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/form_text_margin"
+                android:background="@null"
+                android:hint="@string/form_hint_text"
+                android:textColor="@color/form_text_color"
+                android:textSize="@dimen/form_text_size" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/form_tab_height"
+        android:layout_margin="@dimen/form_margin_size"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="@dimen/form_tab_width"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/form_margin_size"
+            android:background="@color/custom_white"
+            android:gravity="center"
+            android:text="@string/form_urine_volume"
+            android:textColor="@color/form_text_color"
+            android:textSize="@dimen/form_text_size" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/form_margin_size"
+            android:background="@color/custom_white">
+
+            <EditText
+                android:id="@+id/urine_volume"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/form_text_margin"
+                android:background="@null"
+                android:hint="@string/form_hint_text"
+                android:textColor="@color/form_text_color"
+                android:textSize="@dimen/form_text_size" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="39dp"
+        android:layout_margin="1dp"
+        android:background="@drawable/bg_corner_fill_bottom_white">
+
+        <TextView
+            android:layout_width="@dimen/form_tab_width"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/form_skin_test"
+            android:textColor="@color/form_text_color"
+            android:textSize="@dimen/form_text_size" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/form_margin_size"
+            android:background="@color/custom_white">
+
+            <EditText
+                android:id="@+id/skin_test"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/form_text_margin"
@@ -438,5 +589,6 @@
                 android:textSize="@dimen/form_text_size" />
         </LinearLayout>
     </LinearLayout>
+
 </LinearLayout>
 
