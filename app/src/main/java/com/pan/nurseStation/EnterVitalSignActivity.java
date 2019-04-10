@@ -134,9 +134,11 @@ public class EnterVitalSignActivity extends AppCompatActivity {
         timeTextView = findViewById(R.id.time_text);
 
         Calendar calendar = Calendar.getInstance();
-        dateTextView.setText(DateKit.formatDate(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)));
-        timeTextView.setText(DateKit.formatTime(calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE)));
-
+        date = DateKit.formatDate(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+        time = DateKit.formatTime(calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE));
+        dateTextView.setText(date);
+        timeTextView.setText(time);
+        
         //获取系统的日期
         dateTextView.setOnClickListener(view -> {
             DatePickerDialog dateDialog = new DatePickerDialog(this, (DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) -> {
