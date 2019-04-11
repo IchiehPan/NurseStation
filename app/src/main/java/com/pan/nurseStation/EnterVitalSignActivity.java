@@ -171,10 +171,12 @@ public class EnterVitalSignActivity extends AppCompatActivity {
             if (Objects.equals(pulseType, getString(R.string.form_pulse_type_pulse))) {
                 pulseEditText.setEnabled(true);
                 heartEditText.setEnabled(false);
+                heartEditText.setText("");
             }
             if (Objects.equals(pulseType, getString(R.string.form_pulse_type_heart))) {
                 pulseEditText.setEnabled(false);
                 heartEditText.setEnabled(true);
+                pulseEditText.setText("");
             }
             if (Objects.equals(pulseType, getString(R.string.form_pulse_type_all))) {
                 pulseEditText.setEnabled(true);
