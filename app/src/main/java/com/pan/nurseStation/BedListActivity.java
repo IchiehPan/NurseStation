@@ -69,6 +69,11 @@ public class BedListActivity extends AppCompatActivity implements CommonView {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (DBHisBusiness.loginBean == null) {
+            signOut(null);
+            return;
+        }
         setContentView(R.layout.activity_bed_list);
 
         initView();

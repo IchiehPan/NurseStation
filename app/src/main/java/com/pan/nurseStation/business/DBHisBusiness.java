@@ -30,7 +30,7 @@ import java.util.Map;
 
 public class DBHisBusiness {
     public static RequestQueue mQueue;
-    public static LoginResponseBean.Data loginBean = new LoginResponseBean.Data();
+    public static LoginResponseBean.Data loginBean = null;
     public static List<LevelResponseBean.Data> levelDataList = new ArrayList<>();
     public static Map<String, Integer> bedTypeColorMap = new HashMap<>();
 

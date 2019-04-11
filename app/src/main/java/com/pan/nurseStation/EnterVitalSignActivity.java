@@ -285,6 +285,7 @@ public class EnterVitalSignActivity extends AppCompatActivity {
         info.setTemperature(temperature);
 
         if (Objects.equals(pulseType, getString(R.string.form_pulse_type_pulse))) {
+            info.setPulse_type(String.valueOf(1));
             info.setPulse(pulse);
             if (!StringKit.isValid(pulse)) {
                 Toast.makeText(this, getString(R.string.input_not_tip), Toast.LENGTH_SHORT).show();
@@ -292,6 +293,7 @@ public class EnterVitalSignActivity extends AppCompatActivity {
             }
         }
         if (Objects.equals(pulseType, getString(R.string.form_pulse_type_heart))) {
+            info.setPulse_type(String.valueOf(2));
             info.setHeart_rate(heart);
             if (!StringKit.isValid(heart)) {
                 Toast.makeText(this, getString(R.string.input_not_tip), Toast.LENGTH_SHORT).show();
@@ -299,6 +301,7 @@ public class EnterVitalSignActivity extends AppCompatActivity {
             }
         }
         if (Objects.equals(pulseType, getString(R.string.form_pulse_type_all))) {
+            info.setPulse_type(String.valueOf(3));
             info.setPulse(pulse);
             info.setHeart_rate(heart);
             if (!StringKit.isValid(pulse) || !StringKit.isValid(heart)) {
@@ -315,6 +318,7 @@ public class EnterVitalSignActivity extends AppCompatActivity {
         info.setOutput_fluid_volume(outputVolume);
         info.setWeight(weight);
         info.setHeight(height);
+        info.setSkin_test(skinTest);
         info.setRemark(other);
 
         info.setEday(date);
