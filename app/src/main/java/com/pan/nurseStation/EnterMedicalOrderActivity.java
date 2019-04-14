@@ -55,6 +55,7 @@ public class EnterMedicalOrderActivity extends AppCompatActivity implements Comm
     private TextView bedId;
     private Map<Object, Object> checkedMap;
     private PatientDetailResponseBean.Data data;
+    private boolean isVerified = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,8 +111,11 @@ public class EnterMedicalOrderActivity extends AppCompatActivity implements Comm
 
     @Override
     public void setScan(String str) {
-        scanSuccess();
-        scanFail();
+        if (Objects.equals(str, data.getHos_number())) {
+            scanSuccess();
+        } else {
+            scanFail();
+        }
     }
 
     private void scanFail() {
@@ -121,6 +125,7 @@ public class EnterMedicalOrderActivity extends AppCompatActivity implements Comm
     private void scanSuccess() {
         AnimateBusiness.slideToggle(successButtonBar, 40, Constants.SLIDE_DURATION_MS, Constants.SLIDE_DURATION_MS);
         scanSuccessTip.setText(getString(R.string.scan_success_tip2));
+        isVerified = true;
     }
 
     @Override
@@ -309,6 +314,11 @@ public class EnterMedicalOrderActivity extends AppCompatActivity implements Comm
     }
 
     public void submitQuantity(View view) {
+        if (!isVerified) {
+            Toast.makeText(this, getString(R.string.scan_not_tip), Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         List<EnjoinDoRequestBean.Data> dataList = new ArrayList<>();
         for (Map.Entry entry : checkedMap.entrySet()) {
             List<EnjoinDoInfoResponseBean.Data.MedicalOrder> medicalOrderList = (List<EnjoinDoInfoResponseBean.Data.MedicalOrder>) entry.getKey();

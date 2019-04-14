@@ -3,6 +3,7 @@ package com.pan.nurseStation;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,6 +20,8 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
+import com.bben.ydcf.scandome.CommonView;
+import com.bben.ydcf.scandome.receiver.ScanResultReceiver;
 import com.pan.lib.util.BeanKit;
 import com.pan.lib.util.DateKit;
 import com.pan.lib.util.StringKit;
@@ -35,7 +38,7 @@ import com.pan.nurseStation.widget.dialog.ScanInputDialog;
 import java.util.Calendar;
 import java.util.Objects;
 
-public class EnterVitalSignActivity extends AppCompatActivity {
+public class EnterVitalSignActivity extends AppCompatActivity implements CommonView {
     private static final String TAG = EnterVitalSignActivity.class.getSimpleName();
     private ScrollView scrollView;
     private RadioGroup temperatureGroup;
@@ -75,12 +78,16 @@ public class EnterVitalSignActivity extends AppCompatActivity {
     private String date;
     private String time;
     private boolean isVerified = false;
+    private ScanResultReceiver resultReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enter_vital_sign);
         initView();
+
+        resultReceiver = new ScanResultReceiver(this);
+        registerReceiver(resultReceiver, new IntentFilter(com.bben.ydcf.scandome.Constants.DECODE_RESULT_FILTER));
 
         Bundle bundle = getIntent().getExtras();
         if (bundle == null) {
@@ -282,13 +289,13 @@ public class EnterVitalSignActivity extends AppCompatActivity {
         DBHisBusiness dbHisBusiness = new DBHisBusiness();
         SignsDoRequestBean requestBean = new SignsDoRequestBean();
         SignsDoRequestBean.Info info = new SignsDoRequestBean.Info();
-        if (Objects.equals(temperatureType, getString(R.string.form_temperature_type_mouth))) {
+        if (Objects.equals(temperatureType, getString(R.string.form_temperature_type_mouth)) && StringKit.isValid(temperature)) {
             info.setTemp_type(String.valueOf(1));
         }
-        if (Objects.equals(temperatureType, getString(R.string.form_temperature_type_underarm))) {
+        if (Objects.equals(temperatureType, getString(R.string.form_temperature_type_underarm)) && StringKit.isValid(temperature)) {
             info.setTemp_type(String.valueOf(2));
         }
-        if (Objects.equals(temperatureType, getString(R.string.form_temperature_type_anus))) {
+        if (Objects.equals(temperatureType, getString(R.string.form_temperature_type_anus)) && StringKit.isValid(temperature)) {
             info.setTemp_type(String.valueOf(3));
         }
 
@@ -404,5 +411,14 @@ public class EnterVitalSignActivity extends AppCompatActivity {
     public void hideErrorDialog(View view) {
         Log.i(TAG, "hideErrorDialog: --------------------------");
         errorDialog.hide();
+    }
+
+    @Override
+    public void setScan(String str) {
+        if (Objects.equals(str, data.getHos_number())) {
+            scanSuccess();
+        } else {
+            scanFail();
+        }
     }
 }
