@@ -19,6 +19,7 @@
             android:layout_centerVertical="true"
             android:layout_marginStart="9dp"
             android:background="@drawable/ic_back"
+            android:contentDescription="@string/todo"
             android:onClick="inBedListActivity" />
 
         <TextView
@@ -202,7 +203,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
                 android:background="@null"
-                android:text="@string/form_date"
+                android:text="@string/example_date"
                 android:textColor="#666666"
                 android:textSize="10sp" />
 
@@ -225,7 +226,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:background="@null"
-                android:text="@string/form_time"
+                android:text="@string/example_time"
                 android:textColor="#666666"
                 android:textSize="10sp" />
 

@@ -37,7 +37,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/form_temperature_type_mouth"
+                    android:checked="true"
+                    android:text="@string/form_temperature_type_underarm"
                     android:textColor="@color/form_text_color"
                     android:textSize="@dimen/form_text_size" />
 
@@ -45,7 +46,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/form_temperature_type_underarm"
+                    android:text="@string/form_temperature_type_mouth"
                     android:textColor="@color/form_text_color"
                     android:textSize="@dimen/form_text_size" />
 
@@ -144,6 +145,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:checked="true"
                     android:text="@string/form_pulse_type_pulse"
                     android:textColor="@color/form_text_color"
                     android:textSize="@dimen/form_text_size" />
@@ -195,7 +197,6 @@
                 android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/form_text_margin"
                 android:background="@null"
-                android:hint="@string/form_hint_text"
                 android:textColor="@color/form_text_color"
                 android:textSize="@dimen/form_text_size" />
 
@@ -218,7 +219,6 @@
             android:textColor="@color/form_text_color"
             android:textSize="@dimen/form_text_size" />
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -231,7 +231,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/form_text_margin"
                 android:background="@null"
-                android:hint="@string/form_hint_text"
+                android:enabled="false"
                 android:textColor="@color/form_text_color"
                 android:textSize="@dimen/form_text_size" />
         </LinearLayout>

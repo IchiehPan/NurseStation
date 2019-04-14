@@ -1,17 +1,10 @@
 <resources>
     <string name="app_name">移动护理</string>
     <!-- Strings related to login -->
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password (optional)</string>
-    <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
-    <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
-    </string>
 
     <string name="todo">TODO</string>
     <string name="action_login">登 录</string>
@@ -20,7 +13,6 @@
     <string name="action_submit">提 交</string>
     <string name="action_cancel">取 消</string>
     <string name="action_confirm">确 认</string>
-    <string name="in_test_activity">In Test Activity</string>
     <string name="login_username_hint">请输入账号</string>
     <string name="login_password_hint">请输入密码</string>
     <string name="login_success_tip">登录成功</string>
@@ -37,6 +29,7 @@
     <string name="scan_finish_tip">我知道了</string>
     <string name="scan_input_tip">输入病人腕带码：</string>
     <string name="input_not_tip">请填写完表格</string>
+    <string name="scan_not_tip">请扫描病人腕带核对身份</string>
 
 
     <string name="bed_list_title">床位列表</string>
@@ -77,12 +70,12 @@
     <string name="example_patient_age">45岁</string>
     <string name="example_patient_number">5042602</string>
     <string name="example_date">2018-02-01</string>
+    <string name="example_time">08:00</string>
 
     <string name="example_medical_type">维生素C注射液[规格]</string>
     <string name="example_medical_unit">0.5g/QD/-</string>
 
     <string name="bed_info_example">002床 王小明</string>
-    <string name="title_activity_bed_info">BedInfoActivity</string>
 
     <string name="order_status">状态</string>
     <string name="order_status_waiting_for_medicine">待核药</string>
@@ -94,8 +87,6 @@
     <string name="order_type_long">长嘱</string>
     <string name="order_type_short">临嘱</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="patient_info_title">病人信息</string>
     <string name="medical_order_title">医嘱执行</string>
     <string name="vital_sign_title">生命体征</string>
@@ -132,8 +123,4 @@
     <string name="form_pulse_type_pulse">脉率</string>
     <string name="form_pulse_type_heart">心率</string>
     <string name="form_pulse_type_all">脉率+心率</string>
-
-
-    <string name="form_date">2018-02-01</string>
-    <string name="form_time">08：00</string>
 </resources>

@@ -74,6 +74,7 @@ public class EnterVitalSignActivity extends AppCompatActivity {
 
     private String date;
     private String time;
+    private boolean isVerified = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -219,6 +220,11 @@ public class EnterVitalSignActivity extends AppCompatActivity {
     }
 
     public void submitForm(View view) {
+        if (!isVerified) {
+            Toast.makeText(this, getString(R.string.scan_not_tip), Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         temperatureButton = findViewById(temperatureGroup.getCheckedRadioButtonId());
         pulseButton = findViewById(pulseGroup.getCheckedRadioButtonId());
 
@@ -244,9 +250,9 @@ public class EnterVitalSignActivity extends AppCompatActivity {
         String other = otherEditText.getText().toString();
         String skinTest = skinTestEditText.getText().toString();
 
-        if (!StringKit.isValid(temperature) || !StringKit.isValid(breathe) || !StringKit.isValid(bloodPressure)
-                || !StringKit.isValid(stoolFrequency) || !StringKit.isValid(urineVolume) || !StringKit.isValid(inputVolume) || !StringKit.isValid(outputVolume)
-                || !StringKit.isValid(weight) || !StringKit.isValid(height) || !StringKit.isValid(skinTest) || !StringKit.isValid(other)) {
+        if (!StringKit.isValid(temperature) && !StringKit.isValid(breathe) && !StringKit.isValid(bloodPressure) && !StringKit.isValid(pulse)
+                && !StringKit.isValid(stoolFrequency) && !StringKit.isValid(urineVolume) && !StringKit.isValid(inputVolume) && !StringKit.isValid(outputVolume)
+                && !StringKit.isValid(weight) && !StringKit.isValid(height) && !StringKit.isValid(skinTest) && !StringKit.isValid(other)) {
             Toast.makeText(this, getString(R.string.input_not_tip), Toast.LENGTH_SHORT).show();
             return;
         }
@@ -286,30 +292,18 @@ public class EnterVitalSignActivity extends AppCompatActivity {
 
         info.setTemperature(temperature);
 
-        if (Objects.equals(pulseType, getString(R.string.form_pulse_type_pulse))) {
+        if (Objects.equals(pulseType, getString(R.string.form_pulse_type_pulse)) && StringKit.isValid(pulse)) {
             info.setPulse_type(String.valueOf(1));
             info.setPulse(pulse);
-            if (!StringKit.isValid(pulse)) {
-                Toast.makeText(this, getString(R.string.input_not_tip), Toast.LENGTH_SHORT).show();
-                return;
-            }
         }
-        if (Objects.equals(pulseType, getString(R.string.form_pulse_type_heart))) {
+        if (Objects.equals(pulseType, getString(R.string.form_pulse_type_heart)) && StringKit.isValid(heart)) {
             info.setPulse_type(String.valueOf(2));
             info.setHeart_rate(heart);
-            if (!StringKit.isValid(heart)) {
-                Toast.makeText(this, getString(R.string.input_not_tip), Toast.LENGTH_SHORT).show();
-                return;
-            }
         }
-        if (Objects.equals(pulseType, getString(R.string.form_pulse_type_all))) {
+        if (Objects.equals(pulseType, getString(R.string.form_pulse_type_all)) && StringKit.isValid(pulse) && StringKit.isValid(heart)) {
             info.setPulse_type(String.valueOf(3));
             info.setPulse(pulse);
             info.setHeart_rate(heart);
-            if (!StringKit.isValid(pulse) || !StringKit.isValid(heart)) {
-                Toast.makeText(this, getString(R.string.input_not_tip), Toast.LENGTH_SHORT).show();
-                return;
-            }
         }
 
         info.setBreath(breathe);
@@ -396,6 +390,7 @@ public class EnterVitalSignActivity extends AppCompatActivity {
     private void scanSuccess() {
         AnimateBusiness.slideToggle(successButtonBar, 40, Constants.SLIDE_DURATION_MS, Constants.SLIDE_DURATION_MS);
         scanSuccessTip.setText(getString(R.string.scan_success_tip2));
+        isVerified = true;
     }
 
     public void showErrorDialog() {
