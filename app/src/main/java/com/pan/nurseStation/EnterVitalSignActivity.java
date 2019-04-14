@@ -185,6 +185,8 @@ public class EnterVitalSignActivity extends AppCompatActivity {
             }
         });
 
+        temperatureGroup.check(R.id.temperature_type_underarm);
+        pulseGroup.check(R.id.pulse_type_pulse);
 
 //        // 这里有一个非空复制的操作
 //        pulseEditText.setOnFocusChangeListener((View view, boolean b) -> {

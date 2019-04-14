@@ -34,6 +34,7 @@
                 android:orientation="horizontal">
 
                 <RadioButton
+                    android:id="@+id/temperature_type_underarm"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -43,6 +44,7 @@
                     android:textSize="@dimen/form_text_size" />
 
                 <RadioButton
+                    android:id="@+id/temperature_type_mouth"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -142,6 +144,7 @@
                 android:orientation="horizontal">
 
                 <RadioButton
+                    android:id="@+id/pulse_type_pulse"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -151,6 +154,7 @@
                     android:textSize="@dimen/form_text_size" />
 
                 <RadioButton
+                    android:id="@+id/pulse_type_heart"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -159,6 +163,7 @@
                     android:textSize="@dimen/form_text_size" />
 
                 <RadioButton
+                    android:id="@+id/pulse_type_all"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
