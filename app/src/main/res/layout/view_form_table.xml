@@ -92,6 +92,7 @@
                 android:layout_marginStart="@dimen/form_text_margin"
                 android:background="@null"
                 android:hint="@string/form_hint_text"
+                android:inputType="numberDecimal"
                 android:textColor="@color/form_text_color"
                 android:textSize="@dimen/form_text_size" />
         </LinearLayout>
@@ -202,9 +203,9 @@
                 android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/form_text_margin"
                 android:background="@null"
+                android:inputType="numberDecimal"
                 android:textColor="@color/form_text_color"
                 android:textSize="@dimen/form_text_size" />
-
         </LinearLayout>
 
     </LinearLayout>
@@ -237,6 +238,7 @@
                 android:layout_marginStart="@dimen/form_text_margin"
                 android:background="@null"
                 android:enabled="false"
+                android:inputType="numberDecimal"
                 android:textColor="@color/form_text_color"
                 android:textSize="@dimen/form_text_size" />
         </LinearLayout>
@@ -271,6 +273,7 @@
                 android:layout_marginStart="@dimen/form_text_margin"
                 android:background="@null"
                 android:hint="@string/form_hint_text"
+                android:inputType="numberDecimal"
                 android:textColor="@color/form_text_color"
                 android:textSize="@dimen/form_text_size" />
         </LinearLayout>
@@ -320,6 +323,7 @@
                 android:layout_marginStart="@dimen/form_text_margin"
                 android:background="@null"
                 android:hint="@string/form_hint_text"
+                android:inputType="numberDecimal"
                 android:textColor="@color/form_text_color"
                 android:textSize="@dimen/form_text_size" />
 
@@ -354,6 +358,7 @@
                 android:layout_marginStart="@dimen/form_text_margin"
                 android:background="@null"
                 android:hint="@string/form_hint_text"
+                android:inputType="numberDecimal"
                 android:textColor="@color/form_text_color"
                 android:textSize="@dimen/form_text_size" />
         </LinearLayout>
@@ -390,6 +395,7 @@
                 android:layout_marginStart="@dimen/form_text_margin"
                 android:background="@null"
                 android:hint="@string/form_hint_text"
+                android:inputType="numberDecimal"
                 android:textColor="@color/form_text_color"
                 android:textSize="@dimen/form_text_size" />
         </LinearLayout>
@@ -402,7 +408,6 @@
             android:text="@string/form_height"
             android:textColor="@color/form_text_color"
             android:textSize="@dimen/form_text_size" />
-
 
         <LinearLayout
             android:layout_width="0dp"
@@ -418,6 +423,7 @@
                 android:layout_marginStart="@dimen/form_text_margin"
                 android:background="@null"
                 android:hint="@string/form_hint_text"
+                android:inputType="numberDecimal"
                 android:textColor="@color/form_text_color"
                 android:textSize="@dimen/form_text_size" />
         </LinearLayout>
@@ -454,6 +460,7 @@
                 android:layout_marginStart="@dimen/form_text_margin"
                 android:background="@null"
                 android:hint="@string/form_hint_text"
+                android:inputType="numberDecimal"
                 android:textColor="@color/form_text_color"
                 android:textSize="@dimen/form_text_size" />
         </LinearLayout>
@@ -490,6 +497,7 @@
                 android:layout_marginStart="@dimen/form_text_margin"
                 android:background="@null"
                 android:hint="@string/form_hint_text"
+                android:inputType="numberDecimal"
                 android:textColor="@color/form_text_color"
                 android:textSize="@dimen/form_text_size" />
         </LinearLayout>
@@ -525,6 +533,7 @@
                 android:layout_marginStart="@dimen/form_text_margin"
                 android:background="@null"
                 android:hint="@string/form_hint_text"
+                android:inputType="numberDecimal"
                 android:textColor="@color/form_text_color"
                 android:textSize="@dimen/form_text_size" />
         </LinearLayout>
