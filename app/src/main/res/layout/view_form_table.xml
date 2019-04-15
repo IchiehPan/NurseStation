@@ -19,48 +19,42 @@
             android:textColor="@color/form_text_color"
             android:textSize="@dimen/form_text_size" />
 
-        <LinearLayout
+        <RadioGroup
+            android:id="@+id/radio_temperature"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="@dimen/form_margin_size"
             android:background="@drawable/bg_corner_fill_top_right_white"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
 
-            <RadioGroup
-                android:id="@+id/radio_temperature"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
+            <RadioButton
+                android:id="@+id/temperature_type_underarm"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:checked="true"
+                android:text="@string/form_temperature_type_underarm"
+                android:textColor="@color/form_text_color"
+                android:textSize="@dimen/form_text_size" />
 
-                <RadioButton
-                    android:id="@+id/temperature_type_underarm"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:checked="true"
-                    android:text="@string/form_temperature_type_underarm"
-                    android:textColor="@color/form_text_color"
-                    android:textSize="@dimen/form_text_size" />
+            <RadioButton
+                android:id="@+id/temperature_type_mouth"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/form_temperature_type_mouth"
+                android:textColor="@color/form_text_color"
+                android:textSize="@dimen/form_text_size" />
 
-                <RadioButton
-                    android:id="@+id/temperature_type_mouth"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/form_temperature_type_mouth"
-                    android:textColor="@color/form_text_color"
-                    android:textSize="@dimen/form_text_size" />
-
-                <RadioButton
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/form_temperature_type_anus"
-                    android:textColor="@color/form_text_color"
-                    android:textSize="@dimen/form_text_size" />
-            </RadioGroup>
-        </LinearLayout>
+            <RadioButton
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/form_temperature_type_anus"
+                android:textColor="@color/form_text_color"
+                android:textSize="@dimen/form_text_size" />
+        </RadioGroup>
     </LinearLayout>
 
     <LinearLayout
@@ -130,49 +124,43 @@
             android:textColor="@color/form_text_color"
             android:textSize="@dimen/form_text_size" />
 
-        <LinearLayout
+        <RadioGroup
+            android:id="@+id/radio_pulse"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="@dimen/form_margin_size"
             android:background="@drawable/bg_corner_fill_top_right_white"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
 
-            <RadioGroup
-                android:id="@+id/radio_pulse"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
+            <RadioButton
+                android:id="@+id/pulse_type_pulse"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:checked="true"
+                android:text="@string/form_pulse_type_pulse"
+                android:textColor="@color/form_text_color"
+                android:textSize="@dimen/form_text_size" />
 
-                <RadioButton
-                    android:id="@+id/pulse_type_pulse"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:checked="true"
-                    android:text="@string/form_pulse_type_pulse"
-                    android:textColor="@color/form_text_color"
-                    android:textSize="@dimen/form_text_size" />
+            <RadioButton
+                android:id="@+id/pulse_type_heart"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/form_pulse_type_heart"
+                android:textColor="@color/form_text_color"
+                android:textSize="@dimen/form_text_size" />
 
-                <RadioButton
-                    android:id="@+id/pulse_type_heart"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/form_pulse_type_heart"
-                    android:textColor="@color/form_text_color"
-                    android:textSize="@dimen/form_text_size" />
-
-                <RadioButton
-                    android:id="@+id/pulse_type_all"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/form_pulse_type_all"
-                    android:textColor="@color/form_text_color"
-                    android:textSize="@dimen/form_text_size" />
-            </RadioGroup>
-        </LinearLayout>
+            <RadioButton
+                android:id="@+id/pulse_type_all"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/form_pulse_type_all"
+                android:textColor="@color/form_text_color"
+                android:textSize="@dimen/form_text_size" />
+        </RadioGroup>
     </LinearLayout>
 
 

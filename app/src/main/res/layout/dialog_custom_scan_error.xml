@@ -16,7 +16,8 @@
             android:layout_height="35dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="36dp"
-            android:background="@drawable/ic_warning_triangle" />
+            android:background="@drawable/ic_warning_triangle"
+            android:contentDescription="@string/todo" />
 
         <!--<Button-->
         <!--android:layout_width="40dp"-->
