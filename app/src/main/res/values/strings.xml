@@ -123,4 +123,6 @@
     <string name="form_pulse_type_pulse">脉率</string>
     <string name="form_pulse_type_heart">心率</string>
     <string name="form_pulse_type_all">脉率+心率</string>
+    <string name="_user_name">011012</string>
+    <string name="_user_pwd">pwd</string>
 </resources>

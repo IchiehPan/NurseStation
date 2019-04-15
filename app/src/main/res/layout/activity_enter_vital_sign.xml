@@ -74,10 +74,11 @@
                 android:id="@+id/patient_sex"
                 android:layout_width="10dp"
                 android:layout_height="13dp"
-                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp"
                 android:layout_marginTop="20dp"
-                android:layout_toRightOf="@id/patient_name"
-                android:background="@drawable/ic_male" />
+                android:layout_toEndOf="@id/patient_name"
+                android:background="@drawable/ic_male"
+                android:contentDescription="@string/todo" />
 
             <TextView
                 android:id="@+id/patient_age"
@@ -109,7 +110,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/patient_age"
                 android:layout_marginTop="7dp"
-                android:layout_toRightOf="@id/hos_number_head"
+                android:layout_toEndOf="@id/hos_number_head"
                 android:includeFontPadding="false"
                 android:text="@string/example_patient_number"
                 android:textColor="#666666"
@@ -134,7 +135,7 @@
                 android:layout_below="@id/hos_number_head"
                 android:layout_marginTop="7dp"
                 android:layout_marginBottom="14dp"
-                android:layout_toRightOf="@id/department_name"
+                android:layout_toEndOf="@id/department_name"
                 android:includeFontPadding="false"
                 android:text="@string/example_bed_no"
                 android:textColor="#666666"
@@ -165,7 +166,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginEnd="4dp"
-                    android:background="@drawable/ic_scan" />
+                    android:background="@drawable/ic_scan"
+                    android:contentDescription="@string/todo" />
 
                 <TextView
                     android:id="@+id/scan_success_tip"
@@ -210,15 +212,16 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
                 android:layout_marginStart="15dp"
                 android:layout_marginEnd="22dp"
+                android:contentDescription="@string/todo"
                 android:src="@drawable/ic_arrow_down" />
 
             <ImageView
                 android:layout_width="@dimen/line_size"
                 android:layout_height="12dp"
-                android:background="#333333" />
+                android:background="#333333"
+                android:contentDescription="@string/todo" />
 
             <TextView
                 android:id="@+id/time_text"
@@ -233,9 +236,9 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
                 android:layout_marginStart="15dp"
                 android:layout_marginEnd="28dp"
+                android:contentDescription="@string/todo"
                 android:src="@drawable/ic_arrow_down" />
         </LinearLayout>
 
@@ -283,7 +286,7 @@
             android:layout_height="30dp"
             android:layout_alignParentEnd="true"
             android:layout_marginTop="29dp"
-            android:layout_marginRight="22dp"
+            android:layout_marginEnd="22dp"
             android:background="@drawable/bg_corner_fill_all_blue"
             android:onClick="submitForm"
             android:text="@string/action_submit"
@@ -294,8 +297,8 @@
             android:layout_width="119dp"
             android:layout_height="30dp"
             android:layout_marginTop="29dp"
-            android:layout_marginRight="11dp"
-            android:layout_toLeftOf="@id/button_submit"
+            android:layout_marginEnd="11dp"
+            android:layout_toStartOf="@id/button_submit"
             android:background="@drawable/bg_corner_stroke_all_white"
             android:onClick="resetForm"
             android:text="@string/action_reload"
