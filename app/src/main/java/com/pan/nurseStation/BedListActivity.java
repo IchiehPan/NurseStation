@@ -133,6 +133,12 @@ public class BedListActivity extends AppCompatActivity implements CommonView {
         dbHisBusiness.bedlist(bedListRequestBean, response -> {
             Log.i(TAG, "onResponse: " + response);
             BedListResponseBean responseBean = BeanKit.string2Bean(response, BedListResponseBean.class);
+            if (responseBean.getRet() != Constants.MESSAGE_SUCCESS_CODE) {
+                Toast.makeText(this, responseBean.getMsg(), Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+
             BedListResponseBean.Data data = responseBean.getData();
 
             // 底下的数据
