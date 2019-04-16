@@ -93,7 +93,7 @@ public class BedListActivity extends AppCompatActivity implements CommonView {
             DBHisBusiness.levelDataList = responseBean.getData();
             DBHisBusiness.initBedTypeColorMap(this);
 
-            String[] bedTypes;
+            String[] bedTypes = new String[]{};
             if (Constants.ISDEBUG) {
                 bedTypes = this.getResources().getStringArray(R.array.bed_types);
             }
