@@ -18,7 +18,10 @@
     <color name="bed_type_color_cyanine">#1dcdcd</color>
     <color name="bed_type_color_green">#03ba7e</color>
     <color name="bed_type_color_orange">#ff9b6a</color>
-    <color name="bed_type_color_brown">#895e37</color>
+    <color name="bed_type_color_brown">#91633d</color>
+    <color name="bed_type_color_gray">#895e37</color>
+    <color name="bed_type_color_yellow">#d0d821</color>
+    <color name="bed_type_color_purple">#af4fb7</color>
 
     <array name="bed_type_color">
         <!--护理级别的颜色-->
@@ -29,5 +32,8 @@
         <item>@color/bed_type_color_green</item>
         <item>@color/bed_type_color_orange</item>
         <item>@color/bed_type_color_brown</item>
+        <item>@color/bed_type_color_gray</item>
+        <item>@color/bed_type_color_yellow</item>
+        <item>@color/bed_type_color_purple</item>
     </array>
 </resources>
