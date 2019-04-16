@@ -90,6 +90,11 @@ public class BedListActivity extends AppCompatActivity implements CommonView {
         levelRequestBean.setDepartment_id(DBHisBusiness.loginBean.getDepartment_id());
         dbHisBusiness.level(levelRequestBean, response -> {
             LevelResponseBean responseBean = BeanKit.string2Bean(response, LevelResponseBean.class);
+            if (responseBean.getRet() != Constants.MESSAGE_SUCCESS_CODE) {
+                Toast.makeText(this, responseBean.getMsg(), Toast.LENGTH_SHORT).show();
+                return;
+            }
+
             DBHisBusiness.levelDataList = responseBean.getData();
             DBHisBusiness.initBedTypeColorMap(this);
 
@@ -107,9 +112,9 @@ public class BedListActivity extends AppCompatActivity implements CommonView {
                 bedTypes = bedTypeList.toArray(new String[bedTypeList.size()]);
             }
             // 设置高度
-            int rows = bedTypes.length % 3 == 0 ? bedTypes.length / 3 : bedTypes.length / 3 + 1;
+//            int rows = bedTypes.length % 3 == 0 ? bedTypes.length / 3 : bedTypes.length / 3 + 1;
 
-            bedTypeView.setMinimumHeight(rows * getResources().getDimensionPixelSize(R.dimen.single_level_type_height));
+//            bedTypeView.setMinimumHeight(rows * getResources().getDimensionPixelSize(R.dimen.single_level_type_height));
 
             SimpleSpinnerAdapter<String> arrayAdapter = new SimpleSpinnerAdapter<>(this, R.layout.item_simple_spinner, android.R.id.text1, bedTypes);
             arrayAdapter.setDropDownViewResource(R.layout.item_simple_spinner_dropdown);
@@ -138,9 +143,7 @@ public class BedListActivity extends AppCompatActivity implements CommonView {
                 return;
             }
 
-
             BedListResponseBean.Data data = responseBean.getData();
-
             // 底下的数据
             departmentName.setText(DBHisBusiness.loginBean.getDepartment_name());
             totalCount.setText(data.getRecords());
