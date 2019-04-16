@@ -74,11 +74,11 @@ public class LoginActivity extends AppCompatActivity {
         View focusView = null;
 
         // Check for a valid password, if the user entered one.
-        if (TextUtils.isEmpty(password)) {
-            mPasswordView.setError(getString(R.string.error_invalid_password));
-            focusView = mPasswordView;
-            cancel = true;
-        }
+//        if (TextUtils.isEmpty(password)) {
+//            mPasswordView.setError(getString(R.string.error_invalid_password));
+//            focusView = mPasswordView;
+//            cancel = true;
+//        }
 
         // Check for a valid email address.
         if (TextUtils.isEmpty(username)) {
@@ -96,13 +96,13 @@ public class LoginActivity extends AppCompatActivity {
             // perform the user login attempt.
 
             // 模拟内网环境下登录成功
-            if (Constants.ISDEBUG) {
-                if (Objects.equals(username, "admin") && Objects.equals(password, "123456")) {
-                    // success
-                    loginSuccess();
-                    return;
-                }
-            }
+//            if (Constants.ISDEBUG) {
+//                if (Objects.equals(username, "admin") && Objects.equals(password, "123456")) {
+//                    // success
+//                    loginSuccess();
+//                    return;
+//                }
+//            }
 
 
             LoginRequestBean requestBean = new LoginRequestBean(username, password);
