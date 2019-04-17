@@ -83,7 +83,6 @@
             android:inputType="textPassword"
             android:maxLines="1"
             android:singleLine="true"
-            android:text="@string/_user_pwd"
             android:textColorHint="#ABABAB"
             android:textSize="10sp" />
     </LinearLayout>
