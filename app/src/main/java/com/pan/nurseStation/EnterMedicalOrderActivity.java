@@ -82,9 +82,9 @@ public class EnterMedicalOrderActivity extends AppCompatActivity implements Comm
         String sex = data.getSex();
         patientName.setText(data.getName());
         if (Objects.equals(sex, getString(R.string.sex_type_male))) {
-            patientSex.setBackground(getResources().getDrawable(R.drawable.ic_male));
+            patientSex.setBackgroundResource(R.drawable.ic_male);
         } else if (Objects.equals(sex, getString(R.string.sex_type_female))) {
-            patientSex.setBackground(getResources().getDrawable(R.drawable.ic_female));
+            patientSex.setBackgroundResource(R.drawable.ic_female);
         }
         patientAge.setText(data.getAge());
         hosNumber.setText(data.getHos_number());

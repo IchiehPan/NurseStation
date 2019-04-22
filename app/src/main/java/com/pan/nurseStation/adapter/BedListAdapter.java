@@ -68,9 +68,9 @@ public class BedListAdapter extends BaseAdapter {
 
         patientName.setText(patientInfo.getName());
         if (Objects.equals(patientInfo.getSex(), mContext.getString(R.string.sex_type_male))) {
-            patientSex.setBackground(mContext.getResources().getDrawable(R.drawable.ic_male));
+            patientSex.setBackgroundResource(R.drawable.ic_male);
         } else if (Objects.equals(patientInfo.getSex(), mContext.getString(R.string.sex_type_female))) {
-            patientSex.setBackground(mContext.getResources().getDrawable(R.drawable.ic_female));
+            patientSex.setBackgroundResource(R.drawable.ic_female);
         }
         patientAge.setText(patientInfo.getAge());
         patientNumber.setText(patientInfo.getHos_number());
