@@ -24,4 +24,12 @@ public class MapKit {
         return resultMap;
     }
 
+    public static String getValue(String key, Map<String, String> map) {
+        if (map == null){
+            return "";
+        }
+
+        return StringKit.validStr(map.get(key));
+    }
+
 }
