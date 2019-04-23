@@ -176,6 +176,10 @@ public class EnterVitalSignActivity extends AppCompatActivity implements CommonV
 
         pulseGroup.setOnCheckedChangeListener((RadioGroup radioGroup, int i) -> {
             pulseButton = findViewById(i);
+            if (pulseButton == null) {
+                return;
+            }
+
             String pulseType = pulseButton.getText().toString();
             if (Objects.equals(pulseType, getString(R.string.form_pulse_type_pulse))) {
                 pulseEditText.setEnabled(true);
