@@ -10,7 +10,6 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.StringRequest;
-import com.pan.anlib.util.VolleyKit;
 import com.pan.nurseStation.R;
 import com.pan.nurseStation.bean.Constants;
 import com.pan.nurseStation.bean.request.BedListRequestBean;
@@ -22,6 +21,7 @@ import com.pan.nurseStation.bean.request.PatientDetailRequestBean;
 import com.pan.nurseStation.bean.request.SignsDoRequestBean;
 import com.pan.nurseStation.bean.response.LevelResponseBean;
 import com.pan.nurseStation.bean.response.LoginResponseBean;
+import com.pan.nurseStation.util.VolleyKit;
 
 import java.util.ArrayList;
 import java.util.HashMap;

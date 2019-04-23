@@ -23,7 +23,6 @@ import android.widget.Toast;
 import com.alibaba.fastjson.JSON;
 import com.bben.ydcf.scandome.CommonView;
 import com.bben.ydcf.scandome.receiver.ScanResultReceiver;
-import com.pan.anlib.util.DensityKit;
 import com.pan.lib.util.BeanKit;
 import com.pan.nurseStation.adapter.BedListAdapter;
 import com.pan.nurseStation.adapter.BedTypeAdapter;
@@ -37,6 +36,7 @@ import com.pan.nurseStation.bean.response.LevelResponseBean;
 import com.pan.nurseStation.bean.response.PatientDetailResponseBean;
 import com.pan.nurseStation.business.DBHisBusiness;
 import com.pan.nurseStation.listener.AutoLoadListener;
+import com.pan.nurseStation.util.DensityKit;
 import com.pan.nurseStation.widget.dialog.JAlertDialog;
 import com.umeng.analytics.MobclickAgent;
 

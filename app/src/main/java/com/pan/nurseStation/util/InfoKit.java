@@ -1,4 +1,4 @@
-package com.pan.anlib.util;
+package com.pan.nurseStation.util;
 
 import android.content.Context;
 import android.content.pm.ActivityInfo;
