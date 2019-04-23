@@ -9,13 +9,10 @@ import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.Button;
 
-import com.alibaba.fastjson.JSON;
 import com.pan.lib.util.BeanKit;
-import com.pan.nurseStation.BedInfoActivity;
 import com.pan.nurseStation.EnterMedicalOrderActivity;
-import com.pan.nurseStation.EnterVitalSignActivity;
 import com.pan.nurseStation.R;
-import com.pan.nurseStation.bean.Constants;
+import com.pan.nurseStation.config.Constants;
 import com.pan.nurseStation.bean.response.BedListResponseBean;
 import com.pan.nurseStation.widget.web.JWebSetting;
 import com.pan.nurseStation.widget.web.JWebViewClient;

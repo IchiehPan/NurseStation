@@ -1,8 +1,10 @@
 package com.pan.nurseStation;
 
+import android.Manifest;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -27,7 +29,7 @@ import com.pan.lib.util.BeanKit;
 import com.pan.nurseStation.adapter.BedListAdapter;
 import com.pan.nurseStation.adapter.BedTypeAdapter;
 import com.pan.nurseStation.adapter.SimpleSpinnerAdapter;
-import com.pan.nurseStation.bean.Constants;
+import com.pan.nurseStation.config.Constants;
 import com.pan.nurseStation.bean.request.BedListRequestBean;
 import com.pan.nurseStation.bean.request.LevelRequestBean;
 import com.pan.nurseStation.bean.request.PatientDetailRequestBean;
@@ -44,8 +46,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import pub.devrel.easypermissions.AfterPermissionGranted;
+import pub.devrel.easypermissions.AppSettingsDialog;
+import pub.devrel.easypermissions.EasyPermissions;
 
-public class BedListActivity extends AppCompatActivity implements CommonView {
+
+public class BedListActivity extends AppCompatActivity implements CommonView, EasyPermissions.PermissionCallbacks {
     private static final String TAG = BedListActivity.class.getSimpleName();
 
     private ScanResultReceiver resultReceiver;
@@ -343,5 +349,50 @@ public class BedListActivity extends AppCompatActivity implements CommonView {
     public void onPause() {
         super.onPause();
         MobclickAgent.onPause(this);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        // Forward results to EasyPermissions
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
+    }
+
+    @AfterPermissionGranted(Constants.RC_ALL_PERMISSION)
+    private void methodRequiresTwoPermission() {
+        String[] perms = {Manifest.permission.INTERNET,
+                Manifest.permission.ACCESS_NETWORK_STATE,
+                Manifest.permission.ACCESS_WIFI_STATE,
+                Manifest.permission.WAKE_LOCK,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.READ_PHONE_STATE,
+        };
+        if (EasyPermissions.hasPermissions(this, perms)) {
+            // Already have permission, do the thing
+            // ...
+        } else {
+            // Do not have permissions, request them now
+            EasyPermissions.requestPermissions(this, getString(R.string.request_permission_tip), Constants.RC_ALL_PERMISSION, perms);
+        }
+    }
+
+    @Override
+    public void onPermissionsDenied(int requestCode, List<String> perms) {
+        // Some permissions have been denied
+        // ...
+        Log.d(TAG, "onPermissionsDenied:" + requestCode + ":" + perms.size());
+
+        // (Optional) Check whether the user denied any permissions and checked "NEVER ASK AGAIN."
+        // This will display a dialog directing them to enable the permission in app settings.
+        if (EasyPermissions.somePermissionPermanentlyDenied(this, perms)) {
+            new AppSettingsDialog.Builder(this).build().show();
+        }
+    }
+
+    @Override
+    public void onPermissionsGranted(int requestCode, @NonNull List<String> perms) {
+        // Some permissions have been granted
+        // ...
     }
 }

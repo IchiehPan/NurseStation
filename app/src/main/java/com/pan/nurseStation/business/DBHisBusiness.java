@@ -11,7 +11,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.StringRequest;
 import com.pan.nurseStation.R;
-import com.pan.nurseStation.bean.Constants;
+import com.pan.nurseStation.config.Constants;
 import com.pan.nurseStation.bean.request.BedListRequestBean;
 import com.pan.nurseStation.bean.request.EnjoinDoInfoRequestBean;
 import com.pan.nurseStation.bean.request.EnjoinDoRequestBean;

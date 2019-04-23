@@ -11,7 +11,7 @@ import android.webkit.WebView;
 
 import com.pan.lib.util.BeanKit;
 import com.pan.nurseStation.R;
-import com.pan.nurseStation.bean.Constants;
+import com.pan.nurseStation.config.Constants;
 import com.pan.nurseStation.bean.response.BedListResponseBean;
 import com.pan.nurseStation.widget.fragment.BackHandledInterface;
 import com.pan.nurseStation.widget.web.JWebSetting;

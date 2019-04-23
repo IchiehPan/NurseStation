@@ -20,7 +20,7 @@ import com.bben.ydcf.scandome.receiver.ScanResultReceiver;
 import com.pan.lib.util.BeanKit;
 import com.pan.lib.util.NumberKit;
 import com.pan.nurseStation.animate.AnimateBusiness;
-import com.pan.nurseStation.bean.Constants;
+import com.pan.nurseStation.config.Constants;
 import com.pan.nurseStation.bean.request.EnjoinDoInfoRequestBean;
 import com.pan.nurseStation.bean.request.EnjoinDoRequestBean;
 import com.pan.nurseStation.bean.response.EnjoinDoInfoResponseBean;

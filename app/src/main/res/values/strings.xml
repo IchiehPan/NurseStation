@@ -30,6 +30,7 @@
     <string name="scan_input_tip">输入病人腕带码：</string>
     <string name="input_not_tip">请填写完表格</string>
     <string name="scan_not_tip">请扫描病人腕带核对身份</string>
+    <string name="request_permission_tip">请给与应用权限</string>
 
 
     <string name="bed_list_title">床位列表</string>

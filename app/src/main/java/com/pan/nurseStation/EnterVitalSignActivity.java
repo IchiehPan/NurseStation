@@ -26,7 +26,7 @@ import com.pan.lib.util.BeanKit;
 import com.pan.lib.util.DateKit;
 import com.pan.lib.util.StringKit;
 import com.pan.nurseStation.animate.AnimateBusiness;
-import com.pan.nurseStation.bean.Constants;
+import com.pan.nurseStation.config.Constants;
 import com.pan.nurseStation.bean.request.SignsDoRequestBean;
 import com.pan.nurseStation.bean.response.PatientDetailResponseBean;
 import com.pan.nurseStation.bean.response.SignsDoResponseBean;

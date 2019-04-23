@@ -1,4 +1,4 @@
-package com.pan.nurseStation.bean;
+package com.pan.nurseStation.config;
 
 public class Constants {
     /**
@@ -58,4 +58,6 @@ public class Constants {
     public final static int ORDER_STATUS_WAIT_EXEC = 1;
     public final static int ORDER_STATUS_DO_EXEC = 2;
     public final static int ORDER_STATUS_DONE_EXEC = 3;
+
+    public final static int RC_ALL_PERMISSION = 30001;
 }

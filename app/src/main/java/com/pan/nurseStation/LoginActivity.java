@@ -16,15 +16,11 @@ import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.pan.lib.util.BeanKit;
-import com.pan.nurseStation.bean.Constants;
-import com.pan.nurseStation.bean.request.LevelRequestBean;
+import com.pan.nurseStation.config.Constants;
 import com.pan.nurseStation.bean.request.LoginRequestBean;
-import com.pan.nurseStation.bean.response.LevelResponseBean;
 import com.pan.nurseStation.bean.response.LoginResponseBean;
 import com.pan.nurseStation.business.DBHisBusiness;
 import com.umeng.analytics.MobclickAgent;
-
-import java.util.Objects;
 
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = LoginActivity.class.getSimpleName();
