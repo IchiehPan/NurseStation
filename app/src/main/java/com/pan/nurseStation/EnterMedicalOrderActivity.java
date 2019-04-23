@@ -150,7 +150,7 @@ public class EnterMedicalOrderActivity extends AppCompatActivity implements Comm
     }
 
     public void showInputDialog(View view) {
-        inputDialog = new ScanInputDialog(this, R.style.JDialogStyle, R.layout.dialog_custom_scan_input);
+        inputDialog = new ScanInputDialog(this, R.style.JDialogStyle);
         inputDialog.setCanceledOnTouchOutside(false);
         inputDialog.show();
     }

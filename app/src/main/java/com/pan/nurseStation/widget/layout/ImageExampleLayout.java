@@ -2,6 +2,7 @@ package com.pan.nurseStation.widget.layout;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -9,8 +10,6 @@ import android.widget.TextView;
 
 import com.pan.lib.util.StringKit;
 import com.pan.nurseStation.R;
-
-import androidx.annotation.Nullable;
 
 public class ImageExampleLayout extends LinearLayout {
     private TextView tv;

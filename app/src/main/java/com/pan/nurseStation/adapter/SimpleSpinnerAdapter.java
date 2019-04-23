@@ -1,19 +1,18 @@
 package com.pan.nurseStation.adapter;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.pan.nurseStation.R;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 public class SimpleSpinnerAdapter<T> extends ArrayAdapter<T> {
     private Context mContext;
