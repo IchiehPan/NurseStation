@@ -48,7 +48,7 @@ public class LoginActivity extends AppCompatActivity {
         Button mEmailSignInButton = findViewById(R.id.email_sign_in_button);
         mEmailSignInButton.setOnClickListener(view -> attemptLogin());
 
-//        Log.i(TAG, "onCreate: " + InfoKit.getScreenMetrics(this));
+//        Log.d(TAG, "onCreate: " + InfoKit.getScreenMetrics(this));
     }
 
 

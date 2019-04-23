@@ -272,22 +272,22 @@ public class EnterVitalSignActivity extends AppCompatActivity implements CommonV
         boolean isAssistedBreathe = assistedBreatheCheckBox.isChecked();
         boolean isPhysicalCooling = physicalCoolingCheckBox.isChecked();
 
-        Log.i(TAG, "submitForm: temperatureType=" + temperatureType);
-        Log.i(TAG, "submitForm: pulseType=" + pulseType);
-        Log.i(TAG, "submitForm: temperature=" + temperature);
-        Log.i(TAG, "submitForm: pulse=" + pulse);
-        Log.i(TAG, "submitForm: breathe=" + breathe);
-        Log.i(TAG, "submitForm: bloodPressure=" + bloodPressure);
-        Log.i(TAG, "submitForm: stoolFrequency=" + stoolFrequency);
-        Log.i(TAG, "submitForm: urineVolume=" + urineVolume);
-        Log.i(TAG, "submitForm: inputVolume=" + inputVolume);
-        Log.i(TAG, "submitForm: outputVolume=" + outputVolume);
-        Log.i(TAG, "submitForm: weight=" + weight);
-        Log.i(TAG, "submitForm: height=" + height);
-        Log.i(TAG, "submitForm: other=" + other);
-        Log.i(TAG, "submitForm: skinTest=" + skinTest);
-        Log.i(TAG, "submitForm: isAssistedBreathe=" + isAssistedBreathe);
-        Log.i(TAG, "submitForm: isPhysicalCooling=" + isPhysicalCooling);
+        Log.d(TAG, "submitForm: temperatureType=" + temperatureType);
+        Log.d(TAG, "submitForm: temperature=" + temperature);
+        Log.d(TAG, "submitForm: pulse=" + pulse);
+        Log.d(TAG, "submitForm: breathe=" + breathe);
+        Log.d(TAG, "submitForm: pulseType=" + pulseType);
+        Log.d(TAG, "submitForm: bloodPressure=" + bloodPressure);
+        Log.d(TAG, "submitForm: stoolFrequency=" + stoolFrequency);
+        Log.d(TAG, "submitForm: urineVolume=" + urineVolume);
+        Log.d(TAG, "submitForm: inputVolume=" + inputVolume);
+        Log.d(TAG, "submitForm: outputVolume=" + outputVolume);
+        Log.d(TAG, "submitForm: weight=" + weight);
+        Log.d(TAG, "submitForm: height=" + height);
+        Log.d(TAG, "submitForm: other=" + other);
+        Log.d(TAG, "submitForm: skinTest=" + skinTest);
+        Log.d(TAG, "submitForm: isAssistedBreathe=" + isAssistedBreathe);
+        Log.d(TAG, "submitForm: isPhysicalCooling=" + isPhysicalCooling);
 
         DBHisBusiness dbHisBusiness = new DBHisBusiness();
         SignsDoRequestBean requestBean = new SignsDoRequestBean();
@@ -379,14 +379,12 @@ public class EnterVitalSignActivity extends AppCompatActivity implements CommonV
     }
 
     public void hideInputDialog(View view) {
-        Log.i(TAG, "hideInputDialog: --------------------------");
         inputDialog.hide();
     }
 
     public void submitInputDialog(View view) {
         EditText editText = inputDialog.findViewById(R.id.hos_id);
         String hosId = editText.getText().toString();
-        Log.i(TAG, "submitInputDialog: --------------------------hosId=" + hosId);
         if (Objects.equals(hosId, data.getHos_number())) {
             scanSuccess();
         } else {
@@ -412,7 +410,6 @@ public class EnterVitalSignActivity extends AppCompatActivity implements CommonV
     }
 
     public void hideErrorDialog(View view) {
-        Log.i(TAG, "hideErrorDialog: --------------------------");
         errorDialog.hide();
     }
 

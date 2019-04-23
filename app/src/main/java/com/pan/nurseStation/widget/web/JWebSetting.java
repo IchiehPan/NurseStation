@@ -40,6 +40,6 @@ public class JWebSetting {
             webSettings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
         }
 
-        Log.i(TAG, "UA: " + webSettings.getUserAgentString());
+        Log.d(TAG, "UA: " + webSettings.getUserAgentString());
     }
 }

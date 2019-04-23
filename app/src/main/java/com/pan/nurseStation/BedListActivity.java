@@ -123,7 +123,6 @@ public class BedListActivity extends AppCompatActivity implements CommonView, Ea
 //            int rows = bedTypes.length % 3 == 0 ? bedTypes.length / 3 : bedTypes.length / 3 + 1;
 
 //            bedTypeView.setMinimumHeight(rows * getResources().getDimensionPixelSize(R.dimen.single_level_type_height));
-            Log.i(TAG, "initNavData: bedTypes.length=" + bedTypes.length);
 
             SimpleSpinnerAdapter<String> arrayAdapter = new SimpleSpinnerAdapter<>(this, R.layout.item_simple_spinner, android.R.id.text1, bedTypes);
             arrayAdapter.setDropDownViewResource(R.layout.item_simple_spinner_dropdown);
@@ -277,17 +276,15 @@ public class BedListActivity extends AppCompatActivity implements CommonView, Ea
     }
 
     public void slideIn(View view) {
-        Log.i(TAG, "slideIn: ---");
         int translationX = searchBarView.getWidth() - DensityKit.getPxByResId(this, R.dimen.search_edit_text_margin_left);
-        Log.i(TAG, "initView: translationX=" + translationX);
+        Log.d(TAG, "initView: translationX=" + translationX);
         searchEditTextBar.setVisibility(View.VISIBLE);
 
-        Log.i(TAG, "initView: searchEditTextBar=" + searchEditTextBar);
-        Log.i(TAG, "initView: getWidth()=" + searchEditTextBar.getWidth());
-        Log.i(TAG, "initView: getHeight()=" + searchEditTextBar.getHeight());
+        Log.d(TAG, "initView: getWidth()=" + searchEditTextBar.getWidth());
+        Log.d(TAG, "initView: getHeight()=" + searchEditTextBar.getHeight());
 
-        Log.i(TAG, "initView: getTranslationX()=" + searchEditTextBar.getTranslationX());
-        Log.i(TAG, "initView: getTranslationY()=" + searchEditTextBar.getTranslationY());
+        Log.d(TAG, "initView: getTranslationX()=" + searchEditTextBar.getTranslationX());
+        Log.d(TAG, "initView: getTranslationY()=" + searchEditTextBar.getTranslationY());
         //RESTART表示从头开始，REVERSE表示从末尾倒播
         ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(searchEditTextBar, "translationX", translationX, 0);
 //        objectAnimator.setRepeatMode(ValueAnimator.RESTART);
@@ -295,7 +292,6 @@ public class BedListActivity extends AppCompatActivity implements CommonView, Ea
     }
 
     public void slideOut(View view) {
-        Log.i(TAG, "slideOut: ---");
         int translationX = searchBarView.getWidth() - DensityKit.getPxByResId(this, R.dimen.search_edit_text_margin_left);
         //RESTART表示从头开始，REVERSE表示从末尾倒播
         ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(searchEditTextBar, "translationX", 0, translationX);
@@ -327,7 +323,6 @@ public class BedListActivity extends AppCompatActivity implements CommonView, Ea
     }
 
     public void hideDialog(View view) {
-        Log.i(TAG, "hideErrorDialog: --------------------------");
         dialog.hide();
     }
 
@@ -371,8 +366,10 @@ public class BedListActivity extends AppCompatActivity implements CommonView, Ea
         if (EasyPermissions.hasPermissions(this, perms)) {
             // Already have permission, do the thing
             // ...
+            Log.d(TAG, "methodRequiresTwoPermission: 已经拥有权限");
         } else {
             // Do not have permissions, request them now
+            Log.d(TAG, "methodRequiresTwoPermission: 开始申请权限");
             EasyPermissions.requestPermissions(this, getString(R.string.request_permission_tip), Constants.RC_ALL_PERMISSION, perms);
         }
     }
@@ -394,5 +391,6 @@ public class BedListActivity extends AppCompatActivity implements CommonView, Ea
     public void onPermissionsGranted(int requestCode, @NonNull List<String> perms) {
         // Some permissions have been granted
         // ...
+        Log.d(TAG, "onPermissionsGranted: 申请权限通过");
     }
 }

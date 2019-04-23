@@ -114,8 +114,8 @@ public class InfoKit {
         DisplayMetrics dm = context.getResources().getDisplayMetrics();
         int w_screen = dm.widthPixels;
         int h_screen = dm.heightPixels;
-        Log.i(TAG, "getScreenMetrics: widthPixels=" + dm.widthPixels);
-        Log.i(TAG, "getScreenMetrics: heightPixels=" + dm.heightPixels);
+        Log.d(TAG, "getScreenMetrics: widthPixels=" + dm.widthPixels);
+        Log.d(TAG, "getScreenMetrics: heightPixels=" + dm.heightPixels);
         return new Point(w_screen, h_screen);
     }
 

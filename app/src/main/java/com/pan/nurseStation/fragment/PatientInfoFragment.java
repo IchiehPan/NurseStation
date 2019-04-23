@@ -64,7 +64,7 @@ public class PatientInfoFragment extends Fragment implements BackHandledInterfac
         mTabLayout.addOnTabSelectedListener(new TabLayout.BaseOnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                Log.i(TAG, "onTabSelected: ---------------------------" + tab.getText());
+                Log.d(TAG, "onTabSelected: ---------------------------" + tab.getText());
                 // 选中事件
                 String text = tab.getText().toString();
                 if (Objects.equals(text, getString(R.string.page_basic_info))) {
@@ -108,7 +108,6 @@ public class PatientInfoFragment extends Fragment implements BackHandledInterfac
 
     @Override
     public void onBackPressed() {
-        Log.i(TAG, "setSelectedFragment: ----------------------------------------------------");
     }
 
     public WebView getWebView() {

@@ -146,7 +146,6 @@ public class EnterMedicalOrderActivity extends AppCompatActivity implements Comm
     }
 
     public void hideErrorDialog(View view) {
-        Log.i(TAG, "hideErrorDialog: --------------------------");
         errorDialog.hide();
     }
 
@@ -157,14 +156,12 @@ public class EnterMedicalOrderActivity extends AppCompatActivity implements Comm
     }
 
     public void hideInputDialog(View view) {
-        Log.i(TAG, "hideInputDialog: --------------------------");
         inputDialog.hide();
     }
 
     public void submitInputDialog(View view) {
         EditText editText = inputDialog.findViewById(R.id.hos_id);
         String hosId = editText.getText().toString();
-        Log.i(TAG, "submitInputDialog: --------------------------hosId=" + hosId);
         if (Objects.equals(hosId, data.getHos_number())) {
             scanSuccess();
         } else {
@@ -261,7 +258,7 @@ public class EnterMedicalOrderActivity extends AppCompatActivity implements Comm
         EnjoinDoInfoRequestBean requestBean = new EnjoinDoInfoRequestBean();
         requestBean.setHos_number(data.getHos_number());
         dbHisBusiness.patientEnjoinDoInfo(requestBean, response -> {
-            Log.d(TAG, "getMedicalOrderData: response=" + response);
+            Log.i(TAG, "getMedicalOrderData: response=" + response);
             EnjoinDoInfoResponseBean responseBean = BeanKit.string2Bean(response, EnjoinDoInfoResponseBean.class);
 
             for (EnjoinDoInfoResponseBean.Data infoData : responseBean.getData()) {
@@ -335,7 +332,7 @@ public class EnterMedicalOrderActivity extends AppCompatActivity implements Comm
         EnjoinDoRequestBean requestBean = new EnjoinDoRequestBean();
         requestBean.setIds(dataList);
 
-        Log.i(TAG, "submitQuantity: EnjoinDoRequestBean=" + JSON.toJSONString(requestBean));
+        Log.d(TAG, "submitQuantity: EnjoinDoRequestBean=" + JSON.toJSONString(requestBean));
 
         dbHisBusiness.patientEnjoinDo(requestBean, response -> {
             Log.i(TAG, "submitQuantity: response=" + response);
