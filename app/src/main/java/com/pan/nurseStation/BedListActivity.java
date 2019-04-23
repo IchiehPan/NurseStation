@@ -77,6 +77,8 @@ public class BedListActivity extends AppCompatActivity implements CommonView, Ea
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        methodRequiresAllPermission();
+
         if (DBHisBusiness.loginBean == null) {
             signOut(null);
             return;
@@ -354,8 +356,7 @@ public class BedListActivity extends AppCompatActivity implements CommonView, Ea
         EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
     }
 
-    @AfterPermissionGranted(Constants.RC_ALL_PERMISSION)
-    private void methodRequiresTwoPermission() {
+    private void methodRequiresAllPermission() {
         String[] perms = {Manifest.permission.INTERNET,
                 Manifest.permission.ACCESS_NETWORK_STATE,
                 Manifest.permission.ACCESS_WIFI_STATE,
