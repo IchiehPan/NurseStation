@@ -124,7 +124,8 @@
         android:layout_height="31dp"
         android:layout_gravity="center"
         android:background="@null"
-        android:dropDownVerticalOffset="31dp" />
+        android:dropDownVerticalOffset="31dp"
+        android:entries="@array/bed_types" />
 
     <View
         android:layout_width="match_parent"

@@ -20,9 +20,22 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
+#fastjson
 -dontwarn com.alibaba.fastjson.**
--dontwarn org.apache.commons.**
+-keep class com.alibaba.fastjson.** { *; }
 
+## -------------------------------------------
+##     volley混淆
+## -------------------------------------------
+-keep class com.android.volley.** {*;}
+-keep class com.android.volley.toolbox.** {*;}
+-keep class com.android.volley.Response$* { *; }
+-keep class com.android.volley.Request$* { *; }
+-keep class com.android.volley.RequestQueue$* { *; }
+-keep class com.android.volley.toolbox.HurlStack$* { *; }
+-keep class com.android.volley.toolbox.ImageLoader$* { *; }
+
+#umeng
 -keep class com.umeng.** {*;}
 -keepclassmembers class * {
    public <init> (org.json.JSONObject);

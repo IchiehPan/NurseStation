@@ -90,6 +90,7 @@ public class BedListActivity extends AppCompatActivity implements CommonView {
         LevelRequestBean levelRequestBean = new LevelRequestBean();
         levelRequestBean.setDepartment_id(DBHisBusiness.loginBean.getDepartment_id());
         dbHisBusiness.level(levelRequestBean, response -> {
+            Log.d(TAG, "initNavData: response=" + response);
             LevelResponseBean responseBean = BeanKit.string2Bean(response, LevelResponseBean.class);
             if (responseBean.getRet() != Constants.MESSAGE_SUCCESS_CODE) {
                 Toast.makeText(this, responseBean.getMsg(), Toast.LENGTH_SHORT).show();
