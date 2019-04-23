@@ -13,6 +13,3 @@ dependencies {
     implementation group: 'commons-beanutils', name: 'commons-beanutils', version: '1.9.3'
 
 }
-
-sourceCompatibility = '1.8'
-targetCompatibility = '1.8'
