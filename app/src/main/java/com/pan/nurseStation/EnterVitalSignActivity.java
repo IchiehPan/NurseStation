@@ -229,8 +229,6 @@ public class EnterVitalSignActivity extends AppCompatActivity implements CommonV
         heightEditText.setText("");
         otherEditText.setText("");
         skinTestEditText.setText("");
-        assistedBreatheCheckBox.setChecked(false);
-        physicalCoolingCheckBox.setChecked(false);
     }
 
     public void submitForm(View view) {
