@@ -35,6 +35,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".LoginActivity"></activity>
+
+        <meta-data android:value="YOUR_APP_KEY" android:name="5cbe657e0cafb29dc7000320"/>
+        <meta-data android:value="Channel ID" android:name="nurse"/>
     </application>
 
 </manifest>
