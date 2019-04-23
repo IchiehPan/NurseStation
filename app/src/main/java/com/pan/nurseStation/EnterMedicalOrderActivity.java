@@ -31,6 +31,7 @@ import com.pan.nurseStation.widget.button.RoundButton;
 import com.pan.nurseStation.widget.dialog.ScanErrorDialog;
 import com.pan.nurseStation.widget.dialog.ScanInputDialog;
 import com.pan.nurseStation.widget.layout.ImageExampleLayout;
+import com.umeng.analytics.MobclickAgent;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -361,5 +362,17 @@ public class EnterMedicalOrderActivity extends AppCompatActivity implements Comm
         Intent intent = new Intent(this, BedListActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 }

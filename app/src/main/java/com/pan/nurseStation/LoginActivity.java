@@ -22,6 +22,7 @@ import com.pan.nurseStation.bean.request.LoginRequestBean;
 import com.pan.nurseStation.bean.response.LevelResponseBean;
 import com.pan.nurseStation.bean.response.LoginResponseBean;
 import com.pan.nurseStation.business.DBHisBusiness;
+import com.umeng.analytics.MobclickAgent;
 
 import java.util.Objects;
 
@@ -139,6 +140,18 @@ public class LoginActivity extends AppCompatActivity {
     public void loginFail() {
         mPasswordView.setError(getString(R.string.error_incorrect_password));
         mPasswordView.requestFocus();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 
 

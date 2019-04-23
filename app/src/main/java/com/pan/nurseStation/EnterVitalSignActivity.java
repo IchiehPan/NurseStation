@@ -34,6 +34,7 @@ import com.pan.nurseStation.business.DBHisBusiness;
 import com.pan.nurseStation.widget.button.RoundButton;
 import com.pan.nurseStation.widget.dialog.ScanErrorDialog;
 import com.pan.nurseStation.widget.dialog.ScanInputDialog;
+import com.umeng.analytics.MobclickAgent;
 
 import java.util.Calendar;
 import java.util.Objects;
@@ -420,5 +421,17 @@ public class EnterVitalSignActivity extends AppCompatActivity implements CommonV
         } else {
             scanFail();
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 }

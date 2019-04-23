@@ -38,6 +38,7 @@ import com.pan.nurseStation.bean.response.PatientDetailResponseBean;
 import com.pan.nurseStation.business.DBHisBusiness;
 import com.pan.nurseStation.listener.AutoLoadListener;
 import com.pan.nurseStation.widget.dialog.JAlertDialog;
+import com.umeng.analytics.MobclickAgent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -330,5 +331,15 @@ public class BedListActivity extends AppCompatActivity implements CommonView {
         startActivity(intent);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
+    }
 }

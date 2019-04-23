@@ -11,6 +11,8 @@ import android.util.Log;
 import android.view.Display;
 import android.view.WindowManager;
 
+import com.umeng.commonsdk.statistics.common.DeviceConfig;
+
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
@@ -134,5 +136,18 @@ public class InfoKit {
             screenResolution.set(display.getWidth(), display.getHeight());
         }
         return screenResolution;
+    }
+
+    public static String[] getTestDeviceInfo(Context context) {
+        String[] deviceInfo = new String[2];
+        try {
+            if (context != null) {
+                deviceInfo[0] = DeviceConfig.getDeviceIdForGeneral(context);
+                deviceInfo[1] = DeviceConfig.getMac(context);
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "getTestDeviceInfo: ", e);
+        }
+        return deviceInfo;
     }
 }

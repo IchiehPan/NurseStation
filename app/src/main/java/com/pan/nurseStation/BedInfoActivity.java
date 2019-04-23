@@ -18,6 +18,7 @@ import com.pan.nurseStation.bean.response.BedListResponseBean;
 import com.pan.nurseStation.fragment.MedicalOrderFragment;
 import com.pan.nurseStation.fragment.PatientInfoFragment;
 import com.pan.nurseStation.fragment.VitalSignFragment;
+import com.umeng.analytics.MobclickAgent;
 
 public class BedInfoActivity extends FragmentActivity {
     private static final String TAG = BedInfoActivity.class.getSimpleName();
@@ -176,5 +177,17 @@ public class BedInfoActivity extends FragmentActivity {
                 vitalSignFragment.getWebView().reload();
                 break;
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 }
