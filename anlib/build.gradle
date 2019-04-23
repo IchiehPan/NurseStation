@@ -33,7 +33,4 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     // https://mvnrepository.com/artifact/com.android.volley/volley
     implementation group: 'com.android.volley', name: 'volley', version: '1.1.1'
-
-    implementation  'com.umeng.umsdk:analytics:7.5.4'
-    implementation  'com.umeng.umsdk:common:1.5.4'
 }
