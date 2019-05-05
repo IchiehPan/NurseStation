@@ -220,8 +220,8 @@ public class EnterVitalSignActivity extends AppCompatActivity implements CommonV
     }
 
     public void resetForm(View view) {
-        temperatureGroup.clearCheck();
-        pulseGroup.clearCheck();
+//        temperatureGroup.clearCheck();
+//        pulseGroup.clearCheck();
         temperatureEditText.setText("");
         pulseEditText.setText("");
         heartEditText.setText("");
