@@ -3,6 +3,7 @@
  */
 package com.pan.nurseStation.bean.response;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -41,7 +42,7 @@ public class PatientDetailResponseBean {
         return msg;
     }
 
-    public static class Data {
+    public static class Data implements Serializable {
 
         private String name = "";
         private String bed_id = "";

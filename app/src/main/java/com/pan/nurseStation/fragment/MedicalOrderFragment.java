@@ -42,8 +42,7 @@ public class MedicalOrderFragment extends Fragment {
 
         Bundle bundle = this.getArguments();
         if (bundle != null) {
-            String patientInfo = bundle.getString("patientInfo");
-            patientInfoBean = BeanKit.string2Bean(patientInfo, BedListResponseBean.PatientInfo.class);
+            patientInfoBean = (BedListResponseBean.PatientInfo) bundle.getSerializable("patientInfo");
         }
 
         button.setOnClickListener(view -> {

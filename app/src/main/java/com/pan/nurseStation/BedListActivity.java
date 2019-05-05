@@ -331,7 +331,7 @@ public class BedListActivity extends AppCompatActivity implements CommonView, Ea
     public void inBedInfoActivity(BedListResponseBean.PatientInfo patientInfo) {
         Intent intent = new Intent(this, BedInfoActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putString("patientInfo", JSON.toJSONString(patientInfo));
+        bundle.putSerializable("patientInfo", patientInfo);
         intent.putExtras(bundle);
         startActivity(intent);
     }

@@ -95,15 +95,7 @@ public class JAlertDialog extends AlertDialog {
         Intent intent = new Intent(getContext(), clazz);
         Bundle bundle = new Bundle();
 
-        bundle.putString("patientInfo", JSON.toJSONString(data));
-        bundle.putString("hos_number", data.getHos_number());
-        bundle.putString("name", data.getName());
-        bundle.putString("age", data.getAge());
-        bundle.putString("sex", data.getSex());
-        bundle.putString("bedId", data.getBed_id());
-        bundle.putString("level", data.getLevel());
-        bundle.putString("number", data.getNumber());
-        bundle.putString("department_id", data.getDepartment_id());
+        bundle.putSerializable("patientInfo", data);
         intent.putExtras(bundle);
         getContext().startActivity(intent);
     }

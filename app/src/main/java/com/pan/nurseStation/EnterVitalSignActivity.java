@@ -95,8 +95,7 @@ public class EnterVitalSignActivity extends AppCompatActivity implements CommonV
             Toast.makeText(this, getString(R.string.request_fail_tip), Toast.LENGTH_SHORT).show();
             return;
         }
-        String patientInfo = bundle.getString("patientInfo");
-        data = BeanKit.string2Bean(patientInfo, PatientDetailResponseBean.Data.class);
+        data = (PatientDetailResponseBean.Data) bundle.getSerializable("patientInfo");
         initData(data);
     }
 
@@ -353,7 +352,7 @@ public class EnterVitalSignActivity extends AppCompatActivity implements CommonV
                 Toast.makeText(this, getString(R.string.request_success_tip), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(this, BedInfoActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putString("patientInfo", JSON.toJSONString(data));
+                bundle.putSerializable("patientInfo", data);
                 bundle.putInt("fragmentIndex", BedInfoActivity.FRAG_VITAL_SIGN_INDEX);
                 intent.putExtras(bundle);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);

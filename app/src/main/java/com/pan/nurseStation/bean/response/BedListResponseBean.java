@@ -3,6 +3,7 @@
  */
 package com.pan.nurseStation.bean.response;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -101,7 +102,7 @@ public class BedListResponseBean {
 
     }
 
-    public static class PatientInfo {
+    public static class PatientInfo implements Serializable {
 
         private String department_id = "";
         private String bed_id = "";

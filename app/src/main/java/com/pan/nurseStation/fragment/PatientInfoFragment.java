@@ -46,8 +46,7 @@ public class PatientInfoFragment extends Fragment implements BackHandledInterfac
     private void initView(View root) {
         mWebView = root.findViewById(R.id.webView);
         Bundle bundle = this.getArguments();
-        String patientInfo = bundle.getString("patientInfo");
-        patientInfoBean = BeanKit.string2Bean(patientInfo, BedListResponseBean.PatientInfo.class);
+        patientInfoBean = (BedListResponseBean.PatientInfo) bundle.getSerializable("patientInfo");
         String hosNumber = patientInfoBean.getHos_number();
 
         //声明WebSettings子类

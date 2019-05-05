@@ -73,8 +73,8 @@ public class BedInfoActivity extends FragmentActivity {
             return;
         }
 
-        String patientInfo = bundle.getString("patientInfo");
-        patientInfoBean = BeanKit.string2Bean(patientInfo, BedListResponseBean.PatientInfo.class);
+
+        patientInfoBean = (BedListResponseBean.PatientInfo) bundle.getSerializable("patientInfo");
         initData(patientInfoBean);
         initFragments(bundle);
         int fragmentIndex = bundle.getInt("fragmentIndex");
