@@ -176,7 +176,7 @@ public class EnterMedicalOrderActivity extends AppCompatActivity implements Comm
         return imageExampleLayout;
     }
 
-    public View getCheckContentView(EnjoinDoInfoResponseBean.Data.Group_list.MedicalOrder medicalOrder) {
+    public View getCheckContentView(EnjoinDoInfoResponseBean.MedicalOrder medicalOrder) {
         View contentView = getLayoutInflater().inflate(R.layout.item_checkbox_text_content, null);
         TextView typeText = contentView.findViewById(R.id.medical_type_text);
         TextView unitText = contentView.findViewById(R.id.medical_unit_text);
@@ -189,7 +189,7 @@ public class EnterMedicalOrderActivity extends AppCompatActivity implements Comm
         int pt_status = medicalOrder.getPt_status();
         typeText.setText(title);
         unitText.setText(dosage + "/" + amount + "/" + useMethod);
-        List<EnjoinDoInfoResponseBean.Data.Group_list.MedicalOrder> data = new ArrayList<>();
+        List<EnjoinDoInfoResponseBean.MedicalOrder> data = new ArrayList<>();
         data.add(medicalOrder);
         cb.setOnCheckedChangeListener((CompoundButton buttonView, boolean isChecked) -> {
             if (isChecked) {
@@ -203,11 +203,11 @@ public class EnterMedicalOrderActivity extends AppCompatActivity implements Comm
         return contentView;
     }
 
-    public void addCheckContentView(LinearLayout view, List<List<EnjoinDoInfoResponseBean.Data.Group_list.MedicalOrder>> dataList) {
-        for (List<EnjoinDoInfoResponseBean.Data.Group_list.MedicalOrder> data : dataList) {
+    public void addCheckContentView(LinearLayout view, List<List<EnjoinDoInfoResponseBean.MedicalOrder>> dataList) {
+        for (List<EnjoinDoInfoResponseBean.MedicalOrder> data : dataList) {
             if (!dataList.isEmpty()) {
                 int index = 0;
-                for (EnjoinDoInfoResponseBean.Data.Group_list.MedicalOrder medicalOrder : data) {
+                for (EnjoinDoInfoResponseBean.MedicalOrder medicalOrder : data) {
                     String title = medicalOrder.getTitle();
                     String dosage = medicalOrder.getDosage();
                     String amount = medicalOrder.getAmount();
@@ -261,9 +261,9 @@ public class EnterMedicalOrderActivity extends AppCompatActivity implements Comm
             Log.i(TAG, "getMedicalOrderData: response=" + response);
             EnjoinDoInfoResponseBean responseBean = BeanKit.string2Bean(response, EnjoinDoInfoResponseBean.class);
 
-            for (EnjoinDoInfoResponseBean.Data.Group_list group_list : responseBean.getData().getGroup_list()) {
+            for (EnjoinDoInfoResponseBean.Group_list group_list : responseBean.getData().getGroup_list()) {
                 int status = group_list.getPt_status();
-                List<List<EnjoinDoInfoResponseBean.Data.Group_list.MedicalOrder>> list = group_list.getList();
+                List<List<EnjoinDoInfoResponseBean.MedicalOrder>> list = group_list.getList();
                 switch (status) {
                     case Constants.ORDER_STATUS_WAIT_MEDICAL:
                         linearLayout.addView(getCheckHeadView(getString(R.string.order_status_waiting_for_medicine)));
@@ -319,8 +319,8 @@ public class EnterMedicalOrderActivity extends AppCompatActivity implements Comm
 
         List<String> dataList = new ArrayList<>();
         for (Map.Entry entry : checkedMap.entrySet()) {
-            List<EnjoinDoInfoResponseBean.Data.Group_list.MedicalOrder> medicalOrderList = (List<EnjoinDoInfoResponseBean.Data.Group_list.MedicalOrder>) entry.getKey();
-            for (EnjoinDoInfoResponseBean.Data.Group_list.MedicalOrder medicalOrder : medicalOrderList) {
+            List<EnjoinDoInfoResponseBean.MedicalOrder> medicalOrderList = (List<EnjoinDoInfoResponseBean.MedicalOrder>) entry.getKey();
+            for (EnjoinDoInfoResponseBean.MedicalOrder medicalOrder : medicalOrderList) {
                 dataList.add(medicalOrder.getId());
             }
         }
