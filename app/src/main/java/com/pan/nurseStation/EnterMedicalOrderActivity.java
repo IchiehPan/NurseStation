@@ -205,7 +205,7 @@ public class EnterMedicalOrderActivity extends AppCompatActivity implements Comm
 
     public void addCheckContentView(LinearLayout view, List<List<EnjoinDoInfoResponseBean.Data.Group_list.MedicalOrder>> dataList) {
         for (List<EnjoinDoInfoResponseBean.Data.Group_list.MedicalOrder> data : dataList) {
-            if (dataList.size() > 1) {
+            if (!dataList.isEmpty()) {
                 int index = 0;
                 for (EnjoinDoInfoResponseBean.Data.Group_list.MedicalOrder medicalOrder : data) {
                     String title = medicalOrder.getTitle();
@@ -247,7 +247,7 @@ public class EnterMedicalOrderActivity extends AppCompatActivity implements Comm
                     view.addView(contentView);
                     ++index;
                 }
-            } else if (dataList.size() == 0) {
+            } else {
                 linearLayout.addView(getCheckContentView(data.get(0)));
             }
         }
