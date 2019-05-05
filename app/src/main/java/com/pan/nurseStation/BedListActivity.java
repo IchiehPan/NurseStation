@@ -340,14 +340,14 @@ public class BedListActivity extends AppCompatActivity implements CommonView, Ea
 
     @Override
     public void onResume() {
-        super.onResume();
         MobclickAgent.onResume(this);
+        super.onResume();
     }
 
     @Override
     public void onPause() {
-        super.onPause();
         MobclickAgent.onPause(this);
+        super.onPause();
     }
 
     @Override
