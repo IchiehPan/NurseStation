@@ -72,9 +72,9 @@ public class BedInfoActivity extends FragmentActivity {
             return;
         }
 
-
-        String tagInfo = bundle.getString("tagInfo");
-        initData(tagInfo);
+        String bedId = bundle.getString("bedId");
+        String name = bundle.getString("name");
+        initData(bedId + " " + name);
         initFragments(bundle);
         int fragmentIndex = bundle.getInt("fragmentIndex");
         if (fragmentIndex == lastShowFragment) {

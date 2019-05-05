@@ -23,7 +23,6 @@ public class PatientInfoFragment extends Fragment implements BackHandledInterfac
     private static final String TAG = PatientInfoFragment.class.getSimpleName();
     private WebView mWebView;
     private TabLayout mTabLayout;
-    private BedListResponseBean.PatientInfo patientInfoBean;
 
     public PatientInfoFragment() {
         // Required empty public constructor
@@ -46,8 +45,7 @@ public class PatientInfoFragment extends Fragment implements BackHandledInterfac
     private void initView(View root) {
         mWebView = root.findViewById(R.id.webView);
         Bundle bundle = this.getArguments();
-        patientInfoBean = (BedListResponseBean.PatientInfo) bundle.getSerializable("patientInfo");
-        String hosNumber = patientInfoBean.getHos_number();
+        String hosNumber = bundle.getString("hosNumber");
 
         //声明WebSettings子类
         JWebSetting.setParam(mWebView.getSettings());

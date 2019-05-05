@@ -20,7 +20,6 @@ import com.pan.nurseStation.widget.web.JWebViewClient;
 public class MedicalOrderFragment extends Fragment {
     private WebView mWebView;
     private Button button;
-    private BedListResponseBean.PatientInfo patientInfoBean;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -41,9 +40,11 @@ public class MedicalOrderFragment extends Fragment {
         button = root.findViewById(R.id.button);
 
         Bundle bundle = this.getArguments();
-        if (bundle != null) {
-            patientInfoBean = (BedListResponseBean.PatientInfo) bundle.getSerializable("patientInfo");
+        if (bundle == null) {
+            return;
         }
+
+        String hosNumber = bundle.getString("hosNumber");
 
         button.setOnClickListener(view -> {
             Intent intent = new Intent(getContext(), EnterMedicalOrderActivity.class);
@@ -54,7 +55,7 @@ public class MedicalOrderFragment extends Fragment {
         //声明WebSettings子类
         JWebSetting.setParam(mWebView.getSettings());
 
-        mWebView.loadUrl(Constants.MEDICAL_ORDER_URL + patientInfoBean.getHos_number());
+        mWebView.loadUrl(Constants.MEDICAL_ORDER_URL + hosNumber);
         mWebView.setWebViewClient(JWebViewClient.getInstance());
     }
 

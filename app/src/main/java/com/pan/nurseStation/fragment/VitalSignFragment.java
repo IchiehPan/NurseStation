@@ -21,7 +21,6 @@ public class VitalSignFragment extends Fragment {
     private static final String TAG = VitalSignFragment.class.getSimpleName();
     private WebView mWebView;
     private Button button;
-    private BedListResponseBean.PatientInfo patientInfoBean;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,9 +41,7 @@ public class VitalSignFragment extends Fragment {
         button = root.findViewById(R.id.button);
 
         Bundle bundle = this.getArguments();
-        if (bundle != null) {
-            patientInfoBean = (BedListResponseBean.PatientInfo) bundle.getSerializable("patientInfo");
-        }
+        String hosNumber = bundle.getString("hosNumber");
 
         button.setOnClickListener(view -> {
             Intent intent = new Intent(getContext(), EnterVitalSignActivity.class);
@@ -54,7 +51,7 @@ public class VitalSignFragment extends Fragment {
 
         //声明WebSettings子类
         JWebSetting.setParam(mWebView.getSettings());
-        mWebView.loadUrl(Constants.VITAL_SIGN_URL + patientInfoBean.getHos_number());
+        mWebView.loadUrl(Constants.VITAL_SIGN_URL + hosNumber);
         mWebView.setWebViewClient(JWebViewClient.getInstance());
     }
 

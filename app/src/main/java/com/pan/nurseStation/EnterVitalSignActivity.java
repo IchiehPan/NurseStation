@@ -352,7 +352,9 @@ public class EnterVitalSignActivity extends AppCompatActivity implements CommonV
                 Toast.makeText(this, getString(R.string.request_success_tip), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(this, BedInfoActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putString("tagInfo", data.getBed_id() + " " + data.getName());
+                bundle.putString("bedId", data.getBed_id());
+                bundle.putString("name", data.getName());
+                bundle.putString("hosNumber", data.getHos_number());
                 bundle.putInt("fragmentIndex", BedInfoActivity.FRAG_VITAL_SIGN_INDEX);
                 intent.putExtras(bundle);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
