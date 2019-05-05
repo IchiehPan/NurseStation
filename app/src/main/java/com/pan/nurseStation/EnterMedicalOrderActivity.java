@@ -193,7 +193,7 @@ public class EnterMedicalOrderActivity extends AppCompatActivity implements Comm
         data.add(medicalOrder);
         cb.setOnCheckedChangeListener((CompoundButton buttonView, boolean isChecked) -> {
             if (isChecked) {
-                checkedMap.put(data, pt_status);
+                checkedMap.put(data, cb);
                 increaseQuantityNum();
             } else {
                 checkedMap.remove(data);
@@ -229,7 +229,7 @@ public class EnterMedicalOrderActivity extends AppCompatActivity implements Comm
                     } else {
                         cb.setOnCheckedChangeListener((CompoundButton buttonView, boolean isChecked) -> {
                             if (isChecked) {
-                                checkedMap.put(data, pt_status);
+                                checkedMap.put(data, cb);
                                 increaseQuantityNum();
                             } else {
                                 checkedMap.remove(data);
@@ -303,8 +303,8 @@ public class EnterMedicalOrderActivity extends AppCompatActivity implements Comm
     }
 
     public void resetQuantity(View view) {
-        for (Object key : checkedMap.keySet()) {
-            CheckBox cb = (CheckBox) key;
+        for (Object value : checkedMap.values()) {
+            CheckBox cb = (CheckBox) value;
             cb.setChecked(false);
         }
         checkedMap.clear();
