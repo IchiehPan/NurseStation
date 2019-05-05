@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.pan.lib.util.BeanKit;
@@ -69,6 +70,7 @@ public class BedInfoActivity extends FragmentActivity {
 
         Bundle bundle = getIntent().getExtras();
         if (bundle == null) {
+            Toast.makeText(this, getString(R.string.request_fail_tip), Toast.LENGTH_SHORT).show();
             return;
         }
 

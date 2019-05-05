@@ -40,10 +40,6 @@ public class MedicalOrderFragment extends Fragment {
         button = root.findViewById(R.id.button);
 
         Bundle bundle = this.getArguments();
-        if (bundle == null) {
-            return;
-        }
-
         String hosNumber = bundle.getString("hosNumber");
 
         button.setOnClickListener(view -> {

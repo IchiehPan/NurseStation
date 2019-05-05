@@ -26,6 +26,7 @@ import com.pan.lib.util.BeanKit;
 import com.pan.lib.util.DateKit;
 import com.pan.lib.util.StringKit;
 import com.pan.nurseStation.animate.AnimateBusiness;
+import com.pan.nurseStation.bean.request.PatientDetailRequestBean;
 import com.pan.nurseStation.config.Constants;
 import com.pan.nurseStation.bean.request.SignsDoRequestBean;
 import com.pan.nurseStation.bean.response.PatientDetailResponseBean;
@@ -71,9 +72,9 @@ public class EnterVitalSignActivity extends AppCompatActivity implements CommonV
     private RoundButton successButtonBar;
     private TextView scanSuccessTip;
     private ScanErrorDialog errorDialog;
-    private PatientDetailResponseBean.Data data;
     private TextView dateTextView;
     private TextView timeTextView;
+    private PatientDetailResponseBean.Data data;
 
 
     private String date;
@@ -92,25 +93,31 @@ public class EnterVitalSignActivity extends AppCompatActivity implements CommonV
 
         Bundle bundle = getIntent().getExtras();
         if (bundle == null) {
-            Toast.makeText(this, getString(R.string.request_fail_tip), Toast.LENGTH_SHORT).show();
             return;
         }
-        data = (PatientDetailResponseBean.Data) bundle.getSerializable("patientInfo");
-        initData(data);
+        initData(bundle.getString("hosNumber"));
     }
 
-    private void initData(PatientDetailResponseBean.Data data) {
-        String sex = data.getSex();
-        patientName.setText(data.getName());
-        if (Objects.equals(sex, getString(R.string.sex_type_male))) {
-            patientSex.setBackgroundResource(R.drawable.ic_male);
-        } else if (Objects.equals(sex, getString(R.string.sex_type_female))) {
-            patientSex.setBackgroundResource(R.drawable.ic_female);
-        }
-        patientAge.setText(data.getAge());
-        hosNumber.setText(data.getHos_number());
-        departmentName.setText(data.getDepartment_name());
-        bedId.setText(data.getBed_id());
+    private void initData(String hosNumber) {
+        DBHisBusiness dbHisBusiness = new DBHisBusiness();
+        PatientDetailRequestBean requestBean = new PatientDetailRequestBean();
+        requestBean.setHos_number(hosNumber);
+        dbHisBusiness.patientdetail(requestBean, response -> {
+            Log.d(TAG, "showDialog: response=" + response);
+            data = BeanKit.string2Bean(response, PatientDetailResponseBean.class).getData();
+
+            String sex = data.getSex();
+            this.patientName.setText(data.getName());
+            if (Objects.equals(sex, getString(R.string.sex_type_male))) {
+                this.patientSex.setBackgroundResource(R.drawable.ic_male);
+            } else if (Objects.equals(sex, getString(R.string.sex_type_female))) {
+                this.patientSex.setBackgroundResource(R.drawable.ic_female);
+            }
+            this.patientAge.setText(data.getAge());
+            this.hosNumber.setText(data.getHos_number());
+            this.departmentName.setText(data.getDepartment_name());
+            this.bedId.setText(data.getBed_id());
+        }, error -> Log.e(TAG, "initData: ", error));
     }
 
     private void initView() {
