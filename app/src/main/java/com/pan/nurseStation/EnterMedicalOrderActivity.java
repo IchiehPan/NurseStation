@@ -176,7 +176,7 @@ public class EnterMedicalOrderActivity extends AppCompatActivity implements Comm
         return imageExampleLayout;
     }
 
-    public View getCheckContentView(EnjoinDoInfoResponseBean.Data.MedicalOrder medicalOrder) {
+    public View getCheckContentView(EnjoinDoInfoResponseBean.Data.Group_list.MedicalOrder medicalOrder) {
         View contentView = getLayoutInflater().inflate(R.layout.item_checkbox_text_content, null);
         TextView typeText = contentView.findViewById(R.id.medical_type_text);
         TextView unitText = contentView.findViewById(R.id.medical_unit_text);
@@ -186,14 +186,14 @@ public class EnterMedicalOrderActivity extends AppCompatActivity implements Comm
         String amount = medicalOrder.getAmount();
         String useMethod = medicalOrder.getUse_method();
         String id = medicalOrder.getId();
-        String status = medicalOrder.getStatus();
+        int pt_status = medicalOrder.getPt_status();
         typeText.setText(title);
         unitText.setText(dosage + "/" + amount + "/" + useMethod);
-        List<EnjoinDoInfoResponseBean.Data.MedicalOrder> data = new ArrayList<>();
+        List<EnjoinDoInfoResponseBean.Data.Group_list.MedicalOrder> data = new ArrayList<>();
         data.add(medicalOrder);
         cb.setOnCheckedChangeListener((CompoundButton buttonView, boolean isChecked) -> {
             if (isChecked) {
-                checkedMap.put(data, status);
+                checkedMap.put(data, pt_status);
                 increaseQuantityNum();
             } else {
                 checkedMap.remove(data);
@@ -203,17 +203,17 @@ public class EnterMedicalOrderActivity extends AppCompatActivity implements Comm
         return contentView;
     }
 
-    public void addCheckContentView(LinearLayout view, List<List<EnjoinDoInfoResponseBean.Data.MedicalOrder>> dataList) {
-        for (List<EnjoinDoInfoResponseBean.Data.MedicalOrder> data : dataList) {
+    public void addCheckContentView(LinearLayout view, List<List<EnjoinDoInfoResponseBean.Data.Group_list.MedicalOrder>> dataList) {
+        for (List<EnjoinDoInfoResponseBean.Data.Group_list.MedicalOrder> data : dataList) {
             if (dataList.size() > 1) {
                 int index = 0;
-                for (EnjoinDoInfoResponseBean.Data.MedicalOrder medicalOrder : data) {
+                for (EnjoinDoInfoResponseBean.Data.Group_list.MedicalOrder medicalOrder : data) {
                     String title = medicalOrder.getTitle();
                     String dosage = medicalOrder.getDosage();
                     String amount = medicalOrder.getAmount();
                     String useMethod = medicalOrder.getUse_method();
                     String id = medicalOrder.getId();
-                    String status = medicalOrder.getStatus();
+                    int pt_status = medicalOrder.getPt_status();
 
                     View contentView = getLayoutInflater().inflate(R.layout.item_checkbox_text_content, null);
                     TextView typeText = contentView.findViewById(R.id.medical_type_text);
@@ -229,7 +229,7 @@ public class EnterMedicalOrderActivity extends AppCompatActivity implements Comm
                     } else {
                         cb.setOnCheckedChangeListener((CompoundButton buttonView, boolean isChecked) -> {
                             if (isChecked) {
-                                checkedMap.put(data, status);
+                                checkedMap.put(data, pt_status);
                                 increaseQuantityNum();
                             } else {
                                 checkedMap.remove(data);
@@ -261,9 +261,9 @@ public class EnterMedicalOrderActivity extends AppCompatActivity implements Comm
             Log.i(TAG, "getMedicalOrderData: response=" + response);
             EnjoinDoInfoResponseBean responseBean = BeanKit.string2Bean(response, EnjoinDoInfoResponseBean.class);
 
-            for (EnjoinDoInfoResponseBean.Data infoData : responseBean.getData()) {
-                int status = infoData.getStatus();
-                List<List<EnjoinDoInfoResponseBean.Data.MedicalOrder>> list = infoData.getList();
+            for (EnjoinDoInfoResponseBean.Data.Group_list group_list : responseBean.getData().getGroup_list()) {
+                int status = group_list.getPt_status();
+                List<List<EnjoinDoInfoResponseBean.Data.Group_list.MedicalOrder>> list = group_list.getList();
                 switch (status) {
                     case Constants.ORDER_STATUS_WAIT_MEDICAL:
                         linearLayout.addView(getCheckHeadView(getString(R.string.order_status_waiting_for_medicine)));
@@ -317,14 +317,11 @@ public class EnterMedicalOrderActivity extends AppCompatActivity implements Comm
             return;
         }
 
-        List<EnjoinDoRequestBean.Data> dataList = new ArrayList<>();
+        List<String> dataList = new ArrayList<>();
         for (Map.Entry entry : checkedMap.entrySet()) {
-            List<EnjoinDoInfoResponseBean.Data.MedicalOrder> medicalOrderList = (List<EnjoinDoInfoResponseBean.Data.MedicalOrder>) entry.getKey();
-            for (EnjoinDoInfoResponseBean.Data.MedicalOrder medicalOrder : medicalOrderList) {
-                EnjoinDoRequestBean.Data data = new EnjoinDoRequestBean.Data();
-                data.setId(medicalOrder.getId());
-                data.setStatus(medicalOrder.getStatus());
-                dataList.add(data);
+            List<EnjoinDoInfoResponseBean.Data.Group_list.MedicalOrder> medicalOrderList = (List<EnjoinDoInfoResponseBean.Data.Group_list.MedicalOrder>) entry.getKey();
+            for (EnjoinDoInfoResponseBean.Data.Group_list.MedicalOrder medicalOrder : medicalOrderList) {
+                dataList.add(medicalOrder.getId());
             }
         }
 
@@ -349,7 +346,6 @@ public class EnterMedicalOrderActivity extends AppCompatActivity implements Comm
             } else {
                 Toast.makeText(this, getString(R.string.request_fail_tip), Toast.LENGTH_SHORT).show();
             }
-
         }, error -> {
             Log.e(TAG, "submitQuantity: ", error);
         });

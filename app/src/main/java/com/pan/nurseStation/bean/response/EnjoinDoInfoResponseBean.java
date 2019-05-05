@@ -17,7 +17,7 @@ public class EnjoinDoInfoResponseBean {
      * 操作码，0表示成功，其他表示失败
      */
     private int ret;
-    private List<Data> data;
+    private Data data;
     private String msg;
 
     public void setRet(int ret) {
@@ -28,11 +28,11 @@ public class EnjoinDoInfoResponseBean {
         return ret;
     }
 
-    public void setData(List<Data> data) {
+    public void setData(Data data) {
         this.data = data;
     }
 
-    public List<Data> getData() {
+    public Data getData() {
         return data;
     }
 
@@ -44,134 +44,138 @@ public class EnjoinDoInfoResponseBean {
         return msg;
     }
 
-    private int status;
-    private List<List> list;
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setList(List<List> list) {
-        this.list = list;
-    }
-
-    public List<List> getList() {
-        return list;
-    }
-
-
     public static class Data {
 
-        private int status;
-        private List<List<MedicalOrder>> list;
+        private String reg_no;
+        private List<Group_list> group_list;
 
-        public void setStatus(int status) {
-            this.status = status;
+        public void setReg_no(String reg_no) {
+            this.reg_no = reg_no;
         }
 
-        public int getStatus() {
-            return status;
+        public String getReg_no() {
+            return reg_no;
         }
 
-        public void setList(List<List<MedicalOrder>> list) {
-            this.list = list;
+        public void setGroup_list(List<Group_list> group_list) {
+            this.group_list = group_list;
         }
 
-        public List<List<MedicalOrder>> getList() {
-            return list;
+        public List<Group_list> getGroup_list() {
+            return group_list;
         }
 
-        public static class MedicalOrder {
+        public static class Group_list {
 
-            /**
-             * 主键ID
-             */
-            private String id;
-            /**
-             * 医嘱名称
-             */
-            private String title;
-            /**
-             * 组合号
-             */
-            private String combination;
-            /**
-             * 用量
-             */
-            private String dosage;
-            /**
-             * 用法
-             */
-            private String use_method;
-            /**
-             * 数量
-             */
-            private String amount;
-            /**
-             * 状态，0：待核药，1：待执行，2：执行中，3：已完成
-             */
-            private String status;
+            private int pt_status;
+            private List<List<MedicalOrder>> list;
 
-            public void setId(String id) {
-                this.id = id;
+            public void setPt_status(int pt_status) {
+                this.pt_status = pt_status;
             }
 
-            public String getId() {
-                return id;
+            public int getPt_status() {
+                return pt_status;
             }
 
-            public void setTitle(String title) {
-                this.title = title;
+            public void setList(List<List<MedicalOrder>> list) {
+                this.list = list;
             }
 
-            public String getTitle() {
-                return title;
+            public List<List<MedicalOrder>> getList() {
+                return list;
             }
 
-            public void setCombination(String combination) {
-                this.combination = combination;
+            public static class MedicalOrder {
+
+                /**
+                 * 主键ID
+                 */
+                private String id;
+                /**
+                 * 医嘱名称
+                 */
+                private String title;
+                /**
+                 * 组合号
+                 */
+                private String combination;
+                /**
+                 * 用量
+                 */
+                private String dosage;
+                /**
+                 * 用法
+                 */
+                private String use_method;
+                /**
+                 * 数量
+                 */
+                private String amount;
+                /**
+                 * 状态，0：待核药，1：待执行，2：执行中，3：已完成
+                 */
+                private int pt_status;
+
+                public void setId(String id) {
+                    this.id = id;
+                }
+
+                public String getId() {
+                    return id;
+                }
+
+                public void setTitle(String title) {
+                    this.title = title;
+                }
+
+                public String getTitle() {
+                    return title;
+                }
+
+                public void setCombination(String combination) {
+                    this.combination = combination;
+                }
+
+                public String getCombination() {
+                    return combination;
+                }
+
+                public void setDosage(String dosage) {
+                    this.dosage = dosage;
+                }
+
+                public String getDosage() {
+                    return dosage;
+                }
+
+                public void setUse_method(String use_method) {
+                    this.use_method = use_method;
+                }
+
+                public String getUse_method() {
+                    return use_method;
+                }
+
+                public void setAmount(String amount) {
+                    this.amount = amount;
+                }
+
+                public String getAmount() {
+                    return amount;
+                }
+
+                public void setPt_status(int pt_status) {
+                    this.pt_status = pt_status;
+                }
+
+                public int getPt_status() {
+                    return pt_status;
+                }
             }
 
-            public String getCombination() {
-                return combination;
-            }
-
-            public void setDosage(String dosage) {
-                this.dosage = dosage;
-            }
-
-            public String getDosage() {
-                return dosage;
-            }
-
-            public void setUse_method(String use_method) {
-                this.use_method = use_method;
-            }
-
-            public String getUse_method() {
-                return use_method;
-            }
-
-            public void setAmount(String amount) {
-                this.amount = amount;
-            }
-
-            public String getAmount() {
-                return amount;
-            }
-
-            public void setStatus(String status) {
-                this.status = status;
-            }
-
-            public String getStatus() {
-                return status;
-            }
         }
+
     }
 
 }
