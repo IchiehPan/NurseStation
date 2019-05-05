@@ -352,7 +352,7 @@ public class EnterMedicalOrderActivity extends AppCompatActivity implements Comm
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
             } else {
-                Toast.makeText(this, getString(R.string.request_fail_tip), Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, responseBean.getMsg(), Toast.LENGTH_SHORT).show();
             }
         }, error -> {
             Log.e(TAG, "submitQuantity: ", error);
