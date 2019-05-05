@@ -96,6 +96,7 @@ public class JAlertDialog extends AlertDialog {
         Bundle bundle = new Bundle();
 
         bundle.putSerializable("patientInfo", data);
+        bundle.putString("tagInfo", data.getBed_id() + " " + data.getName());
         intent.putExtras(bundle);
         getContext().startActivity(intent);
     }

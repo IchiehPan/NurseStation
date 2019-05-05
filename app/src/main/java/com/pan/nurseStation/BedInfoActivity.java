@@ -34,7 +34,6 @@ public class BedInfoActivity extends FragmentActivity {
 
 
     private int lastShowFragment = 0;
-    private BedListResponseBean.PatientInfo patientInfoBean;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = (@NonNull MenuItem item) -> {
@@ -74,8 +73,8 @@ public class BedInfoActivity extends FragmentActivity {
         }
 
 
-        patientInfoBean = (BedListResponseBean.PatientInfo) bundle.getSerializable("patientInfo");
-        initData(patientInfoBean);
+        String tagInfo = bundle.getString("tagInfo");
+        initData(tagInfo);
         initFragments(bundle);
         int fragmentIndex = bundle.getInt("fragmentIndex");
         if (fragmentIndex == lastShowFragment) {
@@ -96,14 +95,8 @@ public class BedInfoActivity extends FragmentActivity {
         bottomNavigationView.setSelectedItemId(menuItem.getItemId());
     }
 
-    private void initData(BedListResponseBean.PatientInfo patientInfoBean) {
-        String bedId = "";
-        String name = "";
-        if (patientInfoBean != null) {
-            bedId = patientInfoBean.getBed_id();
-            name = patientInfoBean.getName();
-        }
-        patientExampleInfo.setText(bedId + " " + name);
+    private void initData(String tagInfo) {
+        patientExampleInfo.setText(tagInfo);
     }
 
     private void initView() {
