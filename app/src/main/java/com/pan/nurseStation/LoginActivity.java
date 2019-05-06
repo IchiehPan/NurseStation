@@ -48,6 +48,10 @@ public class LoginActivity extends AppCompatActivity {
         Button mEmailSignInButton = findViewById(R.id.email_sign_in_button);
         mEmailSignInButton.setOnClickListener(view -> attemptLogin());
 
+        if (Constants.ISDEBUG) {
+            mUsernameView.setText(getString(R.string._user_name));
+        }
+
 //        Log.d(TAG, "onCreate: " + InfoKit.getScreenMetrics(this));
     }
 
