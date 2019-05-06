@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -28,6 +29,7 @@ import com.pan.nurseStation.bean.response.EnjoinDoInfoResponseBean;
 import com.pan.nurseStation.bean.response.EnjoinDoResponseBean;
 import com.pan.nurseStation.bean.response.PatientDetailResponseBean;
 import com.pan.nurseStation.business.DBHisBusiness;
+import com.pan.nurseStation.util.DensityKit;
 import com.pan.nurseStation.widget.button.RoundButton;
 import com.pan.nurseStation.widget.dialog.ScanErrorDialog;
 import com.pan.nurseStation.widget.dialog.ScanInputDialog;
@@ -65,6 +67,20 @@ public class EnterMedicalOrderActivity extends AppCompatActivity implements Comm
         setContentView(R.layout.activity_enter_medical_order);
         initView();
 
+        checkedMap = new HashMap<>();
+
+        if (Constants.ISDEBUG) {
+            for (int index = 0; index <= 50; index++) {
+                List<List<EnjoinDoInfoResponseBean.MedicalOrder>> list = new ArrayList<>();
+                List<EnjoinDoInfoResponseBean.MedicalOrder> tempList = new ArrayList<>();
+                EnjoinDoInfoResponseBean.MedicalOrder tempBean = new EnjoinDoInfoResponseBean.MedicalOrder();
+                tempBean.setTitle(String.valueOf(index));
+                tempList.add(tempBean);
+                list.add(tempList);
+                addCheckContentView(linearLayout, list);
+            }
+        }
+
         resultReceiver = new ScanResultReceiver(this);
         registerReceiver(resultReceiver, new IntentFilter(com.bben.ydcf.scandome.Constants.DECODE_RESULT_FILTER));
 
@@ -73,8 +89,7 @@ public class EnterMedicalOrderActivity extends AppCompatActivity implements Comm
             return;
         }
 
-        checkedMap = new HashMap<>();
-        initData(bundle.getString("hosNumber"));
+//        initData(bundle.getString("hosNumber"));
     }
 
     private void initData(String hosNumber) {
@@ -206,12 +221,18 @@ public class EnterMedicalOrderActivity extends AppCompatActivity implements Comm
                 decreaseQuantityNum();
             }
         });
+
+        // 动态设置marginLayout
+        LinearLayout marginLinearLayout = contentView.findViewById(R.id.margin_linear_layout);
+        LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) marginLinearLayout.getLayoutParams();
+        lp.setMargins(0, 0, 0, DensityKit.getPxByResId(this, R.dimen.list_view_margin));
+        marginLinearLayout.setLayoutParams(lp);
         return contentView;
     }
 
     public void addCheckContentView(LinearLayout view, List<List<EnjoinDoInfoResponseBean.MedicalOrder>> dataList) {
         for (List<EnjoinDoInfoResponseBean.MedicalOrder> data : dataList) {
-            if (!dataList.isEmpty()) {
+            if (data.size() > 1) {
                 int index = 0;
                 for (EnjoinDoInfoResponseBean.MedicalOrder medicalOrder : data) {
                     String title = medicalOrder.getTitle();
@@ -246,14 +267,13 @@ public class EnterMedicalOrderActivity extends AppCompatActivity implements Comm
 
                     LinearLayout marginLinearLayout = contentView.findViewById(R.id.margin_linear_layout);
                     LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) marginLinearLayout.getLayoutParams();
-                    lp.setMargins(0, 0, 0, 0);
-                    lp.height = LinearLayout.LayoutParams.WRAP_CONTENT;
+                    lp.setMargins(0, 0, 0, DensityKit.getPxByResId(this, R.dimen.list_view_margin));
                     marginLinearLayout.setLayoutParams(lp);
 
                     view.addView(contentView);
                     ++index;
                 }
-            } else {
+            } else if (data.size() == 1) {
                 linearLayout.addView(getCheckContentView(data.get(0)));
             }
         }

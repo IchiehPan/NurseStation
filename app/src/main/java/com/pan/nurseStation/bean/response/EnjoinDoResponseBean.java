@@ -1,11 +1,12 @@
 package com.pan.nurseStation.bean.response;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class EnjoinDoResponseBean {
     private int ret;
-    private List<String> data;
-    private String msg;
+    private List<String> data = new ArrayList<>();
+    private String msg = "";
 
     public void setRet(int ret) {
         this.ret = ret;

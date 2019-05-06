@@ -3,6 +3,7 @@
  */
 package com.pan.nurseStation.bean.response;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,8 +18,8 @@ public class EnjoinDoInfoResponseBean {
      * 操作码，0表示成功，其他表示失败
      */
     private int ret;
-    private Data data;
-    private String msg;
+    private Data data = new Data();
+    private String msg = "";
 
     public void setRet(int ret) {
         this.ret = ret;
@@ -46,8 +47,8 @@ public class EnjoinDoInfoResponseBean {
 
     public static class Data {
 
-        private String reg_no;
-        private List<Group_list> group_list;
+        private String reg_no = "";
+        private List<Group_list> group_list = new ArrayList<>();
 
         public void setReg_no(String reg_no) {
             this.reg_no = reg_no;
@@ -69,7 +70,7 @@ public class EnjoinDoInfoResponseBean {
     public static class Group_list {
 
         private int pt_status;
-        private List<List<MedicalOrder>> list;
+        private List<List<MedicalOrder>> list = new ArrayList<>();
 
         public void setPt_status(int pt_status) {
             this.pt_status = pt_status;
@@ -93,27 +94,27 @@ public class EnjoinDoInfoResponseBean {
         /**
          * 主键ID
          */
-        private String id;
+        private String id = "";
         /**
          * 医嘱名称
          */
-        private String title;
+        private String title = "";
         /**
          * 组合号
          */
-        private String combination;
+        private String combination = "";
         /**
          * 用量
          */
-        private String dosage;
+        private String dosage = "";
         /**
          * 用法
          */
-        private String use_method;
+        private String use_method = "";
         /**
          * 数量
          */
-        private String amount;
+        private String amount = "";
         /**
          * 状态，0：待核药，1：待执行，2：执行中，3：已完成
          */

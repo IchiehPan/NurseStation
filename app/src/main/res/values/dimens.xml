@@ -24,4 +24,6 @@
 
     <dimen name="nav_height">36dp</dimen>
     <dimen name="nav_child_margin">9dp</dimen>
+
+    <dimen name="list_view_margin">7dp</dimen>
 </resources>
