@@ -14,14 +14,21 @@
         android:background="@color/custom_white"
         android:orientation="horizontal">
 
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:layout_marginStart="9dp"
-            android:background="@drawable/ic_back"
-            android:contentDescription="@string/todo"
-            android:onClick="inBedListActivity" />
+            android:onClick="inBedListActivity">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/nav_child_margin"
+                android:layout_marginEnd="@dimen/nav_child_margin"
+                android:background="@drawable/ic_back"
+                android:contentDescription="@string/todo" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/patient_example_info"
@@ -33,14 +40,21 @@
             android:textColor="#333333"
             android:textSize="15sp" />
 
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:layout_marginEnd="9dp"
-            android:background="@drawable/ic_refresh"
-            android:contentDescription="@string/todo"
-            android:onClick="refreshTheWeb" />
+            android:onClick="refreshTheWeb">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/nav_child_margin"
+                android:layout_marginEnd="@dimen/nav_child_margin"
+                android:background="@drawable/ic_refresh"
+                android:contentDescription="@string/todo" />
+        </LinearLayout>
     </LinearLayout>
 
     <FrameLayout
