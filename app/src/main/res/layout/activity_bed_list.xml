@@ -11,14 +11,13 @@
     <RelativeLayout
         android:id="@+id/search_bar_view"
         android:layout_width="match_parent"
-        android:layout_height="36dp">
+        android:layout_height="@dimen/nav_height">
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
-            android:layout_marginStart="12dp"
             android:onClick="signOut"
             android:orientation="horizontal">
 
@@ -26,6 +25,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/nav_child_margin"
                 android:background="@drawable/ic_switch"
                 android:contentDescription="@string/todo" />
 
@@ -34,11 +34,11 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="2dp"
+                android:layout_marginEnd="@dimen/nav_child_margin"
                 android:text="@string/bed_list_back"
                 android:textColor="#666666"
                 android:textSize="10sp" />
         </LinearLayout>
-
 
         <TextView
             android:id="@+id/title"
@@ -49,15 +49,22 @@
             android:textColor="#666666"
             android:textSize="15sp" />
 
-        <ImageView
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="12dp"
-            android:background="@drawable/ic_magnifier"
-            android:contentDescription="@string/todo"
-            android:onClick="slideIn" />
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:onClick="slideIn">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/nav_child_margin"
+                android:layout_marginEnd="@dimen/nav_child_margin"
+                android:background="@drawable/ic_magnifier"
+                android:contentDescription="@string/todo" />
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/search_edit_text_bar"
