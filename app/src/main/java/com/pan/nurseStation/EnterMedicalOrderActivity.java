@@ -76,6 +76,9 @@ public class EnterMedicalOrderActivity extends AppCompatActivity implements Comm
                 EnjoinDoInfoResponseBean.MedicalOrder tempBean = new EnjoinDoInfoResponseBean.MedicalOrder();
                 tempBean.setTitle(String.valueOf(index));
                 tempList.add(tempBean);
+                if (index % 2 == 0) {
+                    tempList.add(tempBean);
+                }
                 list.add(tempList);
                 addCheckContentView(linearLayout, list);
             }
@@ -89,7 +92,7 @@ public class EnterMedicalOrderActivity extends AppCompatActivity implements Comm
             return;
         }
 
-//        initData(bundle.getString("hosNumber"));
+        initData(bundle.getString("hosNumber"));
     }
 
     private void initData(String hosNumber) {
@@ -233,6 +236,9 @@ public class EnterMedicalOrderActivity extends AppCompatActivity implements Comm
     public void addCheckContentView(LinearLayout view, List<List<EnjoinDoInfoResponseBean.MedicalOrder>> dataList) {
         for (List<EnjoinDoInfoResponseBean.MedicalOrder> data : dataList) {
             if (data.size() > 1) {
+                LinearLayout tempLayout = new LinearLayout(this);
+                tempLayout.setOrientation(LinearLayout.VERTICAL);
+
                 int index = 0;
                 for (EnjoinDoInfoResponseBean.MedicalOrder medicalOrder : data) {
                     String title = medicalOrder.getTitle();
@@ -265,14 +271,15 @@ public class EnterMedicalOrderActivity extends AppCompatActivity implements Comm
                         });
                     }
 
-                    LinearLayout marginLinearLayout = contentView.findViewById(R.id.margin_linear_layout);
-                    LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) marginLinearLayout.getLayoutParams();
-                    lp.setMargins(0, 0, 0, DensityKit.getPxByResId(this, R.dimen.list_view_margin));
-                    marginLinearLayout.setLayoutParams(lp);
-
-                    view.addView(contentView);
+                    tempLayout.addView(contentView);
                     ++index;
                 }
+
+                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                lp.setMargins(0, 0, 0, DensityKit.getPxByResId(this, R.dimen.list_view_margin));
+                tempLayout.setLayoutParams(lp);
+                view.addView(tempLayout);
+
             } else if (data.size() == 1) {
                 linearLayout.addView(getCheckContentView(data.get(0)));
             }
