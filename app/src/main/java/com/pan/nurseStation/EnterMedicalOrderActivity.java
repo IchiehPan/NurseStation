@@ -67,6 +67,9 @@ public class EnterMedicalOrderActivity extends AppCompatActivity implements Comm
         setContentView(R.layout.activity_enter_medical_order);
         initView();
 
+        resultReceiver = new ScanResultReceiver(this);
+        registerReceiver(resultReceiver, new IntentFilter(com.bben.ydcf.scandome.Constants.DECODE_RESULT_FILTER));
+
         checkedMap = new HashMap<>();
 
         if (Constants.ISDEBUG) {
@@ -82,10 +85,8 @@ public class EnterMedicalOrderActivity extends AppCompatActivity implements Comm
                 list.add(tempList);
                 addCheckContentView(linearLayout, list);
             }
+            return;
         }
-
-        resultReceiver = new ScanResultReceiver(this);
-        registerReceiver(resultReceiver, new IntentFilter(com.bben.ydcf.scandome.Constants.DECODE_RESULT_FILTER));
 
         Bundle bundle = getIntent().getExtras();
         if (bundle == null) {
@@ -336,9 +337,19 @@ public class EnterMedicalOrderActivity extends AppCompatActivity implements Comm
     }
 
     public void resetQuantity(View view) {
-        for (Object value : checkedMap.values()) {
+        for (Object value : new HashMap(checkedMap).values()) {
             CheckBox cb = (CheckBox) value;
+//            cb.setOnCheckedChangeListener(null);
             cb.setChecked(false);
+//            cb.setOnCheckedChangeListener((buttonView, isChecked) -> {
+//                if (isChecked) {
+//                    checkedMap.put(data, cb);
+//                    increaseQuantityNum();
+//                } else {
+//                    checkedMap.remove(data);
+//                    decreaseQuantityNum();
+//                }
+//            });
         }
         checkedMap.clear();
         quantityContent.setText(String.valueOf(0));
