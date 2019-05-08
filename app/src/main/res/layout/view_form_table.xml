@@ -311,7 +311,6 @@
                 android:layout_marginStart="@dimen/form_text_margin"
                 android:background="@null"
                 android:hint="@string/form_hint_text"
-                android:inputType="numberDecimal"
                 android:textColor="@color/form_text_color"
                 android:textSize="@dimen/form_text_size" />
 
