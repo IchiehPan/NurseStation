@@ -299,10 +299,10 @@ public class EnterVitalSignActivity extends AppCompatActivity implements CommonV
         SignsDoRequestBean requestBean = new SignsDoRequestBean();
         SignsDoRequestBean.Info info = new SignsDoRequestBean.Info();
         if (Objects.equals(temperatureType, getString(R.string.form_temperature_type_mouth)) && StringKit.isValid(temperature)) {
-            info.setTemp_type(String.valueOf(1));
+            info.setTemp_type(String.valueOf(2));
         }
         if (Objects.equals(temperatureType, getString(R.string.form_temperature_type_underarm)) && StringKit.isValid(temperature)) {
-            info.setTemp_type(String.valueOf(2));
+            info.setTemp_type(String.valueOf(1));
         }
         if (Objects.equals(temperatureType, getString(R.string.form_temperature_type_anus)) && StringKit.isValid(temperature)) {
             info.setTemp_type(String.valueOf(3));

@@ -32,7 +32,7 @@ public class SignsDoRequestBean {
          */
         private String number = "";
         /**
-         * 体温类型，1:口表;2:掖表;3:肛表
+         * 体温类型，1:掖表;2:口表;3:肛表
          */
         private String temp_type = "";
         /**
